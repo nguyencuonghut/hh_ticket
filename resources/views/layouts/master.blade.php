@@ -5,6 +5,7 @@
     <title>Honghafeed C.A.R System</title>
     <link href="{{ URL::asset('css/jasny-bootstrap.css') }}" rel="stylesheet" type="text/css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/summernote.css" rel="stylesheet">
     <link href="{{ URL::asset('css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ URL::asset('css/jquery.dataTables.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ URL::asset('css/dropzone.css') }}" rel="stylesheet" type="text/css">
@@ -13,6 +14,12 @@
     <link rel="stylesheet" href="{{ asset(elixir('css/app.css')) }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
+
+    <style>
+        .select2-container .select2-selection--single {
+            height: 34px !important;
+        }
+    </style>
 </head>
 <body>
 
@@ -24,7 +31,7 @@
         <!--NOTIFICATIONS START-->
 <div class="menu">
    
-    <div class="notifications-header"><p>Notifications</p> </div>
+    <div class="notifications-header"><p>Thông báo</p> </div>
   <!-- Menu -->
  <ul>
  <?php $notifications = auth()->user()->unreadNotifications; ?>
@@ -41,7 +48,8 @@
 </div>
 
        <div class="dropdown" id="nav-toggle">
-            <a id="notification-clock" role="button" data-toggle="dropdown">
+           <a style="color: white" href="{{url('/users', \Auth::id())}}"><b>{{Auth::user()->name}}</b></a><span><img style="margin-top: -13px; margin-right:5px" src="{{url(\Auth::user()->avatar)}}" class="notification-profile-image"></span>
+           <a id="notification-clock" role="button" data-toggle="dropdown">
                 <i class="glyphicon glyphicon-bell"><span id="notifycount">{{ $notifications->count() }}</span></i>
             </a>
                 </div>
@@ -219,7 +227,14 @@ $('body').click(function(e) {
     <script type="text/javascript" src="{{ URL::asset('js/jquery.caret.min.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/jquery.atwho.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/summernote.js"></script>
 @stack('scripts')
 </body>
-
+<script>
+    $(document).ready(function() {
+        $('#manager_confirmation_comment').summernote({
+            height: 300,
+        });
+    });
+</script>
 </html>

@@ -64,8 +64,8 @@
                                 </div>
                                 <h5><b style="color:blue;float: left;">1. Mô tả vấn đề:</b>
                                     <span>
-                                    <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#description_edit"><i class="fa fa-edit"><b> Cập nhật</b></i></button>
-                                </span>
+                                        <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#description_edit"><i class="fa fa-edit"><b> Cập nhật</b></i></button>
+                                    </span>
                                     <div class="modal fade" id="description_edit" tabindex="-1" role="dialog" aria-labelledby="DescriptionEditModalLabel">
                                         <div class="modal-dialog modal-lg" role="document">
                                             <div class="modal-content">
@@ -119,7 +119,53 @@
                                     <tr>
                                         <th class="col-md-3">Bằng cách nào?</th>
                                         <td class="col-md-4">{{$ticket->how_1}}</td>
-                                        <th rowspan="2">{{$ticket->manager->name}}:<b style="color:red"> Chưa xác nhận!</b></th>
+                                        <th rowspan="2">
+                                            <span>
+                                                <button type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#manager_confirmation" style="margin-top: 2px;margin-left: 2px"><i class="fa fa-check-circle"><b> Xác nhận</b></i></button>
+                                            </span>
+                                            <div class="modal fade" id="manager_confirmation" tabindex="-1" role="dialog" aria-labelledby="ManagerConfirmationModalLabel">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                            <h4 class="modal-title" id="ManagerConfirmationModalLabel">Xác nhận phiếu C.A.R</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            {!! Form::model($ticket, [
+                                                                    'method' => 'PATCH',
+                                                                    'route' => ['managerConfirm', $ticket->id],
+                                                                    'files'=>true,
+                                                                    'enctype' => 'multipart/form-data'
+                                                                    ]) !!}
+
+                                                            <div class="form-group">
+                                                                <select name="manager_confirmation_result" id="manager_confirmation_result" class="form-control" style="width:100%">
+                                                                    <option disabled selected value> {{ __('Chọn') }} </option>
+                                                                    <option value="Đồng ý">Đồng ý</option>
+                                                                    <option value="Từ chối">Từ chối</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                {!! Form::label('manager_confirmation_comment', __('Ý kiến'), ['class' => 'control-label']) !!}
+                                                                {!! Form::textarea('manager_confirmation_comment', null, ['class' => 'form-control']) !!}
+                                                            </div>
+                                                            {!! Form::submit(__('Cập nhật'), ['class' => 'btn btn-primary', 'style' => 'width:100%']) !!}
+                                                            {!! Form::close() !!}
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @if($ticket->manager_confirmation_result)
+                                                <p><b>Xác nhận: </b><b style="color:{{'Đồng ý' === $ticket->manager_confirmation_result ? 'blue':'red'}}">{!! $ticket->manager_confirmation_result !!}</b> <i>(bởi {{$ticket->manager->name}})</i></p>
+                                            @else
+                                                <p style="color:red"> Chưa xác nhận!</p>
+                                            @endif
+                                            @if($ticket->manager_confirmation_comment)
+                                                <p><b>Góp ý:</b><i>{!! $ticket->manager_confirmation_comment !!}</i></p>
+                                            @endif
+                                        </th>
                                     </tr>
                                     <tr>
                                         <th class="col-md-3">Có bao nhiêu sự không phù hợp?</th>
@@ -158,12 +204,10 @@
 
             <div class="activity-feed movedown">
                 @foreach($ticket->activity as $activity)
-                    @if($activity->action != 'effectiveness_asset')
-                        <div class="feed-item">
-                            <div class="activity-date">{{date('d, F Y H:i', strTotime($activity->created_at))}}</div>
-                            <div class="activity-text">{!! $activity->text !!}</div>
-                        </div>
-                    @endif
+                    <div class="feed-item">
+                        <div class="activity-date">{{date('d, F Y H:i', strTotime($activity->created_at))}}</div>
+                        <div class="activity-text">{!! $activity->text !!}</div>
+                    </div>
                 @endforeach
             </div>
         </div>
@@ -172,4 +216,10 @@
 
 @push('scripts')
 
+    <script type="text/javascript">
+        $("#manager_confirmation_result").select2({
+            placeholder: "Chọn",
+            allowClear: true
+        });
+    </script>
 @endpush

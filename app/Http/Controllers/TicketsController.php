@@ -100,12 +100,33 @@ class TicketsController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Manager confirm the ticket
+     * @param $id
+     * @return mixed
+     */
+    public function managerConfirm(Request $request, $id)
+    {
+        //Validate the input value
+        $rules = [
+            'manager_confirmation_result' => 'required',
+        ];
+        $messages = [
+            'manager_confirmation_result.required' => 'Yêu cầu bạn PHẢI điền "Kết quả xác nhận"',
+        ];
+        $this->validate($request, $rules, $messages);
+
+        $this->tickets->managerConfirm($id, $request);
+        Session()->flash('flash_message', 'Xác nhận thành công!');
+        return redirect()->back();
     }
 }

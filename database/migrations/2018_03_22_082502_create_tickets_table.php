@@ -33,6 +33,11 @@ class CreateTicketsTable extends Migration
             $table->integer('creator_id')->unsigned();
             $table->foreign('creator_id')->references('id')->on('users');
             //~Description for ticket
+
+            //Confirmation of manager
+            $table->string('manager_confirmation_result');
+            $table->text('manager_confirmation_comment');
+            //~Confirmation of manager
             $table->timestamps();
         });
     }

@@ -42,6 +42,18 @@ class TicketActionLog
                     'assignee' => $event->getTicket()->manager->name
                 ]);
                 break;
+            case 'manager_approved':
+                $text = __('<b><i>:title</i></b> được đồng ý bởi :manager', [
+                    'title' => $event->getTicket()->title,
+                    'manager' => $event->getTicket()->manager->name
+                ]);
+                break;
+            case 'manager_rejected':
+                $text = __('<b><i>:title</i></b> bị từ chối bởi :manager', [
+                    'title' => $event->getTicket()->title,
+                    'manager' => $event->getTicket()->manager->name
+                ]);
+                break;
             default:
                 break;
         }

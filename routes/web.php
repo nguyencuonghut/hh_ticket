@@ -35,7 +35,7 @@ Route::group(['middleware' => ['auth']], function () {
      * Tickets
      */
     Route::group(['prefix' => 'tickets'], function () {
-
+        Route::patch('tickets/managerconfirm/{id}', 'TicketsController@managerConfirm')->name('managerConfirm');
     });
     Route::resource('tickets', 'TicketsController');
 

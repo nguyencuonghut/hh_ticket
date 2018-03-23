@@ -17,6 +17,8 @@ class TicketRepository implements TicketRepositoryContract
 {
     const CREATED = 'created';
     const UPDATED_DESCRIPTION = 'updated_description';
+    const MANAGER_APPROVED = 'manager_approved';
+    const MANAGER_REJECTED = 'manager_rejected';
 
     /**
      * @param $id
@@ -99,5 +101,25 @@ class TicketRepository implements TicketRepositoryContract
      */
     public function destroy($request, $id)
     {
+    }
+
+    /**
+     * Manager confirm the ticket
+     * @param  \Illuminate\Http\Request  $requestData
+     * @param $id
+     * @return mixed
+     */
+    public function managerConfirm($id, $requestData)
+    {
+        $ticket = Ticket::findOrFail($id);
+        $ticket->manager_confirmation_result = $requestData->manager_confirmation_result;
+        $ticket->manager_confirmation_comment = $requestData->manager_confirmation_comment;
+        $ticket->save();
+        $ticket = $ticket->fresh();
+        if('Đồng ý' == $requestData->manager_confirmation_result){
+            event(new \App\Events\TicketAction($ticket, self::MANAGER_APPROVED));
+        } else {
+            event(new \App\Events\TicketAction($ticket, self::MANAGER_REJECTED));
+        }
     }
 }

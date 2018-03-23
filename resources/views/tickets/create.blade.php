@@ -2,11 +2,6 @@
 @section('heading')
     <h1>Tạo mới phiếu C.A.R</h1>
 @stop
-<style>
-    .select2-container .select2-selection--single {
-        height: 34px !important;
-    }
-</style>
 @section('content')
 
     {!! Form::open([

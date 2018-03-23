@@ -65,6 +65,20 @@ class TicketActionNotification extends Notification
                 ]);
                 $toName = $this->ticket->manager->name;
                 break;
+            case 'manager_approved':
+                $text = __(':title được xác nhận bởi :manager', [
+                    'title' =>  $this->ticket->title,
+                    'manager' => $this->ticket->manager->name,
+                ]);
+                $toName = $this->ticket->creator->name;
+                break;
+            case 'manager_rejected':
+                $text = __(':title bị từ chối xác nhận bởi :manager', [
+                    'title' =>  $this->ticket->title,
+                    'manager' => $this->ticket->manager->name,
+                ]);
+                $toName = $this->ticket->creator->name;
+                break;
             default:
                 break;
         }
@@ -89,19 +103,39 @@ class TicketActionNotification extends Notification
                     'title' =>  $this->ticket->title,
                     'creator' => $this->ticket->creator->name,
                     ]);
+                $assigned_user = $this->ticket->manager->name;
+                $created_user =$this->ticket->creator->name;
                 break;
             case 'updated_description':
                 $text = __(':title được sửa đổi bởi :creator, và giao cho bạn', [
                     'title' =>  $this->ticket->title,
                     'creator' => $this->ticket->creator->name,
                 ]);
+                $assigned_user = $this->ticket->manager->name;
+                $created_user =$this->ticket->creator->name;
+                break;
+            case 'manager_approved':
+                $text = __(':title được đồng ý bởi :manager', [
+                    'title' =>  $this->ticket->title,
+                    'manager' => $this->ticket->manager->name,
+                ]);
+                $assigned_user = $this->ticket->manager->name;
+                $created_user =$this->ticket->creator->name;
+                break;
+            case 'manager_rejected':
+                $text = __(':title bị từ chối bởi :manager', [
+                    'title' =>  $this->ticket->title,
+                    'manager' => $this->ticket->manager->name,
+                ]);
+                $assigned_user = $this->ticket->manager->name;
+                $created_user =$this->ticket->creator->name;
                 break;
             default:
                 break;
         }
         return [
-            'assigned_user' => $notifiable->id, //Assigned user ID
-            'created_user' => $this->ticket->creator->id,
+            'assigned_user' => $assigned_user, //Assigned user ID
+            'created_user' => $created_user,
             'message' => $text,
             'type' =>  Ticket::class,
             'type_id' =>  $this->ticket->id,

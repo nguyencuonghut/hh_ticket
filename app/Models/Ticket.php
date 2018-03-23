@@ -22,6 +22,8 @@ class Ticket extends Model
         'image_path',
         'manager_id',
         'creator_id',
+        'manager_confirmation_result',
+        'manager_confirmation_comment',
     ];
 
     public function source()
@@ -36,7 +38,11 @@ class Ticket extends Model
     {
         return $this->belongsTo(User::class, 'creator_id');
     }
-    public function getAssignedUserAttribute()
+    public function getCreatorUserAttribute()
+    {
+        return User::findOrFail($this->creator_id);
+    }
+    public function getManagerUserAttribute()
     {
         return User::findOrFail($this->manager_id);
     }
