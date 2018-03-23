@@ -16,6 +16,7 @@ use DB;
 class TicketRepository implements TicketRepositoryContract
 {
     const CREATED = 'created';
+    const UPDATED_DESCRIPTION = 'updated_description';
 
     /**
      * @param $id
@@ -64,6 +65,32 @@ class TicketRepository implements TicketRepositoryContract
      */
     public function update($id, $requestData)
     {
+        $ticket = Ticket::findOrFail($id);
+        $filename = null;
+        if ($requestData->hasFile('image_path')) {
+            if (!is_dir(public_path(). '/upload/')) {
+                mkdir(public_path(). '/upload/', 0777, true);
+            }
+            $file =  $requestData->file('image_path');
+
+            $destinationPath = public_path(). '/upload/';
+            $filename = str_random(8) . '_' . $file->getClientOriginalName() ;
+            $file->move($destinationPath, $filename);
+        } else { //Use the current image
+            $filename = $ticket->image_path;
+        }
+
+        $input = $requestData = array_merge(
+            $requestData->all(),
+            ['creator_id' => auth()->id(),
+                'image_path' => $filename,]
+        );
+
+        $ticket->fill($input)->save();
+
+        Session::flash('flash_message', 'Sửa phiếu C.A.R thành công!');
+        event(new \App\Events\TicketAction($ticket, self::UPDATED_DESCRIPTION));
+        return $ticket->id;
     }
 
     /**

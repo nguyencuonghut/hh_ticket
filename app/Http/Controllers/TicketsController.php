@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Ticket\StoreTicketRequest;
+use App\Http\Requests\Ticket\UpdateTicketRequest;
 use App\Models\Source;
 use App\Models\Ticket;
 use App\Models\User;
@@ -46,40 +48,11 @@ class TicketsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\StoreTicketRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreTicketRequest $request)
     {
-        $rules = [
-            'title' => 'required|unique:tickets',
-            'deadline' => 'required',
-            'source_id' => 'required',
-            'what' => 'required',
-            'why' => 'required',
-            'who' => 'required',
-            'where' => 'required',
-            'how_1' => 'required',
-            'how_2' => 'required',
-            'manager_id' => 'required',
-        ];
-
-        $messages = [
-            'title.required' => 'Yêu cầu bạn PHẢI điền "Tiêu Đề"',
-            'title.unique' => '"Tiêu Đề" đã tồn tại. Vui lòng chọn "Tiêu Đề" khác',
-            'deadline.required' => 'Yêu cầu bạn PHẢI điền "Thời Hạn"',
-            'source_id.required' => 'Yêu cầu bạn PHẢI điền "Nguồn Gốc"',
-            'what.required' => 'Yêu cầu bạn PHẢI điền "Cái gì đã xảy ra?"',
-            'why.required' => 'Yêu cầu bạn PHẢI điền "Tại sao đây là một vấn đề?"',
-            'who.required' => 'Yêu cầu bạn PHẢI điền "Ai phát hiện ra?"',
-            'when.required' => 'Yêu cầu bạn PHẢI điền "Nó xảy ra khi nào?"',
-            'where.required' => 'Yêu cầu bạn PHẢI điền "Phát hiện ra ở đâu?"',
-            'how_1.required' => 'Yêu cầu bạn PHẢI điền "Bằng cách nào?"',
-            'how_2.required' => 'Yêu cầu bạn PHẢI điền "Có bao nhiêu sự không phù hợp?"',
-            'manager_id.required' => 'Yêu cầu bạn PHẢI điền "Trưởng bộ phận (nơi xảy ra SKPH)"',
-        ];
-        $this->validate($request, $rules, $messages);
-
         $getInsertedId = $this->tickets->create($request);
 
         return redirect()->route("tickets.show", $getInsertedId);
@@ -95,7 +68,9 @@ class TicketsController extends Controller
     {
         $ticket = Ticket::findOrFail($id);
         return view('tickets.show')
-            ->withTicket($ticket);
+            ->withTicket($ticket)
+            ->withSources(Source::all()->pluck('name', 'id'))
+            ->withUsers(User::all()->pluck('name', 'id'));
     }
 
     /**
@@ -112,13 +87,15 @@ class TicketsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\UpdateTicketRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateTicketRequest $request, $id)
     {
-        //
+        $this->tickets->update($id, $request);
+        Session()->flash('flash_message', 'Ticket được cập nhật thành công');
+        return redirect()->route("tickets.show", $id);
     }
 
     /**

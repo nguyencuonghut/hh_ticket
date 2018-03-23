@@ -63,14 +63,39 @@
                                     <br>
                                 </div>
                                 <h5><b style="color:blue;float: left;">1. Mô tả vấn đề:</b>
+                                    <span>
+                                    <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#description_edit"><i class="fa fa-edit"><b> Cập nhật</b></i></button>
+                                </span>
+                                    <div class="modal fade" id="description_edit" tabindex="-1" role="dialog" aria-labelledby="DescriptionEditModalLabel">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    <h4 class="modal-title" id="DescriptionEditModalLabel">Cập nhật phiếu C.A.R</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    {!! Form::model($ticket, [
+                                                            'method' => 'PATCH',
+                                                            'route' => ['tickets.update', $ticket->id],
+                                                            'files'=>true,
+                                                            'enctype' => 'multipart/form-data'
+                                                            ]) !!}
+                                                    @include('tickets.form', ['submitButtonText' => __('Cập nhật')])
+                                                    {!! Form::close() !!}
+                                                </div>
+                                                <div class="modal-footer">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                 </h5>
                                 <table style="width:100%">
                                     <tr>
                                         <th class="col-md-3">Có gì đã xảy ra?</th>
                                         <td class="col-md-4">{{$ticket->what}}</td>
-                                        @if($ticket->image)
-                                        <th rowspan="5"><img class="img-responsive" src={{url('/upload/' . $ticket->image)}}></th>
+                                        @if($ticket->image_path)
+                                        <th rowspan="5"><img class="img-responsive" src={{url('/upload/' . $ticket->image_path)}}></th>
                                         @else
                                             <th rowspan="5"><img class="img-responsive" src={{url('/images/no-evidence.jpg')}}></th>
                                         @endif

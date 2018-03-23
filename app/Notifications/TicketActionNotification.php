@@ -58,6 +58,13 @@ class TicketActionNotification extends Notification
                 ]);
                 $toName = $this->ticket->manager->name;
                 break;
+            case 'updated_description':
+                $text = __(':title được sửa đổi bởi :creator, và giao cho bạn', [
+                    'title' =>  $this->ticket->title,
+                    'creator' => $this->ticket->creator->name,
+                ]);
+                $toName = $this->ticket->manager->name;
+                break;
             default:
                 break;
         }
@@ -82,6 +89,12 @@ class TicketActionNotification extends Notification
                     'title' =>  $this->ticket->title,
                     'creator' => $this->ticket->creator->name,
                     ]);
+                break;
+            case 'updated_description':
+                $text = __(':title được sửa đổi bởi :creator, và giao cho bạn', [
+                    'title' =>  $this->ticket->title,
+                    'creator' => $this->ticket->creator->name,
+                ]);
                 break;
             default:
                 break;

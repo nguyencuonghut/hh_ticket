@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
                 array (
                     'id' => 1,
                     'name' => 'Admin',
-                    'email' => 'nguyenvancuong@honghafeed.com.vn',
+                    'email' => 'hongha-dev@honghafeed.com.vn',
                     'password' => bcrypt('Hongha@123'),
                     'address' => '',
                     'work_number' => 0,
@@ -49,7 +49,7 @@ class UsersTableSeeder extends Seeder
                 array (
                     'id' => 3,
                     'name' => 'Nguyễn Văn Cường',
-                    'email' => 'nguyencuonghut55@gmail.com',
+                    'email' => 'nguyenvancuong@honghafeed.com.vn',
                     'password' => bcrypt('Hongha@123'),
                     'address' => '',
                     'work_number' => 0,

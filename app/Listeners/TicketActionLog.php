@@ -35,6 +35,13 @@ class TicketActionLog
                         'assignee' => $event->getTicket()->manager->name
                     ]);
                 break;
+            case 'updated_description':
+                $text = __('<b><i>:title</i></b> được sửa đổi bởi :creator và giao cho :assignee', [
+                    'title' => $event->getTicket()->title,
+                    'creator' => $event->getTicket()->creator->name,
+                    'assignee' => $event->getTicket()->manager->name
+                ]);
+                break;
             default:
                 break;
         }
