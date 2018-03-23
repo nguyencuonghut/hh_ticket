@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Source;
+use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Repositories\Ticket\TicketRepositoryContract;
@@ -92,7 +93,9 @@ class TicketsController extends Controller
      */
     public function show($id)
     {
-        //
+        $ticket = Ticket::findOrFail($id);
+        return view('tickets.show')
+            ->withTicket($ticket);
     }
 
     /**

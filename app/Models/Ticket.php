@@ -10,6 +10,7 @@ class Ticket extends Model
 
     protected $fillable = [
         'title',
+        'deadline',
         'source_id',
         'what',
         'why',
@@ -38,5 +39,9 @@ class Ticket extends Model
     public function getAssignedUserAttribute()
     {
         return User::findOrFail($this->manager_id);
+    }
+    public function activity()
+    {
+        return $this->morphMany(Activity::class, 'source');
     }
 }

@@ -39,4 +39,9 @@ class Activity extends model
     public function source() {
         return $this->morphTo();
     }
+
+    public function ticket()
+    {
+        return $this->belongsTo(Ticket::class, 'ticket_id', 'id');
+    }
 }
