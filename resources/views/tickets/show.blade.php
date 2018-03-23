@@ -176,6 +176,40 @@
                             </el-tab-pane>
                             <el-tab-pane label="Khắc phục" name="troubleshoot">
                                 <h5><b style="color:blue; float: left;">2. Xác định trách nhiệm:</b></h5>
+                                <span>
+                                    <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#set_responsibility"><i class="fa fa-edit"><b> Cập nhật</b></i></button>
+                                </span>
+                                <div class="modal fade" id="set_responsibility" tabindex="-1" role="dialog" aria-labelledby="SetResponsibilityModalLabel">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="SetResponsibilityModalLabel">Xác nhận phiếu C.A.R</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                {!! Form::model($ticket, [
+                                                        'method' => 'PATCH',
+                                                        'route' => ['setResponsibility', $ticket->id],
+                                                        'files'=>true,
+                                                        'enctype' => 'multipart/form-data'
+                                                        ]) !!}
+
+                                                {!! Form::label('responsibility_id', __('Trách nhiệm'), ['class' => 'control-label']) !!}
+                                                {!! Form::select('responsibility_id', $responsibilities, null, ['placeholder' => '', 'id'=>'responsibility_id', 'name'=>'responsibility_id','class'=>'form-control', 'style' => 'width: 100%']) !!}
+                                                <br>
+                                                <br>
+                                                {!! Form::submit(__('Cập nhật'), ['class' => 'btn btn-primary', 'style' => 'width:100%']) !!}
+                                                {!! Form::close() !!}
+                                            </div>
+                                            <div class="modal-footer">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @if($ticket->responsibility_id)
+                                    <h5><b>Trách nhiệm:</b> {{$ticket->responsibility->name}}</h5>
+                                @endif
 
                                 <h5><b style="color:blue;float: left;">3. Thực hiện biện pháp khắc phục:</b></h5>
 
@@ -216,9 +250,14 @@
 @stop
 
 @push('scripts')
-
     <script type="text/javascript">
         $("#manager_confirmation_result").select2({
+            placeholder: "Chọn",
+            allowClear: true
+        });
+    </script>
+    <script type="text/javascript">
+        $("#responsibility_id").select2({
             placeholder: "Chọn",
             allowClear: true
         });

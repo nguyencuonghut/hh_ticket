@@ -24,6 +24,7 @@ class Ticket extends Model
         'creator_id',
         'manager_confirmation_result',
         'manager_confirmation_comment',
+        'responsibility_id',
     ];
 
     public function source()
@@ -49,5 +50,9 @@ class Ticket extends Model
     public function activity()
     {
         return $this->morphMany(Activity::class, 'source');
+    }
+    public function responsibility()
+    {
+        return $this->belongsTo(Responsibility::class, 'responsibility_id');
     }
 }

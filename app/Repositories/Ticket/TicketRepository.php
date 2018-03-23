@@ -122,4 +122,18 @@ class TicketRepository implements TicketRepositoryContract
             event(new \App\Events\TicketAction($ticket, self::MANAGER_REJECTED));
         }
     }
+
+    /**
+     * Manager confirm the ticket
+     * @param  \Illuminate\Http\Request  $requestData
+     * @param $id
+     * @return mixed
+     */
+    public function setResponsibility($id, $requestData)
+    {
+        $ticket = Ticket::findOrFail($id);
+        $ticket->responsibility_id = $requestData->responsibility_id;
+        $ticket->save();
+        $ticket = $ticket->fresh();
+    }
 }

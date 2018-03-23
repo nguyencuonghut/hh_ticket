@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Ticket\StoreTicketRequest;
 use App\Http\Requests\Ticket\UpdateTicketRequest;
+use App\Models\Responsibility;
 use App\Models\Source;
 use App\Models\Ticket;
 use App\Models\User;
@@ -70,7 +71,8 @@ class TicketsController extends Controller
         return view('tickets.show')
             ->withTicket($ticket)
             ->withSources(Source::all()->pluck('name', 'id'))
-            ->withUsers(User::all()->pluck('name', 'id'));
+            ->withUsers(User::all()->pluck('name', 'id'))
+            ->withResponsibilities(Responsibility::all()->pluck('name', 'id'));
     }
 
     /**
@@ -126,6 +128,27 @@ class TicketsController extends Controller
         $this->validate($request, $rules, $messages);
 
         $this->tickets->managerConfirm($id, $request);
+        Session()->flash('flash_message', 'Xác nhận thành công!');
+        return redirect()->back();
+    }
+
+    /**
+     * Manager confirm the ticket
+     * @param $id
+     * @return mixed
+     */
+    public function setResponsibility(Request $request, $id)
+    {
+        //Validate the input value
+        $rules = [
+            'responsibility_id' => 'required',
+        ];
+        $messages = [
+            'responsibility_id.required' => 'Yêu cầu bạn PHẢI điền "Trách nhiệm"',
+        ];
+        $this->validate($request, $rules, $messages);
+
+        $this->tickets->setResponsibility($id, $request);
         Session()->flash('flash_message', 'Xác nhận thành công!');
         return redirect()->back();
     }

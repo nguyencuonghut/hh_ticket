@@ -36,8 +36,13 @@ class CreateTicketsTable extends Migration
 
             //Confirmation of manager
             $table->string('manager_confirmation_result');
-            $table->text('manager_confirmation_comment');
+            $table->text('manager_confirmation_comment')->nullable();
             //~Confirmation of manager
+
+            //Identify the responsibility of ticket
+            $table->integer('responsibility_id')->unsigned();
+            $table->foreign('responsibility_id')->references('id')->on('responsibilities');
+            //~Identify the responsibility of ticket
             $table->timestamps();
         });
     }
