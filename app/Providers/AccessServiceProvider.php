@@ -59,5 +59,9 @@ class AccessServiceProvider extends ServiceProvider
             \App\Repositories\Ticket\TicketRepositoryContract::class,
             \App\Repositories\Ticket\TicketRepository::class
         );
+        $this->app->bind(
+            \App\Repositories\Troubleshoot\TroubleshootRepositoryContract::class,
+            \App\Repositories\Troubleshoot\TroubleshootRepository::class
+        );
     }
 }

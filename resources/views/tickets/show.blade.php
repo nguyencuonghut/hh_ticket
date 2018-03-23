@@ -184,7 +184,7 @@
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                <h4 class="modal-title" id="SetResponsibilityModalLabel">Xác nhận phiếu C.A.R</h4>
+                                                <h4 class="modal-title" id="SetResponsibilityModalLabel">Xác định trách nhiệm</h4>
                                             </div>
                                             <div class="modal-body">
                                                 {!! Form::model($ticket, [
@@ -212,6 +212,41 @@
                                 @endif
 
                                 <h5><b style="color:blue;float: left;">3. Thực hiện biện pháp khắc phục:</b></h5>
+                                <span>
+                <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#troubleshootaction"><i class="fa fa-plus-circle"><b> Tạo thêm</b></i></button>
+            </span>
+                                <div class="modal fade" id="troubleshootaction" tabindex="-1" role="dialog" aria-labelledby="TroubleshootModalLabel">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="TroubleshootModalLabel"><b>Thêm biện pháp khắc phục</b></h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                {!! Form::open([
+                                                        'route' => ['troubleshoots.store', $ticket->id],
+                                                        ]) !!}
+
+                                                {!! Form::label('name', __('Biện pháp khắc phục'), ['class' => 'control-label']) !!}
+                                                {!! Form::text('name', null, ['class' => 'form-control', 'id' => 'action']) !!}
+                                                <div class="form-inline">
+                                                    <!-- TODO: fix the bug of searching the user -->
+                                                    <div class="form-group col-sm-6 removeleft ">
+                                                        {!! Form::label('troubleshooter_id', __('Người thực hiện'), ['class' => 'control-label']) !!}
+                                                        {!! Form::select('troubleshooter_id', $users, null, ['placeholder' => '', 'id'=>'troubleshooter_id', 'name'=>'troubleshooter_id','class'=>'form-control', 'style' => 'width:100%']) !!}
+                                                    </div>
+                                                    <div class="form-group col-sm-6 removeright ">
+                                                        {!! Form::label('deadline', __('Thời hạn'), ['class' => 'control-label']) !!}
+                                                        {!! Form::date('deadline', \Carbon\Carbon::now()->addDays(3), ['class' => 'form-control']) !!}
+                                                    </div>
+                                                </div>
+                                                {!! Form::submit( __('Thêm') , ['class' => 'btn btn-primary']) !!}
+                                                {!! Form::close() !!}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @include('tickets.troubleshoots.create', ['subject' => $ticket])
 
                             </el-tab-pane>
                             <el-tab-pane label="Phòng ngừa" name="prevents">
@@ -258,6 +293,12 @@
     </script>
     <script type="text/javascript">
         $("#responsibility_id").select2({
+            placeholder: "Chọn",
+            allowClear: true
+        });
+    </script>
+    <script type="text/javascript">
+        $("#troubleshooter_id").select2({
             placeholder: "Chọn",
             allowClear: true
         });

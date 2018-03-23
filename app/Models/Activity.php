@@ -44,4 +44,9 @@ class Activity extends model
     {
         return $this->belongsTo(Ticket::class, 'ticket_id', 'id');
     }
+
+    public function troubleshoot()
+    {
+        return $this->belongsTo(Troubleshoot::class, 'troubleshoot_id', 'id');
+    }
 }

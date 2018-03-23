@@ -32,6 +32,10 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\TicketActionNotify',
             'App\Listeners\TicketActionLog',
         ],
+        'App\Events\TroubleshootAction' => [
+            'App\Listeners\TroubleshootActionNotify',
+            'App\Listeners\TroubleshootActionLog',
+        ],
     ];
 
     /**

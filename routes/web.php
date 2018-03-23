@@ -40,6 +40,15 @@ Route::group(['middleware' => ['auth']], function () {
     });
     Route::resource('tickets', 'TicketsController');
 
+    /**
+     * Troubleshoots
+     */
+    Route::group(['prefix' => 'troubleshoots'], function () {
+    });
+    Route::patch('troubleshoots/markcomplete/{id}', 'TroubleshootsController@markComplete')->name('troubleshootMarkComplete');
+    Route::post('troubleshoots/{id}/store',
+        ['as' => 'troubleshoots.store', 'uses' => 'TroubleshootsController@store']);
+    Route::resource('troubleshoots', 'TroubleshootsController', ['except' => ['store'] ]);
 	 /**
      * Roles
      */

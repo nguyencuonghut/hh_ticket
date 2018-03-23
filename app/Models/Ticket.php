@@ -55,4 +55,9 @@ class Ticket extends Model
     {
         return $this->belongsTo(Responsibility::class, 'responsibility_id');
     }
+
+    public function troubleshoots()
+    {
+        return $this->hasMany(Troubleshoot::class, 'ticket_id', 'id');
+    }
 }

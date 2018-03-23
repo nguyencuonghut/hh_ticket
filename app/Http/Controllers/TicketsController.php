@@ -7,6 +7,7 @@ use App\Http\Requests\Ticket\UpdateTicketRequest;
 use App\Models\Responsibility;
 use App\Models\Source;
 use App\Models\Ticket;
+use App\Models\Troubleshoot;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Repositories\Ticket\TicketRepositoryContract;
@@ -72,7 +73,8 @@ class TicketsController extends Controller
             ->withTicket($ticket)
             ->withSources(Source::all()->pluck('name', 'id'))
             ->withUsers(User::all()->pluck('name', 'id'))
-            ->withResponsibilities(Responsibility::all()->pluck('name', 'id'));
+            ->withResponsibilities(Responsibility::all()->pluck('name', 'id'))
+            ->withTroubleshoots(Troubleshoot::all()->where('ticket_id', $id));
     }
 
     /**
@@ -149,7 +151,7 @@ class TicketsController extends Controller
         $this->validate($request, $rules, $messages);
 
         $this->tickets->setResponsibility($id, $request);
-        Session()->flash('flash_message', 'Xác nhận thành công!');
+        Session()->flash('flash_message', 'Xác định trách nhiệm thành công!');
         return redirect()->back();
     }
 }
