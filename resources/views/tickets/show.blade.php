@@ -10,6 +10,7 @@
         padding-top: 2px;
         padding-bottom: 2px;
         text-align: left;
+        font-weight: normal;
     }
 </style>
 
@@ -92,7 +93,7 @@
                                 </h5>
                                 <table style="width:100%">
                                     <tr>
-                                        <th class="col-md-3">Có gì đã xảy ra?</th>
+                                        <th class="col-md-3"><b>Có gì đã xảy ra?</b></th>
                                         <td class="col-md-4">{{$ticket->what}}</td>
                                         @if($ticket->image_path)
                                         <th rowspan="5"><img class="img-responsive" src={{url('/upload/' . $ticket->image_path)}}></th>
@@ -101,23 +102,23 @@
                                         @endif
                                     </tr>
                                     <tr>
-                                        <th class="col-md-3">Tại sao đây là một vấn đề?</th>
+                                        <th class="col-md-3"><b>Tại sao đây là một vấn đề?</b></th>
                                         <td class="col-md-4">{{$ticket->why}}</td>
                                     </tr>
                                     <tr>
-                                        <th class="col-md-3">Nó xảy ra khi nào?</th>
+                                        <th class="col-md-3"><b>Nó xảy ra khi nào?</b></th>
                                         <td class="col-md-4">{{date('d F, Y', strtotime($ticket->when))}}</td>
                                     </tr>
                                     <tr>
-                                        <th class="col-md-3">Ai phát hiện ra?</th>
+                                        <th class="col-md-3"><b>Ai phát hiện ra?</b></th>
                                         <td class="col-md-4">{{$ticket->who}}</td>
                                     </tr>
                                     <tr>
-                                        <th class="col-md-3">Phát hiện ra ở đâu?</th>
+                                        <th class="col-md-3"><b>Phát hiện ra ở đâu?</b></th>
                                         <td class="col-md-4">{{$ticket->where}}</td>
                                     </tr>
                                     <tr>
-                                        <th class="col-md-3">Bằng cách nào?</th>
+                                        <th class="col-md-3"><b>Bằng cách nào?</b></th>
                                         <td class="col-md-4">{{$ticket->how_1}}</td>
                                         <th rowspan="2">
                                             <span>
@@ -168,7 +169,7 @@
                                         </th>
                                     </tr>
                                     <tr>
-                                        <th class="col-md-3">Có bao nhiêu sự không phù hợp?</th>
+                                        <th class="col-md-3"><b>Có bao nhiêu sự không phù hợp?</b></th>
                                         <td class="col-md-4">{{$ticket->how_2}}</td>
                                     </tr>
                                 </table>
