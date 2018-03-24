@@ -41,6 +41,12 @@ class TroubleshootActionLog
                     'troubleshooter' => $event->getTroubleshoot()->troubleshooter->name
                 ]);
                 break;
+            case 'completed':
+                $text = __('<b><i>:name</i></b> được hoàn thành bởi :troubleshooter', [
+                    'name' => $event->getTroubleshoot()->name,
+                    'troubleshooter' => $event->getTroubleshoot()->troubleshooter->name
+                ]);
+                break;
             default:
                 break;
         }

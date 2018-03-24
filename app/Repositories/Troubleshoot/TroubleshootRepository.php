@@ -18,6 +18,7 @@ class TroubleshootRepository implements TroubleshootRepositoryContract
 {
     const CREATED = 'created';
     const UPDATED = 'updated';
+    const COMPLETED = 'completed';
 
     /**
      * @param $id
@@ -73,5 +74,25 @@ class TroubleshootRepository implements TroubleshootRepositoryContract
      */
     public function destroy($request, $id)
     {
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function markComplete($id)
+    {
+        $troubleshoot = Troubleshoot::findOrFail($id);
+        if(\Auth::id() == $troubleshoot->troubleshooter_id) {
+            $troubleshoot->status = true;
+            $troubleshoot->is_on_time = (strtotime($troubleshoot->deadline .  "+ 1 days") >= time()) ? true:false;
+            $troubleshoot->save();
+
+            Session()->flash('flash_message', 'Đã hoàn thành một hành động khắc phục!');
+        }else{
+            Session()->flash('flash_message_warning', 'Bạn không có quyền đánh dấu hoàn thành!');
+        }
+        event(new \App\Events\TroubleshootAction($troubleshoot, self::COMPLETED));
+        return $troubleshoot->ticket_id;
     }
 }

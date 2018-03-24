@@ -35,6 +35,7 @@ class TroubleshootActionNotify
             ));
             break;
         case 'updated':
+        case 'completed':
             $troubleshoot->creatorUser->notify(new TroubleshootActionNotification(
                 $troubleshoot,
                 $action

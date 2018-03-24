@@ -63,7 +63,14 @@ class TroubleshootActionNotification extends Notification
                     'name' =>  $this->troubleshoot->name,
                     'troubleshooter' => $this->troubleshoot->troubleshooter->name,
                 ]);
-                $toName = $this->troubleshoot->troubleshooter->name;
+                $toName = $this->troubleshoot->creator->name;
+                break;
+            case 'completed':
+                $text = __(':name được hoàn thành bởi :troubleshooter', [
+                    'name' =>  $this->troubleshoot->name,
+                    'troubleshooter' => $this->troubleshoot->troubleshooter->name,
+                ]);
+                $toName = $this->troubleshoot->creator->name;
                 break;
             default:
                 break;
@@ -94,6 +101,14 @@ class TroubleshootActionNotification extends Notification
                 break;
             case 'updated':
                 $text = __(':name được sửa bởi :troubleshooter', [
+                    'name' =>  $this->troubleshoot->name,
+                    'troubleshooter' => $this->troubleshoot->troubleshooter->name,
+                ]);
+                $assigned_user = $this->troubleshoot->troubleshooter->name;
+                $created_user = $this->troubleshoot->creator->name;
+                break;
+            case 'completed':
+                $text = __(':name được hoàn thành bởi :troubleshooter', [
                     'name' =>  $this->troubleshoot->name,
                     'troubleshooter' => $this->troubleshoot->troubleshooter->name,
                 ]);

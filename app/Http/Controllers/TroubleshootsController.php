@@ -86,7 +86,6 @@ class TroubleshootsController extends Controller
     {
         $ticket_id = $this->actions->update($id, $request);
 
-
         return redirect()->route("tickets.show", $ticket_id);
     }
 
@@ -111,17 +110,8 @@ class TroubleshootsController extends Controller
      */
     public function markComplete($id)
     {
-        $troubleshoot = Troubleshoot::findOrFail($id);
-        if(\Auth::id() == $troubleshoot->troubleshooter_id) {
-            $troubleshoot->status = true;
-            $troubleshoot->is_on_time = (strtotime($troubleshoot->deadline .  "+ 1 days") >= time()) ? true:false;
-            $troubleshoot->save();
+        $ticket_id = $this->actions->markComplete($id);
 
-            Session()->flash('flash_message', 'Đã hoàn thành một hành động khắc phục!');
-            return redirect()->route("tickets.show", $troubleshoot->ticket_id);
-        }else{
-            Session()->flash('flash_message_warning', 'Bạn không có quyền đánh dấu hoàn thành!');
-            return redirect()->route("tickets.show", $troubleshoot->ticket_id);
-        }
+        return redirect()->route("tickets.show", $ticket_id);
     }
 }
