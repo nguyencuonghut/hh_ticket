@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Troubleshoot;
 use Illuminate\Http\Request;
 use App\Http\Requests\Troubleshoot\StoreTroubleshootRequest;
 use App\Http\Requests\Troubleshoot\UpdateTroubleshootRequest;
@@ -101,6 +102,7 @@ class TroubleshootsController extends Controller
     }
 
 
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -109,6 +111,17 @@ class TroubleshootsController extends Controller
      */
     public function markComplete($id)
     {
+        $troubleshoot = Troubleshoot::findOrFail($id);
+        if(\Auth::id() == $troubleshoot->troubleshooter_id) {
+            $troubleshoot->status = true;
+            $troubleshoot->is_on_time = (strtotime($troubleshoot->deadline .  "+ 1 days") >= time()) ? true:false;
+            $troubleshoot->save();
 
+            Session()->flash('flash_message', 'Đã hoàn thành một hành động khắc phục!');
+            return redirect()->route("tickets.show", $troubleshoot->ticket_id);
+        }else{
+            Session()->flash('flash_message_warning', 'Bạn không có quyền đánh dấu hoàn thành!');
+            return redirect()->route("tickets.show", $troubleshoot->ticket_id);
+        }
     }
 }

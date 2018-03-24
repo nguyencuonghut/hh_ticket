@@ -6,12 +6,12 @@
 <div class="form-inline">
     <div class="form-group col-sm-4 removeleft">
         {!! Form::label('source_id', __('Nguồn gốc') , ['class' => 'control-label']) !!}
-        {!! Form::select('source_id', $sources, null, ['placeholder' => '', 'id'=>'source_id', 'name'=>'source_id','class'=>'form-control']) !!}
+        {!! Form::select('source_id', $sources, null, ['placeholder' => '', 'id'=>'source_id', 'name'=>'source_id','class'=>'form-control', 'style' => 'width:100%']) !!}
     </div>
 
     <div class="form-group  col-sm-4 removeleft">
         {!! Form::label('manager_id', __('Trưởng bộ phận (nơi xảy ra SKPH)'), ['class' => 'control-label']) !!}
-        {!! Form::select('manager_id', $users, null, ['placeholder' => '', 'id'=>'manager_id', 'name'=>'manager_id','class'=>'form-control']) !!}
+        {!! Form::select('manager_id', $users, null, ['placeholder' => '', 'id'=>'manager_id', 'name'=>'manager_id','class'=>'form-control', 'style' => 'width:100%']) !!}
     </div>
 
     <div class="form-group col-sm-4 removeleft removeright">
