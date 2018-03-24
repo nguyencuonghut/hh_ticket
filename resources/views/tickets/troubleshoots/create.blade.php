@@ -11,13 +11,13 @@
         </span>
         <table class="table" style="font-size: 12px">
             <thead>
-            <th>Biện pháp khắc phục</th>
-            <th>Người thực hiện</th>
-            <th>Thời hạn</th>
-            <th>Trạng thái</th>
-            <th>Sửa</th>
-            <th>Đánh dấu hoàn thành</th>
-            <th>Giao cho người khác</th>
+            <th><b>Biện pháp khắc phục</b></th>
+            <th><b>Người thực hiện</b></th>
+            <th><b>Thời hạn</b></th>
+            <th><b>Trạng thái</b></th>
+            <th><b>Sửa</b></th>
+            <th><b>Đánh dấu hoàn thành</b></th>
+            <th><b>Giao cho người khác</b></th>
             </thead>
             @foreach($troubleshoots as $action)
                 <tr>
