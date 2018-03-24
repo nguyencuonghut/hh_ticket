@@ -40,7 +40,7 @@ class TroubleshootRepository implements TroubleshootRepositoryContract
             $requestData->all(),
             ['ticket_id' => $ticket_id,
                 'creator_id' => $ticket->manager_id,
-                'status' => false,
+                'status_id' => 1, // Status is Open
                 'is_on_time' => false]
         );
 
@@ -60,7 +60,7 @@ class TroubleshootRepository implements TroubleshootRepositoryContract
         $troubleshoot = Troubleshoot::findOrFail($id);
         $troubleshoot->name = $requestData->name;
         $troubleshoot->deadline = $requestData->deadline;
-        $troubleshoot->status = ($requestData->status === 'Open') ? 0:1;
+        $troubleshoot->status_id = $requestData->status_id;
         $troubleshoot->save();
 
         Session::flash('flash_message', 'Sửa hành động khắc phục thành công!');
@@ -84,7 +84,7 @@ class TroubleshootRepository implements TroubleshootRepositoryContract
     {
         $troubleshoot = Troubleshoot::findOrFail($id);
         if(\Auth::id() == $troubleshoot->troubleshooter_id) {
-            $troubleshoot->status = true;
+            $troubleshoot->status_id = 2; //Status: Closed
             $troubleshoot->is_on_time = (strtotime($troubleshoot->deadline .  "+ 1 days") >= time()) ? true:false;
             $troubleshoot->save();
 

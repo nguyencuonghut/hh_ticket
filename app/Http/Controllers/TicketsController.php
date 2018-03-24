@@ -6,6 +6,7 @@ use App\Http\Requests\Ticket\StoreTicketRequest;
 use App\Http\Requests\Ticket\UpdateTicketRequest;
 use App\Models\Responsibility;
 use App\Models\Source;
+use App\Models\Status;
 use App\Models\Ticket;
 use App\Models\Troubleshoot;
 use App\Models\User;
@@ -74,7 +75,8 @@ class TicketsController extends Controller
             ->withSources(Source::all()->pluck('name', 'id'))
             ->withUsers(User::all()->pluck('name', 'id'))
             ->withResponsibilities(Responsibility::all()->pluck('name', 'id'))
-            ->withTroubleshoots(Troubleshoot::all()->where('ticket_id', $id));
+            ->withTroubleshoots(Troubleshoot::all()->where('ticket_id', $id))
+            ->withStatuses(Status::all()->pluck('name', 'id'));
     }
 
     /**

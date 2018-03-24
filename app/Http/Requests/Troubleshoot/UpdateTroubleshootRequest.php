@@ -25,7 +25,7 @@ class UpdateTroubleshootRequest extends FormRequest
         return [
             'name' => 'required',
             'deadline' => 'required',
-            'status' => 'required',
+            'status_id' => 'required',
         ];
     }
 
@@ -34,7 +34,7 @@ class UpdateTroubleshootRequest extends FormRequest
         return [
             'name.required' => 'Yêu cầu bạn PHẢI điền "Tên biện pháp khắc phục"',
             'deadline.required' => 'Yêu cầu bạn PHẢI điền "Thời Hạn"',
-            'status.required' => 'Yêu cầu bạn PHẢI điền "Trạng thái"',
+            'status_id.required' => 'Yêu cầu bạn PHẢI điền "Trạng thái"',
         ];
     }
 }

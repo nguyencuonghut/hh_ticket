@@ -10,7 +10,8 @@ class SourcesTableSeeder extends Seeder
      * @return void
      */
     public function run()
-    { \DB::table('sources')->delete();
+    {
+        \DB::table('sources')->delete();
 
         \DB::table('sources')->insert(array (
             0 =>

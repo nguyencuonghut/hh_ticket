@@ -28,7 +28,7 @@
                     @endif
                     <td>{{ $action->troubleshooter->name }}</td>
                     <td>{{date('d, F Y', strTotime($action->deadline))}}</td>
-                    <td style="color: {{'Open' == $action->status ? "green": "black"}}">{{ $action->status ? 'Closed':'Open'}}</td>
+                    <td style="color: {{'Open' == $action->status->name ? "green": "black"}}">{{ $action->status->name}}</td>
                     <td style="text-align: center">
                         @if(\Auth::id() == $action->troubleshooter_id)
                             <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#TroubleshootActionEditModal-{{$action->id}}"
@@ -61,11 +61,8 @@
                                                 {!! Form::date('deadline', \Carbon\Carbon::parse($action->deadline), ['class' => 'form-control']) !!}
                                             </div>
                                             <div class="form-group col-sm-6 removeleft removeright ">
-                                                {!! Form::label('status', __('Trạng thái'), ['class' => 'control-label']) !!}
-                                                <select name="status" id="status" class="form-control" style="width:100%">
-                                                    <option <?php if($action->status === false){echo("selected");}?> > {{ __('Open') }} </option>
-                                                    <option <?php if($action->status === true){echo("selected");}?> > {{ __('Closed') }} </option>
-                                                </select>
+                                                {!! Form::label('status_id', __('Trạng thái'), ['class' => 'control-label']) !!}
+                                                {!! Form::select('status_id', $statuses, null, ['placeholder' => '', 'id'=>'status_id', 'name'=>'status_id','class'=>'form-control', 'style' => 'width:100%']) !!}
                                             </div>
                                         </div>
                                         {!! Form::submit('Cập nhật', ['class' => 'btn btn-primary', 'style' => 'width:100%']) !!}
@@ -109,6 +106,12 @@
 @push('scripts')
     <script type="text/javascript">
         $("#troubleshooter_id").select2({
+            placeholder: "Chọn",
+            allowClear: true
+        });
+    </script>
+    <script type="text/javascript">
+        $("#status_id").select2({
             placeholder: "Chọn",
             allowClear: true
         });

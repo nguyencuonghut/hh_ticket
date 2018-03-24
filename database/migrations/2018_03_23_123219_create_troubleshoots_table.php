@@ -23,7 +23,8 @@ class CreateTroubleshootsTable extends Migration
             $table->integer('ticket_id')->unsigned();
             $table->foreign('ticket_id')->references('id')->on('tickets');
             $table->dateTime('deadline');
-            $table->boolean('status');//true-Open, false-Closed
+            $table->integer('status_id')->unsigned;
+            $table->foreign('status_id')->references('id')->on('statuses');
             $table->integer('is_on_time');//true-Open, false-Closed
             $table->timestamps();
         });

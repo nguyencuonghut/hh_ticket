@@ -14,7 +14,7 @@ class Troubleshoot extends Model
         'creator_id',
         'ticket_id',
         'deadline',
-        'status',
+        'status_id',
         'is_on_time',
     ];
 
@@ -30,6 +30,10 @@ class Troubleshoot extends Model
     public function ticket()
     {
         return $this->belongsTo(Ticket::class, 'ticket_id');
+    }
+    public function status()
+    {
+        return $this->belongsTo(Status::class, 'status_id');
     }
     public function getCreatorUserAttribute()
     {
