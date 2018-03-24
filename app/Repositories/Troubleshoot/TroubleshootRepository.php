@@ -19,6 +19,7 @@ class TroubleshootRepository implements TroubleshootRepositoryContract
     const CREATED = 'created';
     const UPDATED = 'updated';
     const COMPLETED = 'completed';
+    const UPDATED_ASSIGN = 'updated_assign';
 
     /**
      * @param $id
@@ -39,6 +40,7 @@ class TroubleshootRepository implements TroubleshootRepositoryContract
         $input = $requestData = array_merge(
             $requestData->all(),
             ['ticket_id' => $ticket_id,
+                'pre_troubleshooter_id' => $requestData->troubleshooter_id,
                 'creator_id' => $ticket->manager_id,
                 'status_id' => 1, // Status is Open
                 'is_on_time' => false]
@@ -94,5 +96,18 @@ class TroubleshootRepository implements TroubleshootRepositoryContract
         }
         event(new \App\Events\TroubleshootAction($troubleshoot, self::COMPLETED));
         return $troubleshoot->ticket_id;
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function updateAssign($id, $requestData)
+    {
+        $troubleshoot = Troubleshoot::findOrFail($id);
+        $troubleshoot->pre_troubleshooter_id = $troubleshoot->troubleshooter_id;
+        $troubleshoot->troubleshooter_id = $requestData->troubleshooter_id;
+        $troubleshoot->save();
+        event(new \App\Events\TroubleshootAction($troubleshoot, self::UPDATED_ASSIGN));
     }
 }

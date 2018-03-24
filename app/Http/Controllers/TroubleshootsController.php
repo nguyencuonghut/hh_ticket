@@ -100,8 +100,6 @@ class TroubleshootsController extends Controller
         //
     }
 
-
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -113,5 +111,27 @@ class TroubleshootsController extends Controller
         $ticket_id = $this->actions->markComplete($id);
 
         return redirect()->route("tickets.show", $ticket_id);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateAssign(Request $request,$id)
+    {
+        //Validate the input value
+        $rules = [
+            'troubleshooter_id' => 'required',
+        ];
+        $messages = [
+            'troubleshooter_id.required' => 'Yêu cầu bạn PHẢI điền "Người thực hiện"',
+        ];
+        $this->validate($request, $rules, $messages);
+
+        $this->actions->updateAssign($id, $request);
+        Session()->flash('flash_message', 'Cập nhật thành công!');
+        return redirect()->back();
     }
 }

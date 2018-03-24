@@ -18,6 +18,8 @@ class CreateTroubleshootsTable extends Migration
             $table->string('name');
             $table->integer('troubleshooter_id')->unsigned();
             $table->foreign('troubleshooter_id')->references('id')->on('users');
+            $table->integer('pre_troubleshooter_id')->unsigned();
+            $table->foreign('pre_troubleshooter_id')->references('id')->on('users');
             $table->integer('creator_id')->unsigned();
             $table->foreign('creator_id')->references('id')->on('users');
             $table->integer('ticket_id')->unsigned();

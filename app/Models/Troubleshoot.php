@@ -11,6 +11,7 @@ class Troubleshoot extends Model
     protected $fillable = [
         'name',
         'troubleshooter_id',
+        'pre_troubleshooter_id',
         'creator_id',
         'ticket_id',
         'deadline',
@@ -22,7 +23,10 @@ class Troubleshoot extends Model
     {
         return $this->belongsTo(User::class, 'troubleshooter_id');
     }
-
+    public function pre_troubleshooter()
+    {
+        return $this->belongsTo(User::class, 'pre_troubleshooter_id');
+    }
     public function creator()
     {
         return $this->belongsTo(User::class, 'creator_id');
@@ -42,6 +46,10 @@ class Troubleshoot extends Model
     public function getTroubleshooterUserAttribute()
     {
         return User::findOrFail($this->troubleshooter_id);
+    }
+    public function getPreTroubleshooterUserAttribute()
+    {
+        return User::findOrFail($this->pre_troubleshooter_id);
     }
     public function activity()
     {

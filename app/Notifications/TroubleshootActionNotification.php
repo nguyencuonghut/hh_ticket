@@ -16,17 +16,20 @@ class TroubleshootActionNotification extends Notification
 
     private $troubleshoot;
     private $action;
+    private $is_pre_troubleshooter;
 
     /**
      * Create a new notification instance.
      * TroubleshootActionNotification constructor.
      * @param $troubleshoot
      * @param $action
+     * @param $is_pre_troubleshooter
      */
-    public function __construct($troubleshoot, $action)
+    public function __construct($troubleshoot, $action, $is_pre_troubleshooter)
     {
         $this->troubleshoot = $troubleshoot;
         $this->action = $action;
+        $this->is_pre_troubleshooter = $is_pre_troubleshooter;
     }
 
     /**
@@ -72,6 +75,23 @@ class TroubleshootActionNotification extends Notification
                 ]);
                 $toName = $this->troubleshoot->creator->name;
                 break;
+            case 'updated_assign':
+                if($this->is_pre_troubleshooter)
+                {
+                    $text = __(':name được chuyển từ bạn sang :troubleshooter', [
+                        'name' =>  $this->troubleshoot->name,
+                        'troubleshooter' => $this->troubleshoot->troubleshooter->name,
+                    ]);
+                    $toName = $this->troubleshoot->pre_troubleshooter->name;
+                } else {
+                    $text = __(':name được chuyển từ :pre_troubleshooter cho bạn', [
+                        'name' =>  $this->troubleshoot->name,
+                        'pre_troubleshooter' => $this->troubleshoot->pre_troubleshooter->name,
+                        'troubleshooter' => $this->troubleshoot->troubleshooter->name,
+                    ]);
+                    $toName = $this->troubleshoot->troubleshooter->name;
+                }
+                break;
             default:
                 break;
         }
@@ -112,6 +132,23 @@ class TroubleshootActionNotification extends Notification
                     'name' =>  $this->troubleshoot->name,
                     'troubleshooter' => $this->troubleshoot->troubleshooter->name,
                 ]);
+                $assigned_user = $this->troubleshoot->troubleshooter->name;
+                $created_user = $this->troubleshoot->creator->name;
+                break;
+            case 'updated_assign':
+                if($this->is_pre_troubleshooter)
+                {
+                    $text = __(':name được chuyển từ bạn sang :troubleshooter', [
+                        'name' =>  $this->troubleshoot->name,
+                        'troubleshooter' => $this->troubleshoot->troubleshooter->name,
+                    ]);
+                } else {
+                    $text = __(':name được chuyển từ :pre_troubleshooter cho bạn', [
+                        'name' =>  $this->troubleshoot->name,
+                        'pre_troubleshooter' => $this->troubleshoot->pre_troubleshooter->name,
+                        'troubleshooter' => $this->troubleshoot->troubleshooter->name,
+                    ]);
+                }
                 $assigned_user = $this->troubleshoot->troubleshooter->name;
                 $created_user = $this->troubleshoot->creator->name;
                 break;

@@ -31,20 +31,35 @@ class TroubleshootActionNotify
         case 'created':
             $troubleshoot->troubleshooterUser->notify(new TroubleshootActionNotification(
                 $troubleshoot,
-                $action
+                $action,
+                false
             ));
             break;
         case 'updated':
         case 'completed':
             $troubleshoot->creatorUser->notify(new TroubleshootActionNotification(
                 $troubleshoot,
-                $action
+                $action,
+                false
+            ));
+            break;
+        case 'updated_assign':
+            $troubleshoot->troubleshooterUser->notify(new TroubleshootActionNotification(
+                $troubleshoot,
+                $action,
+                false
+            ));
+            $troubleshoot->pretroubleshooterUser->notify(new TroubleshootActionNotification(
+                $troubleshoot,
+                $action,
+                true
             ));
             break;
         default:
             $troubleshoot->troubleshooterUser->notify(new TroubleshootActionNotification(
                 $troubleshoot,
-                $action
+                $action,
+                false
             ));
             break;
     }

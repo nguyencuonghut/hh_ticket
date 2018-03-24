@@ -76,8 +76,8 @@ class UsersTableSeeder extends Seeder
             4 =>
                 array (
                     'id' => 5,
-                    'name' => 'Phạm Thị Trang',
-                    'email' => 'phamthitrang@honghafeed.com.vn',
+                    'name' => 'Tony Nguyen',
+                    'email' => 'nguyencuonghut55@gmail.com',
                     'password' => bcrypt('Hongha@123'),
                     'address' => '',
                     'work_number' => 0,

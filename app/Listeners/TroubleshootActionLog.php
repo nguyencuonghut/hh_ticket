@@ -47,6 +47,13 @@ class TroubleshootActionLog
                     'troubleshooter' => $event->getTroubleshoot()->troubleshooter->name
                 ]);
                 break;
+            case 'updated_assign':
+                $text = __('<b><i>:name</i></b> được chuyển từ :pre_troubleshooter sang :troubleshooter', [
+                    'name' => $event->getTroubleshoot()->name,
+                    'pre_troubleshooter' => $event->getTroubleshoot()->pre_troubleshooter->name,
+                    'troubleshooter' => $event->getTroubleshoot()->troubleshooter->name
+                ]);
+                break;
             default:
                 break;
         }

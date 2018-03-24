@@ -95,7 +95,34 @@
                             </button>
                         @else
                             <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-lock"></i></button>
-                    @endif
+                        @endif
+                        <div class="modal fade" id="UpdateAssignModal-{{$action->id}}" tabindex="-1" role="dialog" aria-labelledby="UpdateAssignModalModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="UpdateAssignModalLabel">Sửa biện pháp khắc phục</h4>
+                                    </div>
+                                    <div class="modal-body" style="text-align: left">
+                                        {!! Form::model($action, [
+                                            'method' => 'PATCH',
+                                            'route' => ['troubleshootUpdateAssign', $action->id],
+                                            'files'=>true,
+                                            'enctype' => 'multipart/form-data'
+                                            ]) !!}
+                                        <div class="form-group">
+                                            {!! Form::label('troubleshooter_id', __('Người thực hiện'), ['class' => 'control-label']) !!}
+                                            {!! Form::select('troubleshooter_id', $users, null, ['placeholder' => '', 'id'=>'troubleshooter_id', 'name'=>'troubleshooter_id','class'=>'form-control', 'style' => 'width:100%']) !!}
+                                        </div>
+                                        {!! Form::submit('Cập nhật', ['class' => 'btn btn-primary', 'style' => 'width:100%']) !!}
+
+                                        {!! Form::close() !!}
+                                    </div>
+                                    <div class="modal-footer">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             @endforeach

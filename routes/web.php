@@ -46,6 +46,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'troubleshoots'], function () {
     });
     Route::patch('troubleshoots/markcomplete/{id}', 'TroubleshootsController@markComplete')->name('troubleshootMarkComplete');
+    Route::patch('troubleshoots/updateassign/{id}', 'TroubleshootsController@updateAssign')->name('troubleshootUpdateAssign');
     Route::post('troubleshoots/{id}/store',
         ['as' => 'troubleshoots.store', 'uses' => 'TroubleshootsController@store']);
     Route::resource('troubleshoots', 'TroubleshootsController', ['except' => ['store'] ]);
