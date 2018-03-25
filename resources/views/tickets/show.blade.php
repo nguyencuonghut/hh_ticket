@@ -246,7 +246,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                @include('tickets.troubleshoots.create', ['subject' => $ticket])
+                                @if($troubleshoots->count())
+                                    @include('tickets.troubleshoots.index', ['subject' => $ticket])
+                                @endif
 
                             </el-tab-pane>
                             <el-tab-pane label="Phòng ngừa" name="prevents">

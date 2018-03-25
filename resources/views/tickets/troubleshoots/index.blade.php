@@ -1,11 +1,15 @@
 <div class="row">
     <div class="col-md-12">
         <h5><b style="float: left">Tiến độ:</b></h5>
-        <span style="float: left">&nbsp;</span>
+        <?php
+        $total_actions = $troubleshoots->count();
+        $completed_actions = $troubleshoots->where('status_id', '2')->count();
+        $completed_percentage = (int)(100 * $completed_actions/$total_actions);
+        ?>
         <span>
             <div class="progress">
-                <div class="progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
-                    40%
+                <div class="progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="$completed_percentage" aria-valuemin="0" aria-valuemax="100" style="width: {{$completed_percentage}}%;">
+                    {{$completed_percentage}}%
                 </div>
             </div>
         </span>
