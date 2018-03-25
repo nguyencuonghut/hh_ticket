@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Ticket\StoreTicketRequest;
 use App\Http\Requests\Ticket\UpdateTicketRequest;
+use App\Models\Activity;
 use App\Models\Responsibility;
 use App\Models\Source;
 use App\Models\Status;
@@ -76,7 +77,8 @@ class TicketsController extends Controller
             ->withUsers(User::all()->pluck('name', 'id'))
             ->withResponsibilities(Responsibility::all()->pluck('name', 'id'))
             ->withTroubleshoots(Troubleshoot::all()->where('ticket_id', $id))
-            ->withStatuses(Status::all()->pluck('name', 'id'));
+            ->withStatuses(Status::all()->pluck('name', 'id'))
+            ->withActivities(Activity::all()->where('source_id', $ticket->id));
     }
 
     /**

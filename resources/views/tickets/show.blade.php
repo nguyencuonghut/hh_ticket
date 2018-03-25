@@ -273,19 +273,11 @@
             </div>
 
             <div class="activity-feed movedown">
-                @foreach($ticket->activity as $activity)
+                @foreach($activities as $activity)
                     <div class="feed-item">
                         <div class="activity-date">{{date('d, F Y H:i', strTotime($activity->created_at))}}</div>
                         <div class="activity-text">{!! $activity->text !!}</div>
                     </div>
-                @endforeach
-                @foreach($troubleshoots as $troubleshoot)
-                    @foreach($troubleshoot->activity as $activity)
-                        <div class="feed-item">
-                            <div class="activity-date">{{date('d, F Y H:i', strTotime($activity->created_at))}}</div>
-                            <div class="activity-text">{!! $activity->text !!}</div>
-                        </div>
-                    @endforeach
                 @endforeach
             </div>
         </div>

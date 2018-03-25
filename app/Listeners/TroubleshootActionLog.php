@@ -63,7 +63,7 @@ class TroubleshootActionLog
                 'text' => $text,
                 'user_id' => Auth()->id(),
                 'source_type' =>  Troubleshoot::class,
-                'source_id' =>  $event->getTroubleshoot()->id,
+                'source_id' =>  $event->getTroubleshoot()->ticket_id, //List all activity logs by Ticket
                 'action' => $event->getAction()
             ]
         );
