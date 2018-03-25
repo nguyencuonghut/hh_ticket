@@ -356,7 +356,65 @@
                                         </p>
                                     @endif
                                 </div>
-                                <h5><b style="color:blue">5. Hoạt động phòng ngừa</b></h5>
+                                <h5><b style="color:blue;float: left;">5. Hoạt động phòng ngừa</b></h5>
+                                <span>
+                                    <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#preventionaction"><i class="fa fa-plus-circle"><b> Tạo thêm</b></i></button>
+                                </span>
+                                <div class="modal fade" id="preventionaction" tabindex="-1" role="dialog" aria-labelledby="PreventionModalLabel">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="PreventionModalLabel"><b>Thêm biện pháp phòng ngừa</b></h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                {!! Form::open([
+                                                        'route' => ['preventions.store', $ticket->id],
+                                                        ]) !!}
+
+                                                {!! Form::label('name', __('Biện pháp phòng ngừa'), ['class' => 'control-label']) !!}
+                                                {!! Form::text('name', null, ['class' => 'form-control', 'id' => 'action']) !!}
+                                                <div class="form-inline">
+                                                    <div class="form-group col-sm-6 removeleft ">
+                                                        {!! Form::label('budget', __('Ngân sách'), ['class' => 'control-label']) !!}
+                                                        {!! Form::number('budget', null, ['class' => 'form-control', 'id' => 'action']) !!}
+                                                    </div>
+                                                    <div class="form-group col-sm-6 removeleft removeright ">
+                                                        {!! Form::label('preventor_id', __('Ai làm?'), ['class' => 'control-label']) !!}
+                                                        {!! Form::select('preventor_id', $users, null, ['placeholder' => '', 'id'=>'preventor_id', 'name'=>'preventor_id','class'=>'form-control', 'style' => 'width:100%']) !!}
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-inline">
+                                                    <div class="form-group col-sm-6 removeleft ">
+                                                        {!! Form::label('where', __('Làm ở đâu?'), ['class' => 'control-label']) !!}
+                                                        {!! Form::text('where', null, ['class' => 'form-control', 'id' => 'action']) !!}
+                                                    </div>
+                                                    <div class="form-group col-sm-6 removeleft removeright ">
+                                                        {!! Form::label('when', __('Làm khi nào?'), ['class' => 'control-label']) !!}
+                                                        {!! Form::date('when', \Carbon\Carbon::now()->addDays(3), ['class' => 'form-control']) !!}
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-inline">
+                                                    <div class="form-group col-sm-6 removeleft ">
+                                                        {!! Form::label('how', __('Làm như thế nào?'), ['class' => 'control-label']) !!}
+                                                        {!! Form::text('how', null, ['class' => 'form-control', 'id' => 'action']) !!}
+                                                    </div>
+                                                    <div class="form-group col-sm-6 removeright ">
+                                                        {!! Form::label('deadline', __('Thời hạn'), ['class' => 'control-label']) !!}
+                                                        {!! Form::date('deadline', \Carbon\Carbon::now()->addDays(3), ['class' => 'form-control']) !!}
+                                                    </div>
+                                                </div>
+                                                {!! Form::submit( __('Thêm') , ['class' => 'btn btn-primary', 'style' => 'width:100%']) !!}
+                                                {!! Form::close() !!}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @if($preventions->count())
+                                    @include('tickets.preventions.index', ['subject' => $ticket])
+                                @endif
 
                                 <h5><b style="color:blue;float: left;">6. Đánh giá hiệu quả: &nbsp;</b></h5>
 

@@ -52,6 +52,18 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('troubleshoots/{id}/store',
         ['as' => 'troubleshoots.store', 'uses' => 'TroubleshootsController@store']);
     Route::resource('troubleshoots', 'TroubleshootsController', ['except' => ['store'] ]);
+
+    /**
+     * Preventions
+     */
+    Route::group(['prefix' => 'preventions'], function () {
+    });
+    Route::patch('preventions/markcomplete/{id}', 'PreventionsController@markComplete')->name('preventionMarkComplete');
+    Route::patch('preventions/updateassign/{id}', 'PreventionsController@updateAssign')->name('preventionUpdateAssign');
+    Route::post('preventions/{id}/store',
+        ['as' => 'preventions.store', 'uses' => 'PreventionsController@store']);
+    Route::resource('preventions', 'PreventionsController', ['except' => ['store'] ]);
+
 	 /**
      * Roles
      */

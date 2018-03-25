@@ -49,4 +49,9 @@ class Activity extends model
     {
         return $this->belongsTo(Troubleshoot::class, 'troubleshoot_id', 'id');
     }
+
+    public function prevention()
+    {
+        return $this->belongsTo(Prevention::class, 'prevention_id', 'id');
+    }
 }

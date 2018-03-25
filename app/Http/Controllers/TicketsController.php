@@ -6,6 +6,7 @@ use App\Http\Requests\Ticket\StoreTicketRequest;
 use App\Http\Requests\Ticket\UpdateTicketRequest;
 use App\Models\Activity;
 use App\Models\Evaluation;
+use App\Models\Prevention;
 use App\Models\Responsibility;
 use App\Models\RootCauseType;
 use App\Models\Source;
@@ -82,7 +83,8 @@ class TicketsController extends Controller
             ->withStatuses(Status::all()->pluck('name', 'id'))
             ->withActivities(Activity::all()->where('source_id', $ticket->id))
             ->withEvaluations(Evaluation::all()->pluck('name', 'id'))
-            ->withRootCauseTypes($this->tickets->getAllRootCauseTypesWithDescription());
+            ->withRootCauseTypes($this->tickets->getAllRootCauseTypesWithDescription())
+            ->withPreventions(Prevention::all()->where('ticket_id', $id));
     }
 
     /**
