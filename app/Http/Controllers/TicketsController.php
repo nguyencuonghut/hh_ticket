@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Ticket\StoreTicketRequest;
 use App\Http\Requests\Ticket\UpdateTicketRequest;
 use App\Models\Activity;
+use App\Models\Evaluation;
 use App\Models\Responsibility;
+use App\Models\RootCauseType;
 use App\Models\Source;
 use App\Models\Status;
 use App\Models\Ticket;
@@ -78,7 +80,9 @@ class TicketsController extends Controller
             ->withResponsibilities(Responsibility::all()->pluck('name', 'id'))
             ->withTroubleshoots(Troubleshoot::all()->where('ticket_id', $id))
             ->withStatuses(Status::all()->pluck('name', 'id'))
-            ->withActivities(Activity::all()->where('source_id', $ticket->id));
+            ->withActivities(Activity::all()->where('source_id', $ticket->id))
+            ->withEvaluations(Evaluation::all()->pluck('name', 'id'))
+            ->withRootCauseTypes($this->tickets->getAllRootCauseTypesWithDescription());
     }
 
     /**
@@ -156,6 +160,54 @@ class TicketsController extends Controller
 
         $this->tickets->setResponsibility($id, $request);
         Session()->flash('flash_message', 'Xác định trách nhiệm thành công!');
+        return redirect()->back();
+    }
+
+    /**
+     * Manager confirm the ticket
+     * @param $id
+     * @return mixed
+     */
+    public function evaluateTicket(Request $request, $id)
+    {
+        //Validate the input value
+        $rules = [
+            'evaluation_id' => 'required',
+            'root_cause_type_id' => 'required',
+            'root_cause' => 'required',
+            'root_cause_approver_id' => 'required',
+        ];
+        $messages = [
+            'evaluation_id.required' => 'Yêu cầu bạn PHẢI điền "Mức độ"',
+            'root_cause_type_id.required' => 'Yêu cầu bạn PHẢI điền "Phân loại nguyên nhân"',
+            'root_cause.required' => 'Yêu cầu bạn PHẢI điền "Nguyên nhân gốc"',
+            'root_cause_approver_id.required' => 'Yêu cầu bạn PHẢI điền "Người phê duyệt"',
+        ];
+        $this->validate($request, $rules, $messages);
+
+        $this->tickets->evaluateTicket($id, $request);
+        Session()->flash('flash_message', 'Xem xét mức độ SKPH thành công!');
+        return redirect()->back();
+    }
+
+    /**
+     * Approver confirm the root cause
+     * @param $id
+     * @return mixed
+     */
+    public function rootCauseApprove(Request $request, $id)
+    {
+        //Validate the input value
+        $rules = [
+            'evaluation_result' => 'required',
+        ];
+        $messages = [
+            'evaluation_result.required' => 'Yêu cầu bạn PHẢI điền kết quả phê duyệt',
+        ];
+        $this->validate($request, $rules, $messages);
+
+        $this->tickets->rootCauseApprove($id, $request);
+        Session()->flash('flash_message', 'Duyệt thành công!');
         return redirect()->back();
     }
 }

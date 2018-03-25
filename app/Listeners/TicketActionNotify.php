@@ -42,6 +42,19 @@ class TicketActionNotify
                 $action
             ));
             break;
+        case 'req_approve_root_cause':
+            $ticket->rootCauseApproverUser->notify(new TicketActionNotification(
+                $ticket,
+                $action
+            ));
+            break;
+        case 'root_cause_approved':
+        case 'root_cause_rejected':
+            $ticket->managerUser->notify(new TicketActionNotification(
+                $ticket,
+                $action
+            ));
+            break;
         default:
             $ticket->creatorUser->notify(new TicketActionNotification(
                 $ticket,

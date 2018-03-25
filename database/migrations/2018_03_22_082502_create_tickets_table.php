@@ -43,6 +43,17 @@ class CreateTicketsTable extends Migration
             $table->integer('responsibility_id')->unsigned();
             $table->foreign('responsibility_id')->references('id')->on('responsibilities');
             //~Identify the responsibility of ticket
+
+            //Evaluate the ticket
+            $table->integer('root_cause_type_id')->unsigned();
+            $table->foreign('root_cause_type_id')->references('id')->on('root_cause_types');
+            $table->integer('evaluation_id')->unsigned();
+            $table->foreign('evaluation_id')->references('id')->on('evaluations');
+            $table->longText('root_cause');
+            $table->integer('root_cause_approver_id')->unsigned();
+            $table->foreign('root_cause_approver_id')->references('id')->on('users');
+            $table->string('evaluation_result');
+            //~Evaluate the ticket
             $table->timestamps();
         });
     }

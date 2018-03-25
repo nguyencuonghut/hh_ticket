@@ -1,6 +1,7 @@
 <?php
 namespace App\Repositories\Ticket;
 
+use App\Models\RootCauseType;
 use App\Models\Ticket;
 use Illuminate\Support\Facades\Session;
 use Gate;
@@ -19,6 +20,9 @@ class TicketRepository implements TicketRepositoryContract
     const UPDATED_DESCRIPTION = 'updated_description';
     const MANAGER_APPROVED = 'manager_approved';
     const MANAGER_REJECTED = 'manager_rejected';
+    const REQ_APPROVE_ROOT_CAUSE = 'req_approve_root_cause';
+    const ROOT_CAUSE_APPROVED = 'root_cause_approved';
+    const ROOT_CAUSE_REJECTED = 'root_cause_rejected';
 
     /**
      * @param $id
@@ -135,5 +139,51 @@ class TicketRepository implements TicketRepositoryContract
         $ticket->responsibility_id = $requestData->responsibility_id;
         $ticket->save();
         $ticket = $ticket->fresh();
+    }
+
+    /**
+     * Manager confirm the ticket
+     * @param  \Illuminate\Http\Request  $requestData
+     * @param $id
+     * @return mixed
+     */
+    public function evaluateTicket($id, $requestData)
+    {
+        $ticket = Ticket::findOrFail($id);
+        $ticket->root_cause_type_id = $requestData->root_cause_type_id;
+        $ticket->evaluation_id = $requestData->evaluation_id;
+        $ticket->root_cause = $requestData->root_cause;
+        $ticket->root_cause_approver_id = $requestData->root_cause_approver_id;
+        $ticket->save();
+        $ticket = $ticket->fresh();
+        event(new \App\Events\TicketAction($ticket, self::REQ_APPROVE_ROOT_CAUSE));
+    }
+
+    /**
+     * @param $id
+     * @param
+     */
+    public function getAllRootCauseTypesWithDescription()
+    {
+        return RootCauseType::all()
+            ->pluck('nameAndDescription', 'id');
+    }
+
+    /**
+     * Approver confirm the root cause
+     * @param $id
+     * @return mixed
+     */
+    public function rootCauseApprove($id, $requestData)
+    {
+        $ticket = Ticket::findOrFail($id);
+        $ticket->evaluation_result = $requestData->evaluation_result;
+        $ticket->save();
+        $ticket = $ticket->fresh();
+        if('Đồng ý' == $requestData->evaluation_result){
+            event(new \App\Events\TicketAction($ticket, self::ROOT_CAUSE_APPROVED));
+        } else {
+            event(new \App\Events\TicketAction($ticket, self::ROOT_CAUSE_REJECTED));
+        }
     }
 }

@@ -25,6 +25,11 @@ class Ticket extends Model
         'manager_confirmation_result',
         'manager_confirmation_comment',
         'responsibility_id',
+        'root_cause_type_id',
+        'evaluation_id',
+        'root_cause',
+        'root_cause_approver_id',
+        'evaluation_result',
     ];
 
     public function source()
@@ -39,6 +44,18 @@ class Ticket extends Model
     {
         return $this->belongsTo(User::class, 'creator_id');
     }
+    public function evaluation()
+    {
+        return $this->belongsTo(Evaluation::class, 'evaluation_id');
+    }
+    public function root_cause_type()
+    {
+        return $this->belongsTo(RootCauseType::class, 'root_cause_type_id');
+    }
+    public function root_cause_approver()
+    {
+        return $this->belongsTo(User::class, 'root_cause_approver_id');
+    }
     public function getCreatorUserAttribute()
     {
         return User::findOrFail($this->creator_id);
@@ -46,6 +63,10 @@ class Ticket extends Model
     public function getManagerUserAttribute()
     {
         return User::findOrFail($this->manager_id);
+    }
+    public function getRootCauseApproverUserAttribute()
+    {
+        return User::findOrFail($this->root_cause_approver_id);
     }
     public function activity()
     {

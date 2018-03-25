@@ -54,6 +54,25 @@ class TicketActionLog
                     'manager' => $event->getTicket()->manager->name
                 ]);
                 break;
+            case 'req_approve_root_cause':
+                $text = __('<b><i>:title</i></b> :manager yêu cầu :root_cause_approver duyệt nguyên nhân gốc rễ', [
+                    'title' => $event->getTicket()->title,
+                    'manager' => $event->getTicket()->manager->name,
+                    'root_cause_approver' => $event->getTicket()->root_cause_approver->name
+                ]);
+                break;
+            case 'root_cause_approved':
+                $text = __('<b><i>:title</i></b> nguyên nhân gốc rễ được đồng ý bởi :root_cause_approver', [
+                    'title' => $event->getTicket()->title,
+                    'root_cause_approver' => $event->getTicket()->root_cause_approver->name
+                ]);
+                break;
+            case 'root_cause_rejected':
+                $text = __('<b><i>:title</i></b> nguyên nhân gốc rễ bị từ chối bởi :root_cause_approver', [
+                    'title' => $event->getTicket()->title,
+                    'root_cause_approver' => $event->getTicket()->root_cause_approver->name
+                ]);
+                break;
             default:
                 break;
         }

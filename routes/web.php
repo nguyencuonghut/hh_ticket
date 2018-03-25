@@ -37,6 +37,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'tickets'], function () {
         Route::patch('tickets/managerconfirm/{id}', 'TicketsController@managerConfirm')->name('managerConfirm');
         Route::patch('tickets/setresponsibility/{id}', 'TicketsController@setResponsibility')->name('setResponsibility');
+        Route::patch('tickets/evaluate/{id}', 'TicketsController@evaluateTicket')->name('evaluateTicket');
+        Route::patch('tickets/rootcauseapprove/{id}', 'TicketsController@rootCauseApprove')->name('rootCauseApprove');
     });
     Route::resource('tickets', 'TicketsController');
 
