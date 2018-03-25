@@ -63,6 +63,7 @@ class TroubleshootRepository implements TroubleshootRepositoryContract
         $troubleshoot->name = $requestData->name;
         $troubleshoot->deadline = $requestData->deadline;
         $troubleshoot->status_id = $requestData->status_id;
+        $troubleshoot->is_on_time = ($requestData->status_id == 1) ? 0:$troubleshoot->is_on_time;
         $troubleshoot->save();
 
         Session::flash('flash_message', 'Sửa hành động khắc phục thành công!');
