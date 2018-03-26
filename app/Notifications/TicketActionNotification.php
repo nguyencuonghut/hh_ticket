@@ -99,6 +99,14 @@ class TicketActionNotification extends Notification
                 ]);
                 $toName = $this->ticket->manager->name;
                 break;
+            case 'asset_effectiveness':
+                $text = __(':title được đánh giá :effectiveness :effectiveness_assessor', [
+                    'title' =>  $this->ticket->title,
+                    'effectiveness' => $this->ticket->effectiveness->name,
+                    'effectiveness_assessor' => $this->ticket->effectiveness_assessor->name,
+                ]);
+                $toName = $this->ticket->manager->name;
+                break;
             default:
                 break;
         }
@@ -169,6 +177,15 @@ class TicketActionNotification extends Notification
                 $text = __(':title nguyên nhân gốc rễ bị từ chối bởi :root_cause_approver', [
                     'title' =>  $this->ticket->title,
                     'root_cause_approver' => $this->ticket->root_cause_approver->name,
+                ]);
+                $assigned_user = $this->ticket->manager->name;
+                $created_user =$this->ticket->creator->name;
+                break;
+            case 'asset_effectiveness':
+                $text = __(':title được đánh giá :effectiveness :effectiveness_assessor', [
+                    'title' =>  $this->ticket->title,
+                    'effectiveness' => $this->ticket->effectiveness->name,
+                    'effectiveness_assessor' => $this->ticket->effectiveness_assessor->name,
                 ]);
                 $assigned_user = $this->ticket->manager->name;
                 $created_user =$this->ticket->creator->name;

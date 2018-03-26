@@ -54,6 +54,13 @@ class CreateTicketsTable extends Migration
             $table->foreign('root_cause_approver_id')->references('id')->on('users');
             $table->string('evaluation_result');
             //~Evaluate the ticket
+
+            //Asset effectiveness
+            $table->integer('effectiveness_id')->unsigned();
+            $table->foreign('effectiveness_id')->references('id')->on('effectivenesses');
+            $table->integer('effectiveness_assessor_id')->unsigned();
+            $table->foreign('effectiveness_assessor_id')->references('id')->on('users');
+            //~Asset effectiveness
             $table->timestamps();
         });
     }

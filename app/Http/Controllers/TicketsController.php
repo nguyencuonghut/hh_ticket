@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Ticket\StoreTicketRequest;
 use App\Http\Requests\Ticket\UpdateTicketRequest;
 use App\Models\Activity;
+use App\Models\Effectiveness;
 use App\Models\Evaluation;
 use App\Models\Prevention;
 use App\Models\Responsibility;
@@ -84,7 +85,8 @@ class TicketsController extends Controller
             ->withActivities(Activity::all()->where('source_id', $ticket->id))
             ->withEvaluations(Evaluation::all()->pluck('name', 'id'))
             ->withRootCauseTypes($this->tickets->getAllRootCauseTypesWithDescription())
-            ->withPreventions(Prevention::all()->where('ticket_id', $id));
+            ->withPreventions(Prevention::all()->where('ticket_id', $id))
+            ->withEffectivenesses(Effectiveness::all()->pluck('name', 'id'));
     }
 
     /**
@@ -210,6 +212,27 @@ class TicketsController extends Controller
 
         $this->tickets->rootCauseApprove($id, $request);
         Session()->flash('flash_message', 'Duyệt thành công!');
+        return redirect()->back();
+    }
+
+    /**
+     * Asset the effectiveness of the ticket
+     * @param $id
+     * @return mixed
+     */
+    public function assetEffectiveness(Request $request, $id)
+    {
+        //Validate the input value
+        $rules = [
+            'effectiveness_id' => 'required',
+        ];
+        $messages = [
+            'effectiveness_id.required' => 'Yêu cầu bạn PHẢI điền "Hiệu quả"',
+        ];
+        $this->validate($request, $rules, $messages);
+
+        $this->tickets->assetEffectiveness($id, $request);
+        Session()->flash('flash_message', 'Đánh giá hiệu quả thành công!');
         return redirect()->back();
     }
 }

@@ -50,6 +50,7 @@ class TicketActionNotify
             break;
         case 'root_cause_approved':
         case 'root_cause_rejected':
+        case 'asset_effectiveness':
             $ticket->managerUser->notify(new TicketActionNotification(
                 $ticket,
                 $action

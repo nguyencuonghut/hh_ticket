@@ -23,6 +23,7 @@ class TicketRepository implements TicketRepositoryContract
     const REQ_APPROVE_ROOT_CAUSE = 'req_approve_root_cause';
     const ROOT_CAUSE_APPROVED = 'root_cause_approved';
     const ROOT_CAUSE_REJECTED = 'root_cause_rejected';
+    const ASSET_EFFECTIVENESS = 'asset_effectiveness';
 
     /**
      * @param $id
@@ -185,5 +186,22 @@ class TicketRepository implements TicketRepositoryContract
         } else {
             event(new \App\Events\TicketAction($ticket, self::ROOT_CAUSE_REJECTED));
         }
+    }
+
+
+    /**
+     * Asset the effectiveness of ticket
+     * @param  \Illuminate\Http\Request  $requestData
+     * @param $id
+     * @return mixed
+     */
+    public function assetEffectiveness($id, $requestData)
+    {
+        $ticket = Ticket::findOrFail($id);
+        $ticket->effectiveness_id = $requestData->effectiveness_id;
+        $ticket->effectiveness_assessor_id = auth()->id();
+        $ticket->save();
+        $ticket = $ticket->fresh();
+        event(new \App\Events\TicketAction($ticket, self::ASSET_EFFECTIVENESS));
     }
 }

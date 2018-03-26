@@ -39,6 +39,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::patch('tickets/setresponsibility/{id}', 'TicketsController@setResponsibility')->name('setResponsibility');
         Route::patch('tickets/evaluate/{id}', 'TicketsController@evaluateTicket')->name('evaluateTicket');
         Route::patch('tickets/rootcauseapprove/{id}', 'TicketsController@rootCauseApprove')->name('rootCauseApprove');
+        Route::patch('tickets/asseteffectiveneess/{id}', 'TicketsController@assetEffectiveness')->name('assetEffectiveness');
     });
     Route::resource('tickets', 'TicketsController');
 

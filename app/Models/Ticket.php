@@ -30,6 +30,8 @@ class Ticket extends Model
         'root_cause',
         'root_cause_approver_id',
         'evaluation_result',
+        'effectiveness_id',
+        'effectiveness_assessor_id',
     ];
 
     public function source()
@@ -55,6 +57,14 @@ class Ticket extends Model
     public function root_cause_approver()
     {
         return $this->belongsTo(User::class, 'root_cause_approver_id');
+    }
+    public function effectiveness()
+    {
+        return $this->belongsTo(Effectiveness::class, 'effectiveness_id');
+    }
+    public function effectiveness_assessor()
+    {
+        return $this->belongsTo(User::class, 'effectiveness_assessor_id');
     }
     public function getCreatorUserAttribute()
     {

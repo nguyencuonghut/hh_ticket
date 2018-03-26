@@ -73,6 +73,13 @@ class TicketActionLog
                     'root_cause_approver' => $event->getTicket()->root_cause_approver->name
                 ]);
                 break;
+            case 'asset_effectiveness':
+                $text = __('<b><i>:title</i></b> được đánh giá :effectiveness bởi :effectiveness_assessor', [
+                    'title' => $event->getTicket()->title,
+                    'effectiveness' => $event->getTicket()->effectiveness->name,
+                    'effectiveness_assessor' => $event->getTicket()->effectiveness_assessor->name
+                ]);
+                break;
             default:
                 break;
         }
