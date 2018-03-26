@@ -86,9 +86,17 @@ class Ticket extends Model
     {
         return $this->belongsTo(Responsibility::class, 'responsibility_id');
     }
-
     public function troubleshoots()
     {
         return $this->hasMany(Troubleshoot::class, 'ticket_id', 'id');
+    }
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'source');
+    }
+    public function addComment($reply)
+    {
+        $reply = $this->comments()->create($reply);
+        return $reply;
     }
 }

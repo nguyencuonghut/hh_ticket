@@ -8,7 +8,8 @@ class Comment extends Model
     protected $fillable = [
         'description',
         'task_id',
-        'user_id'
+        'user_id',
+        'ticket_id',
     ];
     protected $hidden = ['remember_token'];
 
@@ -23,6 +24,11 @@ class Comment extends Model
     public function task()
     {
         return $this->belongsTo(Task::class, 'task_id', 'id');
+    }
+
+    public function ticket()
+    {
+        return $this->belongsTo(Ticket::class, 'ticket_id', 'id');
     }
 
     public function user()
