@@ -17,9 +17,24 @@ class NotificationsController extends Controller
     public function markRead(Request $request)
     {
         $user = auth()->user();
-	$user->unreadNotifications()->where('id', $request->id)->first()->markAsRead();
+        $user->unreadNotifications()->where('id', $request->id)->first()->markAsRead();
 
-        return redirect($user->notifications->where('id', $request->id)->first()->data['url']);
+        $type = $user->notifications->where('id', $request->id)->first()->type;
+        switch ($type) {
+            case 'App\Notifications\TicketActionNotification':
+                $tab = 'description';
+                break;
+            case 'App\Notifications\TroubleshootActionNotification':
+                $tab = 'troubleshoot';
+                break;
+            case 'App\Notifications\PreventionActionNotification':
+                $tab = 'prevention';
+                break;
+            default:
+                $tab = 'prevention';
+                break;
+        }
+        return redirect($user->notifications->where('id', $request->id)->first()->data['url'])->with('tab', $tab);
     }
 
     /**

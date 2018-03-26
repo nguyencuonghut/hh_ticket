@@ -43,8 +43,8 @@
                                     case 'troubleshoot':
                                         echo("troubleshoot");
                                         break;
-                                    case 'prevents':
-                                        echo("prevents");
+                                    case 'prevention':
+                                        echo("prevention");
                                         break;
                                     default:
                                         echo("description");
@@ -251,7 +251,7 @@
                                 @endif
 
                             </el-tab-pane>
-                            <el-tab-pane label="Phòng ngừa" name="prevents">
+                            <el-tab-pane label="Phòng ngừa" name="prevention">
                                 <h5><b style="color:blue; float: left;">4. Xem xét mức độ sự không phù hợp:</b></h5>
                                 <span>
                                     <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#evaluation"><i class="fa fa-plus-circle"><b> Cập nhật</b></i></button>
