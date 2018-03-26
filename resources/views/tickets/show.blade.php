@@ -461,6 +461,7 @@
 
                 </div>
             </div>
+            @include('partials.comments', ['subject' => $ticket])
 
         </div>
         <div class="col-md-3">
