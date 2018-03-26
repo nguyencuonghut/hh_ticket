@@ -110,7 +110,7 @@ class PreventionsController extends Controller
     {
         $ticket_id = $this->actions->markComplete($id);
 
-        return redirect()->route("tickets.show", $ticket_id);
+        return redirect()->route("tickets.show", $ticket_id)->with('tab', 'prevention');
     }
 
     /**

@@ -166,7 +166,7 @@ class TicketsController extends Controller
 
         $this->tickets->setResponsibility($id, $request);
         Session()->flash('flash_message', 'Xác định trách nhiệm thành công!');
-        return redirect()->back();
+        return redirect()->back()->with('tab', 'troubleshoot');
     }
 
     /**
