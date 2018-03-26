@@ -14,17 +14,3 @@
 
 @stop
 
-@push('scripts')
-    <script type="text/javascript">
-        $("#source_id").select2({
-            placeholder: "Chọn nguồn gốc",
-            allowClear: true
-        });
-    </script>
-    <script type="text/javascript">
-        $("#manager_id").select2({
-            placeholder: "Chọn trưởng bộ phận",
-            allowClear: true
-        });
-    </script>
-@endpush

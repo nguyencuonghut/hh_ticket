@@ -41,7 +41,7 @@
                         @else
                             <button type="button" class="btn btn-warning btn-sm"><i class="fa fa-lock"></i></button>
                         @endif
-                        <div class="modal fade" id="TroubleshootActionEditModal-{{$action->id}}" tabindex="-1" role="dialog" aria-labelledby="TroubleshootActionEditModalLabel">
+                        <div class="modal fade" id="TroubleshootActionEditModal-{{$action->id}}" role="dialog" aria-labelledby="TroubleshootActionEditModalLabel">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -100,12 +100,12 @@
                         @else
                             <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-lock"></i></button>
                         @endif
-                        <div class="modal fade" id="UpdateAssignModal-{{$action->id}}" tabindex="-1" role="dialog" aria-labelledby="UpdateAssignModalModalLabel">
+                        <div class="modal fade" id="UpdateAssignModal-{{$action->id}}" role="dialog" aria-labelledby="UpdateAssignModalModalLabel">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="UpdateAssignModalLabel">Sửa biện pháp khắc phục</h4>
+                                        <h4 class="modal-title" id="UpdateAssignModalLabel">Giao cho người khác</h4>
                                     </div>
                                     <div class="modal-body" style="text-align: left">
                                         {!! Form::model($action, [
@@ -136,15 +136,15 @@
 
 @push('scripts')
     <script type="text/javascript">
-        $("#troubleshooter_id").select2({
-            placeholder: "Chọn",
-            allowClear: true
-        });
-    </script>
-    <script type="text/javascript">
         $("#status_id").select2({
             placeholder: "Chọn",
             allowClear: true
         });
     </script>
+<script type="text/javascript">
+    $("#troubleshooter_id").select2({
+        placeholder: "Chọn",
+        allowClear: true
+    });
+</script>
 @endpush

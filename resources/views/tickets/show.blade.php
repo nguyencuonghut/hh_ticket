@@ -67,7 +67,7 @@
                                     <span>
                                         <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#description_edit"><i class="fa fa-edit"><b> Cập nhật</b></i></button>
                                     </span>
-                                    <div class="modal fade" id="description_edit" tabindex="-1" role="dialog" aria-labelledby="DescriptionEditModalLabel">
+                                    <div class="modal fade" id="description_edit" role="dialog" aria-labelledby="DescriptionEditModalLabel">
                                         <div class="modal-dialog modal-lg" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -124,7 +124,7 @@
                                             <span>
                                                 <button type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#manager_confirmation" style="margin-top: 2px;margin-left: 2px"><i class="fa fa-check-circle"><b> Xác nhận</b></i></button>
                                             </span>
-                                            <div class="modal fade" id="manager_confirmation" tabindex="-1" role="dialog" aria-labelledby="ManagerConfirmationModalLabel">
+                                            <div class="modal fade" id="manager_confirmation" style="overflow:hidden;" role="dialog" aria-labelledby="ManagerConfirmationModalLabel">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -158,6 +158,9 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <script>
+
+                                            </script>
                                             @if($ticket->manager_confirmation_result)
                                                 <p><b>Xác nhận: </b><b style="color:{{'Đồng ý' === $ticket->manager_confirmation_result ? 'blue':'red'}}">{!! $ticket->manager_confirmation_result !!}</b> <i>(bởi {{$ticket->manager->name}})</i></p>
                                             @else
@@ -179,7 +182,7 @@
                                 <span>
                                     <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#set_responsibility"><i class="fa fa-edit"><b> Cập nhật</b></i></button>
                                 </span>
-                                <div class="modal fade" id="set_responsibility" tabindex="-1" role="dialog" aria-labelledby="SetResponsibilityModalLabel">
+                                <div class="modal fade" id="set_responsibility" role="dialog" aria-labelledby="SetResponsibilityModalLabel">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -217,7 +220,7 @@
                                 <span>
                                     <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#troubleshootaction"><i class="fa fa-plus-circle"><b> Tạo thêm</b></i></button>
                                 </span>
-                                <div class="modal fade" id="troubleshootaction" tabindex="-1" role="dialog" aria-labelledby="TroubleshootModalLabel">
+                                <div class="modal fade" id="troubleshootaction" role="dialog" aria-labelledby="TroubleshootModalLabel">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -232,7 +235,6 @@
                                                 {!! Form::label('name', __('Biện pháp khắc phục'), ['class' => 'control-label']) !!}
                                                 {!! Form::text('name', null, ['class' => 'form-control', 'id' => 'action']) !!}
                                                 <div class="form-inline">
-                                                    <!-- TODO: fix the bug of searching the user -->
                                                     <div class="form-group col-sm-6 removeleft ">
                                                         {!! Form::label('troubleshooter_id', __('Người thực hiện'), ['class' => 'control-label']) !!}
                                                         {!! Form::select('troubleshooter_id', $users, null, ['placeholder' => '', 'id'=>'troubleshooter_id', 'name'=>'troubleshooter_id','class'=>'form-control', 'style' => 'width:100%']) !!}
@@ -258,7 +260,7 @@
                                 <span>
                                     <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#evaluation"><i class="fa fa-plus-circle"><b> Cập nhật</b></i></button>
                                 </span>
-                                <div class="modal fade" id="evaluation" tabindex="-1" role="dialog" aria-labelledby="EvaluationModalLabel">
+                                <div class="modal fade" id="evaluation" role="dialog" aria-labelledby="EvaluationModalLabel">
                                     <div class="modal-dialog modal-lg" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -301,7 +303,7 @@
                                 <span>
                                     <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#root_cause_approve" style="margin-top: 2px;margin-left: 2px"><i class="fa fa-check-circle"><b> Phê duyệt</b></i></button>
                                 </span>
-                                <div class="modal fade" id="root_cause_approve" tabindex="-1" role="dialog" aria-labelledby="RootCauseApproveModalLabel">
+                                <div class="modal fade" id="root_cause_approve" role="dialog" aria-labelledby="RootCauseApproveModalLabel">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -360,7 +362,7 @@
                                 <span>
                                     <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#preventionaction"><i class="fa fa-plus-circle"><b> Tạo thêm</b></i></button>
                                 </span>
-                                <div class="modal fade" id="preventionaction" tabindex="-1" role="dialog" aria-labelledby="PreventionModalLabel">
+                                <div class="modal fade" id="preventionaction" role="dialog" aria-labelledby="PreventionModalLabel">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -379,33 +381,26 @@
                                                         {!! Form::label('budget', __('Ngân sách'), ['class' => 'control-label']) !!}
                                                         {!! Form::number('budget', null, ['class' => 'form-control', 'id' => 'action']) !!}
                                                     </div>
-                                                    <div class="form-group col-sm-6 removeleft removeright ">
-                                                        {!! Form::label('preventor_id', __('Ai làm?'), ['class' => 'control-label']) !!}
-                                                        {!! Form::select('preventor_id', $users, null, ['placeholder' => '', 'id'=>'preventor_id', 'name'=>'preventor_id','class'=>'form-control', 'style' => 'width:100%']) !!}
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-inline">
-                                                    <div class="form-group col-sm-6 removeleft ">
+                                                    <div class="form-group col-sm-6 removeright ">
                                                         {!! Form::label('where', __('Làm ở đâu?'), ['class' => 'control-label']) !!}
                                                         {!! Form::text('where', null, ['class' => 'form-control', 'id' => 'action']) !!}
                                                     </div>
-                                                    <div class="form-group col-sm-6 removeleft removeright ">
+                                                </div>
+                                                <div class="form-inline">
+                                                    <div class="form-group col-sm-6 removeleft ">
                                                         {!! Form::label('when', __('Làm khi nào?'), ['class' => 'control-label']) !!}
-                                                        {!! Form::date('when', \Carbon\Carbon::now()->addDays(3), ['class' => 'form-control']) !!}
+                                                        {!! Form::date('when', \Carbon\Carbon::now()->addDays(3), ['class' => 'form-control', 'style' => 'width:100%']) !!}
+                                                    </div>
+                                                    <div class="form-group col-sm-6 removeright ">
+                                                        {!! Form::label('how', __('Làm như thế nào?'), ['class' => 'control-label']) !!}
+                                                        {!! Form::text('how', null, ['class' => 'form-control', 'id' => 'action', 'style' => 'width:100%']) !!}
                                                     </div>
                                                 </div>
 
-                                                <div class="form-inline">
-                                                    <div class="form-group col-sm-6 removeleft ">
-                                                        {!! Form::label('how', __('Làm như thế nào?'), ['class' => 'control-label']) !!}
-                                                        {!! Form::text('how', null, ['class' => 'form-control', 'id' => 'action']) !!}
+                                                    <div class="form-group">
+                                                        {!! Form::label('preventor_id', __('Ai làm?'), ['class' => 'control-label']) !!}
+                                                        {!! Form::select('preventor_id', $users, null, ['placeholder' => '', 'id'=>'preventor_id', 'name'=>'preventor_id','class'=>'form-control', 'style' => 'width:100%']) !!}
                                                     </div>
-                                                    <div class="form-group col-sm-6 removeright ">
-                                                        {!! Form::label('deadline', __('Thời hạn'), ['class' => 'control-label']) !!}
-                                                        {!! Form::date('deadline', \Carbon\Carbon::now()->addDays(3), ['class' => 'form-control']) !!}
-                                                    </div>
-                                                </div>
                                                 {!! Form::submit( __('Thêm') , ['class' => 'btn btn-primary', 'style' => 'width:100%']) !!}
                                                 {!! Form::close() !!}
                                             </div>
@@ -420,7 +415,7 @@
                                 <span>
                                     <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#effectiveness"><i class="fa fa-edit"><b> Cập nhật</b></i></button>
                                 </span>
-                                <div class="modal fade" id="effectiveness" tabindex="-1" role="dialog" aria-labelledby="EffectivenessModalLabel">
+                                <div class="modal fade" id="effectiveness" role="dialog" aria-labelledby="EffectivenessModalLabel">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -520,6 +515,12 @@
     </script>
     <script type="text/javascript">
         $("#evaluation_result").select2({
+            placeholder: "Chọn",
+            allowClear: true
+        });
+    </script>
+    <script type="text/javascript">
+        $("#preventor_id").select2({
             placeholder: "Chọn",
             allowClear: true
         });

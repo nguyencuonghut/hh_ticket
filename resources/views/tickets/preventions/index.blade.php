@@ -47,7 +47,7 @@
                         @else
                             <button type="button" class="btn btn-warning btn-sm"><i class="fa fa-lock"></i></button>
                         @endif
-                        <div class="modal fade" id="PreventionActionEditModal-{{$action->id}}" tabindex="-1" role="dialog" aria-labelledby="PreventionActionEditModalLabel">
+                        <div class="modal fade" id="PreventionActionEditModal-{{$action->id}}" role="dialog" aria-labelledby="PreventionActionEditModalLabel">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -128,7 +128,7 @@
                         @else
                             <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-lock"></i></button>
                         @endif
-                        <div class="modal fade" id="UpdatePreventionAssignModal-{{$action->id}}" tabindex="-1" role="dialog" aria-labelledby="UpdatePreventionAssignModalLabel">
+                        <div class="modal fade" id="UpdatePreventionAssignModal-{{$action->id}}" role="dialog" aria-labelledby="UpdatePreventionAssignModalLabel">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -164,7 +164,7 @@
 
 @push('scripts')
     <script type="text/javascript">
-        $("#troubleshooter_id").select2({
+        $("#preventor_id").select2({
             placeholder: "Chọn",
             allowClear: true
         });
