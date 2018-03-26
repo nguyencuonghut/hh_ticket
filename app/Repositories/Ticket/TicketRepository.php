@@ -117,11 +117,11 @@ class TicketRepository implements TicketRepositoryContract
     public function managerConfirm($id, $requestData)
     {
         $ticket = Ticket::findOrFail($id);
-        $ticket->manager_confirmation_result = $requestData->manager_confirmation_result;
+        $ticket->manager_confirmation_result_id = $requestData->manager_confirmation_result_id;
         $ticket->manager_confirmation_comment = $requestData->manager_confirmation_comment;
         $ticket->save();
         $ticket = $ticket->fresh();
-        if('Đồng ý' == $requestData->manager_confirmation_result){
+        if('Đồng ý' == $ticket->manager_confirmation_result->name){
             event(new \App\Events\TicketAction($ticket, self::MANAGER_APPROVED));
         } else {
             event(new \App\Events\TicketAction($ticket, self::MANAGER_REJECTED));
@@ -178,10 +178,10 @@ class TicketRepository implements TicketRepositoryContract
     public function rootCauseApprove($id, $requestData)
     {
         $ticket = Ticket::findOrFail($id);
-        $ticket->evaluation_result = $requestData->evaluation_result;
+        $ticket->evaluation_result_id = $requestData->evaluation_result_id;
         $ticket->save();
         $ticket = $ticket->fresh();
-        if('Đồng ý' == $requestData->evaluation_result){
+        if('Đồng ý' == $ticket->evaluation_result->name){
             event(new \App\Events\TicketAction($ticket, self::ROOT_CAUSE_APPROVED));
         } else {
             event(new \App\Events\TicketAction($ticket, self::ROOT_CAUSE_REJECTED));

@@ -22,14 +22,14 @@ class Ticket extends Model
         'image_path',
         'manager_id',
         'creator_id',
-        'manager_confirmation_result',
+        'manager_confirmation_result_id',
         'manager_confirmation_comment',
         'responsibility_id',
         'root_cause_type_id',
         'evaluation_id',
         'root_cause',
         'root_cause_approver_id',
-        'evaluation_result',
+        'evaluation_result_id',
         'effectiveness_id',
         'effectiveness_assessor_id',
     ];
@@ -50,6 +50,10 @@ class Ticket extends Model
     {
         return $this->belongsTo(Evaluation::class, 'evaluation_id');
     }
+    public function evaluation_result()
+    {
+        return $this->belongsTo(ApproveResult::class, 'evaluation_result_id');
+    }
     public function root_cause_type()
     {
         return $this->belongsTo(RootCauseType::class, 'root_cause_type_id');
@@ -65,6 +69,10 @@ class Ticket extends Model
     public function effectiveness_assessor()
     {
         return $this->belongsTo(User::class, 'effectiveness_assessor_id');
+    }
+    public function manager_confirmation_result()
+    {
+        return $this->belongsTo(ApproveResult::class, 'manager_confirmation_result_id');
     }
     public function getCreatorUserAttribute()
     {

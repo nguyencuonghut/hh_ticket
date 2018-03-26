@@ -35,7 +35,8 @@ class CreateTicketsTable extends Migration
             //~Description for ticket
 
             //Confirmation of manager
-            $table->string('manager_confirmation_result');
+            $table->integer('manager_confirmation_result_id')->unsigned();
+            $table->foreign('manager_confirmation_result_id')->references('id')->on('approve_results');
             $table->text('manager_confirmation_comment')->nullable();
             //~Confirmation of manager
 
@@ -52,11 +53,12 @@ class CreateTicketsTable extends Migration
             $table->longText('root_cause');
             $table->integer('root_cause_approver_id')->unsigned();
             $table->foreign('root_cause_approver_id')->references('id')->on('users');
-            $table->string('evaluation_result');
+            $table->integer('evaluation_result_id')->unsigned();
+            $table->foreign('evaluation_result_id')->references('id')->on('approve_results');
             //~Evaluate the ticket
 
             //Asset effectiveness
-            $table->integer('effectiveness_id')->unsigned();
+            $table->integer('effectiveness_iNd')->unsigned();
             $table->foreign('effectiveness_id')->references('id')->on('effectivenesses');
             $table->integer('effectiveness_assessor_id')->unsigned();
             $table->foreign('effectiveness_assessor_id')->references('id')->on('users');

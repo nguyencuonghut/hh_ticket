@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Ticket\StoreTicketRequest;
 use App\Http\Requests\Ticket\UpdateTicketRequest;
 use App\Models\Activity;
+use App\Models\ApproveResult;
 use App\Models\Effectiveness;
 use App\Models\Evaluation;
 use App\Models\Prevention;
@@ -86,7 +87,8 @@ class TicketsController extends Controller
             ->withEvaluations(Evaluation::all()->pluck('name', 'id'))
             ->withRootCauseTypes($this->tickets->getAllRootCauseTypesWithDescription())
             ->withPreventions(Prevention::all()->where('ticket_id', $id))
-            ->withEffectivenesses(Effectiveness::all()->pluck('name', 'id'));
+            ->withEffectivenesses(Effectiveness::all()->pluck('name', 'id'))
+            ->withResults(ApproveResult::all()->pluck('name', 'id'));
     }
 
     /**
@@ -134,10 +136,10 @@ class TicketsController extends Controller
     {
         //Validate the input value
         $rules = [
-            'manager_confirmation_result' => 'required',
+            'manager_confirmation_result_id' => 'required',
         ];
         $messages = [
-            'manager_confirmation_result.required' => 'Yêu cầu bạn PHẢI điền "Kết quả xác nhận"',
+            'manager_confirmation_result_id.required' => 'Yêu cầu bạn PHẢI điền "Kết quả xác nhận"',
         ];
         $this->validate($request, $rules, $messages);
 
@@ -203,10 +205,10 @@ class TicketsController extends Controller
     {
         //Validate the input value
         $rules = [
-            'evaluation_result' => 'required',
+            'evaluation_result_id' => 'required',
         ];
         $messages = [
-            'evaluation_result.required' => 'Yêu cầu bạn PHẢI điền kết quả phê duyệt',
+            'evaluation_result_id.required' => 'Yêu cầu bạn PHẢI điền kết quả phê duyệt',
         ];
         $this->validate($request, $rules, $messages);
 

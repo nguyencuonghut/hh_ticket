@@ -138,13 +138,9 @@
                                                                     'files'=>true,
                                                                     'enctype' => 'multipart/form-data'
                                                                     ]) !!}
-
                                                             <div class="form-group">
-                                                                <select name="manager_confirmation_result" id="manager_confirmation_result" class="form-control" style="width:100%">
-                                                                    <option disabled selected value> {{ __('Chọn') }} </option>
-                                                                    <option value="Đồng ý">Đồng ý</option>
-                                                                    <option value="Từ chối">Từ chối</option>
-                                                                </select>
+                                                                {!! Form::label('manager_confirmation_result_id', __('Nguồn gốc') , ['class' => 'control-label']) !!}
+                                                                {!! Form::select('manager_confirmation_result_id', $results, null, ['placeholder' => '', 'id'=>'manager_confirmation_result_id', 'name'=>'manager_confirmation_result_id','class'=>'form-control', 'style' => 'width:100%']) !!}
                                                             </div>
                                                             <div class="form-group">
                                                                 {!! Form::label('manager_confirmation_comment', __('Ý kiến'), ['class' => 'control-label']) !!}
@@ -161,8 +157,8 @@
                                             <script>
 
                                             </script>
-                                            @if($ticket->manager_confirmation_result)
-                                                <p><b>Xác nhận: </b><b style="color:{{'Đồng ý' === $ticket->manager_confirmation_result ? 'blue':'red'}}">{!! $ticket->manager_confirmation_result !!}</b> <i>(bởi {{$ticket->manager->name}})</i></p>
+                                            @if($ticket->manager_confirmation_result_id)
+                                                <p><b>Xác nhận: </b><b style="color:{{$ticket->manager_confirmation_result->color}}">{!! $ticket->manager_confirmation_result->name !!}</b> <i>(bởi {{$ticket->manager->name}})</i></p>
                                             @else
                                                 <p style="color:red"> Chưa xác nhận!</p>
                                             @endif
@@ -317,13 +313,9 @@
                                                         'files'=>true,
                                                         'enctype' => 'multipart/form-data'
                                                         ]) !!}
-
                                                 <div class="form-group">
-                                                    <select name="evaluation_result" id="evaluation_result" class="form-control" style="width:100%">
-                                                        <option disabled selected value> {{ __('Chọn') }} </option>
-                                                        <option value="Đồng ý">Đồng ý</option>
-                                                        <option value="Từ chối">Từ chối</option>
-                                                    </select>
+                                                    {!! Form::label('evaluation_result_id', __('Duyệt') , ['class' => 'control-label']) !!}
+                                                    {!! Form::select('evaluation_result_id', $results, null, ['placeholder' => '', 'id'=>'evaluation_result_id', 'name'=>'evaluation_result_id','class'=>'form-control', 'style' => 'width:100%']) !!}
                                                 </div>
                                                 {!! Form::submit(__('Duyệt'), ['class' => 'btn btn-primary', 'style' => 'width:100%']) !!}
                                                 {!! Form::close() !!}
@@ -347,8 +339,8 @@
                                     @if($ticket->root_cause_approver_id)
                                             <p><b>Người phê duyệt:</b> {{$ticket->root_cause_approver->name}}</p>
                                     @endif
-                                    @if($ticket->root_cause_approver_id)
-                                        <p><b>Kết quả duyệt:</b> {{$ticket->evaluation_result}}</p>
+                                    @if($ticket->evaluation_result_id)
+                                        <p><b>Kết quả duyệt:</b> <b style="color: {{$ticket->evaluation_result->color}};">{{$ticket->evaluation_result->name}}</b></p>
                                     @endif
                                 </div>
                                 <div class="col-md-12">
@@ -358,7 +350,7 @@
                                         </p>
                                     @endif
                                 </div>
-                                <h5><b style="color:blue;float: left;">5. Hoạt động phòng ngừa</b></h5>
+                                <h5><b style="color:blue;float: left;">5. Hoạt động phòng ngừa:</b></h5>
                                 <span>
                                     <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#preventionaction"><i class="fa fa-plus-circle"><b> Tạo thêm</b></i></button>
                                 </span>
@@ -478,7 +470,7 @@
 
 @push('scripts')
     <script type="text/javascript">
-        $("#manager_confirmation_result").select2({
+        $("#manager_confirmation_result_id").select2({
             placeholder: "Chọn",
             allowClear: true
         });
@@ -514,7 +506,7 @@
         });
     </script>
     <script type="text/javascript">
-        $("#evaluation_result").select2({
+        $("#evaluation_result_id").select2({
             placeholder: "Chọn",
             allowClear: true
         });
