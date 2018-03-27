@@ -349,7 +349,6 @@
                                         <i>{!! $ticket->root_cause !!}</i>
                                     </p>
                                 @endif
-                                <br>
                                 <h5><b style="color:blue;float: left;">5. Hoạt động phòng ngừa:</b></h5>
                                 <span>
                                     <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#preventionaction"><i class="fa fa-plus-circle"><b> Tạo thêm</b></i></button>
