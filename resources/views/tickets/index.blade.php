@@ -13,7 +13,6 @@
             <th>{{ __('Hạn trả lời') }}</th>
             <th>{{ __('Nguồn gốc') }}</th>
             <th>{{ __('Người tạo') }}</th>
-            <th>{{ __('Phòng/ban') }}</th>
         </tr>
         </thead>
     </table>
@@ -34,7 +33,6 @@
                 {data: 'deadline', name: 'deadline', searchable:false},
                 {data: 'source', name: 'source.name'},
                 {data: 'name', name: 'creator.name'},
-                {data: 'department', name: 'department'},
             ]
         });
     });

@@ -266,9 +266,6 @@ class TicketsController extends Controller
             })
             ->editColumn('name', function ($tickets) {
                 return $tickets->creator->name;
-            })
-            ->editColumn('department', function ($tickets) {
-                return $tickets->creator->department->name;
             })->make(true);
     }
 }
