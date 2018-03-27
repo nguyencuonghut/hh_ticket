@@ -206,11 +206,9 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-12">
-                                    @if($ticket->responsibility_id)
-                                        <h5><b>Trách nhiệm:</b> {{$ticket->responsibility->name}}</h5>
-                                    @endif
-                                </div>
+                                @if($ticket->responsibility_id)
+                                    <h5><b>Trách nhiệm:</b> {{$ticket->responsibility->name}}</h5>
+                                @endif
 
                                 <h5><b style="color:blue;float: left;">3. Thực hiện biện pháp khắc phục:</b></h5>
                                 <span>
@@ -327,29 +325,31 @@
                                 </div>
 
                                 <br>
-                                <div class="contactleft col-md-6">
+                                <div class="contactleft">
                                     @if($ticket->evaluation_id)
-                                        <p><b>Mức độ:</b> {{$ticket->evaluation->name}}</p>
-                                    @endif
-                                    @if($ticket->root_cause_type_id)
-                                        <p><b>Phân loại nguyên nhân:</b> {{$ticket->root_cause_type->name}}</p>
-                                    @endif
-                                </div>
-                                <div class="contactright col-md-6">
-                                    @if($ticket->root_cause_approver_id)
-                                            <p><b>Người phê duyệt:</b> {{$ticket->root_cause_approver->name}}</p>
-                                    @endif
-                                    @if($ticket->evaluation_result_id)
-                                        <p><b>Kết quả duyệt:</b> <b style="color: {{$ticket->evaluation_result->color}};">{{$ticket->evaluation_result->name}}</b></p>
-                                    @endif
-                                </div>
-                                <div class="col-md-12">
-                                    @if($ticket->root_cause)
-                                        <p><b>Nguyên nhân gốc rễ:</b>
-                                            <i>{!! $ticket->root_cause !!}</i>
+                                        <p><b>Mức độ:</b> <b>{{$ticket->evaluation->name}}</b>
+                                            (bởi Nguyễn Văn Cường)
                                         </p>
                                     @endif
                                 </div>
+                                <div class="contactright">
+                                    @if($ticket->evaluation_result_id)
+                                        <p><b>Kết quả duyệt:</b> <b style="color: {{$ticket->evaluation_result->color}};">{{$ticket->evaluation_result->name}}</b>
+                                            (bởi {{$ticket->root_cause_approver->name}})
+                                        </p>
+                                    @endif
+                                </div>
+                                <br>
+
+                                @if($ticket->root_cause_type_id)
+                                    <p><b>Phân loại nguyên nhân:</b> {{$ticket->root_cause_type->name}} - <i>{{$ticket->root_cause_type->description}}</i></p>
+                                @endif
+                                @if($ticket->root_cause)
+                                    <p><b>Nguyên nhân gốc rễ:</b>
+                                        <i>{!! $ticket->root_cause !!}</i>
+                                    </p>
+                                @endif
+                                <br>
                                 <h5><b style="color:blue;float: left;">5. Hoạt động phòng ngừa:</b></h5>
                                 <span>
                                     <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#preventionaction"><i class="fa fa-plus-circle"><b> Tạo thêm</b></i></button>
