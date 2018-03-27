@@ -18,6 +18,7 @@ class EvaluationsTableSeeder extends Seeder
                 array (
                     'id' => 1,
                     'name' => 'Nghiêm trọng',
+                    'color' => 'red',
                     'created_at' => '2016-06-04 13:42:19',
                     'updated_at' => '2016-06-04 13:42:19',
                 ),
@@ -25,6 +26,7 @@ class EvaluationsTableSeeder extends Seeder
                 array (
                     'id' => 2,
                     'name' => 'Trung bình',
+                    'color' => 'orange',
                     'created_at' => '2016-06-04 13:42:19',
                     'updated_at' => '2016-06-04 13:42:19',
                 ),
@@ -32,6 +34,7 @@ class EvaluationsTableSeeder extends Seeder
                 array (
                     'id' => 3,
                     'name' => 'Nhẹ',
+                    'color' => 'blue',
                     'created_at' => '2016-06-04 13:42:19',
                     'updated_at' => '2016-06-04 13:42:19',
                 ),

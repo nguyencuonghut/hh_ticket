@@ -58,7 +58,7 @@ class CreateTicketsTable extends Migration
             //~Evaluate the ticket
 
             //Asset effectiveness
-            $table->integer('effectiveness_iNd')->unsigned();
+            $table->integer('effectiveness_id')->unsigned();
             $table->foreign('effectiveness_id')->references('id')->on('effectivenesses');
             $table->integer('effectiveness_assessor_id')->unsigned();
             $table->foreign('effectiveness_assessor_id')->references('id')->on('users');

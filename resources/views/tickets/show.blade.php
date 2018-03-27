@@ -327,8 +327,7 @@
                                 <br>
                                 <div class="contactleft">
                                     @if($ticket->evaluation_id)
-                                        <p><b>Mức độ:</b> <b>{{$ticket->evaluation->name}}</b>
-                                            (bởi Nguyễn Văn Cường)
+                                        <p><b>Mức độ:</b> <b style="color:{{$ticket->evaluation->color}}">{{$ticket->evaluation->name}}</b>
                                         </p>
                                     @endif
                                 </div>
@@ -337,6 +336,8 @@
                                         <p><b>Kết quả duyệt:</b> <b style="color: {{$ticket->evaluation_result->color}};">{{$ticket->evaluation_result->name}}</b>
                                             (bởi {{$ticket->root_cause_approver->name}})
                                         </p>
+                                    @else
+                                        <p><b>Kết quả duyệt:</b> Chưa phê duyệt</p>
                                     @endif
                                 </div>
                                 <br>
