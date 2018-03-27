@@ -3,6 +3,7 @@ namespace App\Repositories\Ticket;
 
 use App\Models\RootCauseType;
 use App\Models\Ticket;
+use App\Models\User;
 use Illuminate\Support\Facades\Session;
 use Gate;
 use Datatables;
@@ -55,7 +56,8 @@ class TicketRepository implements TicketRepositoryContract
         $input = $requestData = array_merge(
             $requestData->all(),
             ['creator_id' => auth()->id(),
-                'image_path' => $filename,]
+                'image_path' => $filename,
+                'department_id' => User::findOrFail($requestData->manager_id)->department->first()->id]
         );
 
         $ticket = Ticket::create($input);

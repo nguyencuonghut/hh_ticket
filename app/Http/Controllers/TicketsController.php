@@ -246,8 +246,8 @@ class TicketsController extends Controller
      */
     public function anyData()
     {
-        $tickets = Ticket::with(['creator', 'source'])->select(
-            ['id', 'title', 'created_at', 'deadline', 'source_id', 'creator_id']
+        $tickets = Ticket::with(['creator', 'source', 'department'])->select(
+            ['id', 'title', 'created_at', 'deadline', 'source_id', 'creator_id', 'department_id']
         )->orderBy('id', 'desc');
         return Datatables::of($tickets)
             ->addColumn('titlelink', function ($tickets) {
@@ -266,6 +266,9 @@ class TicketsController extends Controller
             })
             ->editColumn('name', function ($tickets) {
                 return $tickets->creator->name;
+            })
+            ->editColumn('department', function ($tickets) {
+                return $tickets->department->name;
             })->make(true);
     }
 }

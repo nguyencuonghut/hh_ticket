@@ -22,6 +22,7 @@ class Ticket extends Model
         'image_path',
         'manager_id',
         'creator_id',
+        'department_id',
         'manager_confirmation_result_id',
         'manager_confirmation_comment',
         'responsibility_id',
@@ -45,6 +46,10 @@ class Ticket extends Model
     public function creator()
     {
         return $this->belongsTo(User::class, 'creator_id');
+    }
+    public function department()
+    {
+        return $this->belongsTo(Department::class, 'department_id');
     }
     public function evaluation()
     {

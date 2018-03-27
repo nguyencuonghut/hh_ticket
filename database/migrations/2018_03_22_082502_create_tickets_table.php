@@ -32,6 +32,8 @@ class CreateTicketsTable extends Migration
             $table->foreign('manager_id')->references('id')->on('users');
             $table->integer('creator_id')->unsigned();
             $table->foreign('creator_id')->references('id')->on('users');
+            $table->integer('department_id')->unsigned();
+            $table->foreign('department_id')->references('id')->on('departments');
             //~Description for ticket
 
             //Confirmation of manager
