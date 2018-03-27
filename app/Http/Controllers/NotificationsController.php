@@ -20,9 +20,17 @@ class NotificationsController extends Controller
         $user->unreadNotifications()->where('id', $request->id)->first()->markAsRead();
 
         $type = $user->notifications->where('id', $request->id)->first()->type;
+        $action = $user->notifications->where('id', $request->id)->first()->data['action'];
         switch ($type) {
             case 'App\Notifications\TicketActionNotification':
                 $tab = 'description';
+                if('asset_effectiveness' == $action
+                    || 'root_cause_approved' == $action
+                    || 'root_cause_rejected' == $action
+                    || 'req_approve_root_cause' == $action)
+                {
+                    $tab = 'prevention';
+                }
                 break;
             case 'App\Notifications\TroubleshootActionNotification':
                 $tab = 'troubleshoot';

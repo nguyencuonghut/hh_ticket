@@ -182,7 +182,7 @@ class TicketActionNotification extends Notification
                 $created_user =$this->ticket->creator->name;
                 break;
             case 'asset_effectiveness':
-                $text = __(':title được đánh giá :effectiveness :effectiveness_assessor', [
+                $text = __(':title được đánh giá :effectiveness bởi :effectiveness_assessor', [
                     'title' =>  $this->ticket->title,
                     'effectiveness' => $this->ticket->effectiveness->name,
                     'effectiveness_assessor' => $this->ticket->effectiveness_assessor->name,
