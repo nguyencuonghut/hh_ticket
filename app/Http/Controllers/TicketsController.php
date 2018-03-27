@@ -18,6 +18,8 @@ use App\Models\Troubleshoot;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Repositories\Ticket\TicketRepositoryContract;
+use Datatables;
+use Carbon;
 
 
 class TicketsController extends Controller
@@ -39,7 +41,7 @@ class TicketsController extends Controller
      */
     public function index()
     {
-        //
+        return view('tickets.index');
     }
 
     /**
@@ -236,5 +238,37 @@ class TicketsController extends Controller
         $this->tickets->assetEffectiveness($id, $request);
         Session()->flash('flash_message', 'Đánh giá hiệu quả thành công!');
         return redirect()->back()->with('tab', 'prevention');
+    }
+
+    /**
+     * Data table for all tickets
+     * @return mixed
+     */
+    public function anyData()
+    {
+        $tickets = Ticket::with(['creator', 'source'])->select(
+            ['id', 'title', 'created_at', 'deadline', 'source_id', 'creator_id']
+        )->orderBy('id', 'desc');
+        return Datatables::of($tickets)
+            ->addColumn('titlelink', function ($tickets) {
+                return '<a href="tickets/' . $tickets->id . '" ">' . str_limit($tickets->title, 40) . '</a>';
+            })
+            ->editColumn('created_at', function ($tickets) {
+                return $tickets->created_at ? with(new Carbon($tickets->created_at))
+                    ->format('d/m/Y') : '';
+            })
+            ->editColumn('deadline', function ($tickets) {
+                return $tickets->deadline ? with(new Carbon($tickets->deadline))
+                    ->format('d/m/Y') : '';
+            })
+            ->editColumn('source', function ($tickets) {
+                return $tickets->source->name;
+            })
+            ->editColumn('name', function ($tickets) {
+                return $tickets->creator->name;
+            })
+            ->editColumn('department', function ($tickets) {
+                return $tickets->creator->department->name;
+            })->make(true);
     }
 }
