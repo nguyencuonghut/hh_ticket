@@ -16,7 +16,7 @@
 
     <div class="form-group col-sm-4 removeleft removeright">
         {!! Form::label('deadline', __('Thời hạn'), ['class' => 'control-label']) !!}
-        {!! Form::date('deadline', \Carbon\Carbon::now(), ['class' => 'form-control']) !!}
+        {!! Form::date('deadline', \Carbon\Carbon::now()->addDays(3), ['class' => 'form-control']) !!}
     </div>
 </div>
 

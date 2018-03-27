@@ -193,7 +193,7 @@ class TicketsController extends Controller
 
         $this->tickets->evaluateTicket($id, $request);
         Session()->flash('flash_message', 'Xem xét mức độ SKPH thành công!');
-        return redirect()->back();
+        return redirect()->back()->with('tab', 'prevention');
     }
 
     /**
@@ -214,7 +214,7 @@ class TicketsController extends Controller
 
         $this->tickets->rootCauseApprove($id, $request);
         Session()->flash('flash_message', 'Duyệt thành công!');
-        return redirect()->back();
+        return redirect()->back()->with('tab', 'prevention');
     }
 
     /**
@@ -235,6 +235,6 @@ class TicketsController extends Controller
 
         $this->tickets->assetEffectiveness($id, $request);
         Session()->flash('flash_message', 'Đánh giá hiệu quả thành công!');
-        return redirect()->back();
+        return redirect()->back()->with('tab', 'prevention');
     }
 }

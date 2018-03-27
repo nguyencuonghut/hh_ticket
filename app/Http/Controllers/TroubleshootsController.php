@@ -50,7 +50,7 @@ class TroubleshootsController extends Controller
     {
         $this->actions->create($id, $request);
 
-        return redirect()->route("tickets.show", $id);
+        return redirect()->route("tickets.show", $id)->with('tab', 'troubleshoot');
     }
 
     /**
@@ -86,7 +86,7 @@ class TroubleshootsController extends Controller
     {
         $ticket_id = $this->actions->update($id, $request);
 
-        return redirect()->route("tickets.show", $ticket_id);
+        return redirect()->route("tickets.show", $ticket_id)->with('tab', 'troubleshoot');
     }
 
     /**
@@ -132,6 +132,6 @@ class TroubleshootsController extends Controller
 
         $this->actions->updateAssign($id, $request);
         Session()->flash('flash_message', 'Cập nhật thành công!');
-        return redirect()->back();
+        return redirect()->back()->with('tab', 'troubleshoot');
     }
 }
