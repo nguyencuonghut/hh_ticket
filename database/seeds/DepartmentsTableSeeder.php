@@ -63,6 +63,17 @@ class DepartmentsTableSeeder extends Seeder
         $createDep->name = 'BP Kho';
         $createDep->save();
 
+        $createDep = new Department;
+        $createDep->id = '11';
+        $createDep->name = 'Phòng Thí Nghiệm';
+        $createDep->save();
+
+        $createDep = new Department;
+        $createDep->id = '12';
+        $createDep->name = 'Ban Lãnh Đạo';
+        $createDep->save();
+
+
         \DB::table('department_user')->insert([
             'department_id' => 1,
             'user_id' => 1
@@ -76,12 +87,100 @@ class DepartmentsTableSeeder extends Seeder
             'user_id' => 3
         ]);
         \DB::table('department_user')->insert([
-            'department_id' => 1,
+            'department_id' => 4,
             'user_id' => 4
         ]);
         \DB::table('department_user')->insert([
-            'department_id' => 4,
+            'department_id' => 1,
             'user_id' => 5
+        ]);
+        \DB::table('department_user')->insert([
+            'department_id' => 12,
+            'user_id' => 6
+        ]);
+        \DB::table('department_user')->insert([
+            'department_id' => 9,
+            'user_id' => 7
+        ]);
+        \DB::table('department_user')->insert([
+            'department_id' => 9,
+            'user_id' => 8
+        ]);
+        \DB::table('department_user')->insert([
+            'department_id' => 11,
+            'user_id' => 9
+        ]);
+        \DB::table('department_user')->insert([
+            'department_id' => 12,
+            'user_id' => 10
+        ]);
+        \DB::table('department_user')->insert([
+            'department_id' => 12,
+            'user_id' => 11
+        ]);
+        \DB::table('department_user')->insert([
+            'department_id' => 2,
+            'user_id' => 12
+        ]);
+        \DB::table('department_user')->insert([
+            'department_id' => 2,
+            'user_id' => 13
+        ]);
+        \DB::table('department_user')->insert([
+            'department_id' => 1,
+            'user_id' => 14
+        ]);
+        \DB::table('department_user')->insert([
+            'department_id' => 1,
+            'user_id' => 15
+        ]);
+        \DB::table('department_user')->insert([
+            'department_id' => 3,
+            'user_id' => 16
+        ]);
+        \DB::table('department_user')->insert([
+            'department_id' => 3,
+            'user_id' => 17
+        ]);
+        \DB::table('department_user')->insert([
+            'department_id' => 5,
+            'user_id' => 18
+        ]);
+        \DB::table('department_user')->insert([
+            'department_id' => 5,
+            'user_id' => 19
+        ]);
+        \DB::table('department_user')->insert([
+            'department_id' => 10,
+            'user_id' => 20
+        ]);
+        \DB::table('department_user')->insert([
+            'department_id' => 10,
+            'user_id' => 21
+        ]);
+        \DB::table('department_user')->insert([
+            'department_id' => 6,
+            'user_id' => 22
+        ]);
+        \DB::table('department_user')->insert([
+            'department_id' => 6,
+            'user_id' => 23
+        ]);
+        \DB::table('department_user')->insert([
+            'department_id' => 7,
+            'user_id' => 24
+        ]);
+        \DB::table('department_user')->insert([
+            'department_id' => 7,
+            'user_id' => 25
+        ]);
+        \DB::table('department_user')->insert([
+            'department_id' => 8,
+            'user_id' => 26
+        ]);
+        \DB::table('department_user')->insert([
+            'department_id' => 8,
+            'user_id' => 27
         ]);
     }
 }
