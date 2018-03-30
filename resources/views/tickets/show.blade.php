@@ -280,7 +280,7 @@
                                                     </div>
                                                     <div class="form-group col-sm-6 removeleft removeright">
                                                         {!! Form::label('root_cause_approver_id', __('Người duyệt'), ['class' => 'control-label']) !!}
-                                                        {!! Form::select('root_cause_approver_id', $users, null, ['placeholder' => '', 'id'=>'root_cause_approver_id', 'name'=>'root_cause_approver_id','class'=>'form-control', 'style' => 'width:100%']) !!}
+                                                        {!! Form::select('root_cause_approver_id', $directors, null, ['placeholder' => '', 'id'=>'root_cause_approver_id', 'name'=>'root_cause_approver_id','class'=>'form-control', 'style' => 'width:100%']) !!}
                                                     </div>
                                                 </div>
                                                 {!! Form::label('root_cause', __('Nguyên nhân gốc'), ['class' => 'control-label']) !!}
