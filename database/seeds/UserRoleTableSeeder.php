@@ -25,7 +25,7 @@ class UserRoleTableSeeder extends Seeder
         $newrole->save();
 
         $newrole = new RoleUser;
-        $newrole->role_id = '1';
+        $newrole->role_id = '3';
         $newrole->user_id = '3';
         $newrole->timestamps = false;
         $newrole->save();
@@ -43,7 +43,7 @@ class UserRoleTableSeeder extends Seeder
         $newrole->save();
 
         $newrole = new RoleUser;
-        $newrole->role_id = '1';
+        $newrole->role_id = '4';
         $newrole->user_id = '6';
         $newrole->timestamps = false;
         $newrole->save();
@@ -67,13 +67,13 @@ class UserRoleTableSeeder extends Seeder
         $newrole->save();
 
         $newrole = new RoleUser;
-        $newrole->role_id = '1';
+        $newrole->role_id = '4';
         $newrole->user_id = '10';
         $newrole->timestamps = false;
         $newrole->save();
 
         $newrole = new RoleUser;
-        $newrole->role_id = '1';
+        $newrole->role_id = '4';
         $newrole->user_id = '11';
         $newrole->timestamps = false;
         $newrole->save();
@@ -91,7 +91,7 @@ class UserRoleTableSeeder extends Seeder
         $newrole->save();
 
         $newrole = new RoleUser;
-        $newrole->role_id = '1';
+        $newrole->role_id = '4';
         $newrole->user_id = '14';
         $newrole->timestamps = false;
         $newrole->save();

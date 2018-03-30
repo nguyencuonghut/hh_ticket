@@ -20,6 +20,7 @@ use Illuminate\Http\Request;
 use App\Repositories\Ticket\TicketRepositoryContract;
 use Datatables;
 use Carbon;
+use Illuminate\Support\Facades\DB;
 
 
 class TicketsController extends Controller
@@ -51,9 +52,15 @@ class TicketsController extends Controller
      */
     public function create()
     {
+        $directors = User::whereHas(
+            'roles', function($q){
+                    $q->where('name', 'director');
+                    })->pluck('name', 'id');
+
         return view('tickets.create')
             ->withSources(Source::all()->pluck('name', 'id'))
-            ->withUsers(User::all()->pluck('name', 'id'));
+            ->withUsers(User::all()->pluck('name', 'id'))
+            ->withDirectors($directors);
     }
 
     /**
