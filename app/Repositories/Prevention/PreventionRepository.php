@@ -41,7 +41,7 @@ class PreventionRepository implements PreventionRepositoryContract
             $requestData->all(),
             ['ticket_id' => $ticket_id,
                 'pre_preventor_id' => $requestData->preventor_id,
-                'creator_id' => $ticket->manager_id,
+                'creator_id' => $ticket->director_id,
                 'status_id' => 1, // Status is Open
                 'is_on_time' => false]
         );

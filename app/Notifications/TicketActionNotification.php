@@ -56,26 +56,26 @@ class TicketActionNotification extends Notification
                     'title' =>  $this->ticket->title,
                     'creator' => $this->ticket->creator->name,
                 ]);
-                $toName = $this->ticket->manager->name;
+                $toName = $this->ticket->director->name;
                 break;
             case 'updated_description':
                 $text = __(':title được sửa đổi bởi :creator, và giao cho bạn', [
                     'title' =>  $this->ticket->title,
                     'creator' => $this->ticket->creator->name,
                 ]);
-                $toName = $this->ticket->manager->name;
+                $toName = $this->ticket->director->name;
                 break;
-            case 'manager_approved':
-                $text = __(':title được xác nhận bởi :manager', [
+            case 'director_approved':
+                $text = __(':title được xác nhận bởi :director', [
                     'title' =>  $this->ticket->title,
-                    'manager' => $this->ticket->manager->name,
+                    'director' => $this->ticket->director->name,
                 ]);
                 $toName = $this->ticket->creator->name;
                 break;
-            case 'manager_rejected':
-                $text = __(':title bị từ chối xác nhận bởi :manager', [
+            case 'director_rejected':
+                $text = __(':title bị từ chối xác nhận bởi :director', [
                     'title' =>  $this->ticket->title,
-                    'manager' => $this->ticket->manager->name,
+                    'director' => $this->ticket->director->name,
                 ]);
                 $toName = $this->ticket->creator->name;
                 break;
@@ -90,14 +90,14 @@ class TicketActionNotification extends Notification
                     'title' =>  $this->ticket->title,
                     'root_cause_approver' => $this->ticket->root_cause_approver->name,
                 ]);
-                $toName = $this->ticket->manager->name;
+                $toName = $this->ticket->director->name;
                 break;
             case 'root_cause_rejected':
                 $text = __(':title nguyên nhân gốc rễ bị từ chối bởi :root_cause_approver', [
                     'title' =>  $this->ticket->title,
                     'root_cause_approver' => $this->ticket->root_cause_approver->name,
                 ]);
-                $toName = $this->ticket->manager->name;
+                $toName = $this->ticket->director->name;
                 break;
             case 'asset_effectiveness':
                 $text = __(':title được đánh giá :effectiveness :effectiveness_assessor', [
@@ -105,7 +105,7 @@ class TicketActionNotification extends Notification
                     'effectiveness' => $this->ticket->effectiveness->name,
                     'effectiveness_assessor' => $this->ticket->effectiveness_assessor->name,
                 ]);
-                $toName = $this->ticket->manager->name;
+                $toName = $this->ticket->director->name;
                 break;
             default:
                 break;
@@ -131,7 +131,7 @@ class TicketActionNotification extends Notification
                     'title' =>  $this->ticket->title,
                     'creator' => $this->ticket->creator->name,
                     ]);
-                $assigned_user = $this->ticket->manager->name;
+                $assigned_user = $this->ticket->director->name;
                 $created_user =$this->ticket->creator->name;
                 break;
             case 'updated_description':
@@ -139,30 +139,30 @@ class TicketActionNotification extends Notification
                     'title' =>  $this->ticket->title,
                     'creator' => $this->ticket->creator->name,
                 ]);
-                $assigned_user = $this->ticket->manager->name;
+                $assigned_user = $this->ticket->director->name;
                 $created_user =$this->ticket->creator->name;
                 break;
-            case 'manager_approved':
-                $text = __(':title được đồng ý bởi :manager', [
+            case 'director_approved':
+                $text = __(':title được đồng ý bởi :director', [
                     'title' =>  $this->ticket->title,
-                    'manager' => $this->ticket->manager->name,
+                    'director' => $this->ticket->director->name,
                 ]);
-                $assigned_user = $this->ticket->manager->name;
+                $assigned_user = $this->ticket->director->name;
                 $created_user =$this->ticket->creator->name;
                 break;
-            case 'manager_rejected':
-                $text = __(':title bị từ chối bởi :manager', [
+            case 'director_rejected':
+                $text = __(':title bị từ chối bởi :director', [
                     'title' =>  $this->ticket->title,
-                    'manager' => $this->ticket->manager->name,
+                    'director' => $this->ticket->director->name,
                 ]);
-                $assigned_user = $this->ticket->manager->name;
+                $assigned_user = $this->ticket->director->name;
                 $created_user =$this->ticket->creator->name;
                 break;
             case 'req_approve_root_cause':
                 $text = __(':title yêu cầu bạn duyệt nguyên nhân gốc rễ', [
                     'title' =>  $this->ticket->title,
                 ]);
-                $assigned_user = $this->ticket->manager->name;
+                $assigned_user = $this->ticket->director->name;
                 $created_user =$this->ticket->creator->name;
                 break;
             case 'root_cause_approved':
@@ -170,7 +170,7 @@ class TicketActionNotification extends Notification
                     'title' =>  $this->ticket->title,
                     'root_cause_approver' => $this->ticket->root_cause_approver->name,
                 ]);
-                $assigned_user = $this->ticket->manager->name;
+                $assigned_user = $this->ticket->director->name;
                 $created_user =$this->ticket->creator->name;
                 break;
             case 'root_cause_rejected':
@@ -178,7 +178,7 @@ class TicketActionNotification extends Notification
                     'title' =>  $this->ticket->title,
                     'root_cause_approver' => $this->ticket->root_cause_approver->name,
                 ]);
-                $assigned_user = $this->ticket->manager->name;
+                $assigned_user = $this->ticket->director->name;
                 $created_user =$this->ticket->creator->name;
                 break;
             case 'asset_effectiveness':
@@ -187,7 +187,7 @@ class TicketActionNotification extends Notification
                     'effectiveness' => $this->ticket->effectiveness->name,
                     'effectiveness_assessor' => $this->ticket->effectiveness_assessor->name,
                 ]);
-                $assigned_user = $this->ticket->manager->name;
+                $assigned_user = $this->ticket->director->name;
                 $created_user =$this->ticket->creator->name;
                 break;
             default:

@@ -85,9 +85,14 @@ class TicketsController extends Controller
     public function show($id)
     {
         $ticket = Ticket::findOrFail($id);
+        $directors = User::whereHas(
+            'roles', function($q){
+            $q->where('name', 'director');
+        })->pluck('name', 'id');
         return view('tickets.show')
             ->withTicket($ticket)
             ->withSources(Source::all()->pluck('name', 'id'))
+            ->withDirectors($directors)
             ->withUsers(User::all()->pluck('name', 'id'))
             ->withResponsibilities(Responsibility::all()->pluck('name', 'id'))
             ->withTroubleshoots(Troubleshoot::all()->where('ticket_id', $id))
@@ -137,28 +142,28 @@ class TicketsController extends Controller
     }
 
     /**
-     * Manager confirm the ticket
+     * Director confirm the ticket
      * @param $id
      * @return mixed
      */
-    public function managerConfirm(Request $request, $id)
+    public function directorConfirm(Request $request, $id)
     {
         //Validate the input value
         $rules = [
-            'manager_confirmation_result_id' => 'required',
+            'director_confirmation_result_id' => 'required',
         ];
         $messages = [
-            'manager_confirmation_result_id.required' => 'Yêu cầu bạn PHẢI điền "Kết quả xác nhận"',
+            'director_confirmation_result_id.required' => 'Yêu cầu bạn PHẢI điền "Kết quả xác nhận"',
         ];
         $this->validate($request, $rules, $messages);
 
-        $this->tickets->managerConfirm($id, $request);
+        $this->tickets->directorConfirm($id, $request);
         Session()->flash('flash_message', 'Xác nhận thành công!');
         return redirect()->back();
     }
 
     /**
-     * Manager confirm the ticket
+     * Director confirm the ticket
      * @param $id
      * @return mixed
      */
@@ -179,7 +184,7 @@ class TicketsController extends Controller
     }
 
     /**
-     * Manager confirm the ticket
+     * Director confirm the ticket
      * @param $id
      * @return mixed
      */

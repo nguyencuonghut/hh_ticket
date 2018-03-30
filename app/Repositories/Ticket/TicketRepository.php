@@ -19,8 +19,8 @@ class TicketRepository implements TicketRepositoryContract
 {
     const CREATED = 'created';
     const UPDATED_DESCRIPTION = 'updated_description';
-    const MANAGER_APPROVED = 'manager_approved';
-    const MANAGER_REJECTED = 'manager_rejected';
+    const DIRECTOR_APPROVED = 'director_approved';
+    const DIRECTOR_REJECTED = 'director_rejected';
     const REQ_APPROVE_ROOT_CAUSE = 'req_approve_root_cause';
     const ROOT_CAUSE_APPROVED = 'root_cause_approved';
     const ROOT_CAUSE_REJECTED = 'root_cause_rejected';
@@ -57,7 +57,7 @@ class TicketRepository implements TicketRepositoryContract
             $requestData->all(),
             ['creator_id' => auth()->id(),
                 'image_path' => $filename,
-                'department_id' => User::findOrFail($requestData->manager_id)->department->first()->id]
+                'department_id' => User::findOrFail($requestData->director_id)->department->first()->id]
         );
 
         $ticket = Ticket::create($input);
@@ -111,27 +111,27 @@ class TicketRepository implements TicketRepositoryContract
     }
 
     /**
-     * Manager confirm the ticket
+     * Director confirm the ticket
      * @param  \Illuminate\Http\Request  $requestData
      * @param $id
      * @return mixed
      */
-    public function managerConfirm($id, $requestData)
+    public function directorConfirm($id, $requestData)
     {
         $ticket = Ticket::findOrFail($id);
-        $ticket->manager_confirmation_result_id = $requestData->manager_confirmation_result_id;
-        $ticket->manager_confirmation_comment = $requestData->manager_confirmation_comment;
+        $ticket->director_confirmation_result_id = $requestData->director_confirmation_result_id;
+        $ticket->director_confirmation_comment = $requestData->director_confirmation_comment;
         $ticket->save();
         $ticket = $ticket->fresh();
-        if('Đồng ý' == $ticket->manager_confirmation_result->name){
-            event(new \App\Events\TicketAction($ticket, self::MANAGER_APPROVED));
+        if('Đồng ý' == $ticket->director_confirmation_result->name){
+            event(new \App\Events\TicketAction($ticket, self::DIRECTOR_APPROVED));
         } else {
-            event(new \App\Events\TicketAction($ticket, self::MANAGER_REJECTED));
+            event(new \App\Events\TicketAction($ticket, self::DIRECTOR_REJECTED));
         }
     }
 
     /**
-     * Manager confirm the ticket
+     * Director confirm the ticket
      * @param  \Illuminate\Http\Request  $requestData
      * @param $id
      * @return mixed
@@ -145,7 +145,7 @@ class TicketRepository implements TicketRepositoryContract
     }
 
     /**
-     * Manager confirm the ticket
+     * Director confirm the ticket
      * @param  \Illuminate\Http\Request  $requestData
      * @param $id
      * @return mixed

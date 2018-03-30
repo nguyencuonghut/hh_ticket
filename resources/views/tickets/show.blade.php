@@ -122,29 +122,29 @@
                                         <td class="col-md-4">{{$ticket->how_1}}</td>
                                         <th rowspan="2">
                                             <span>
-                                                <button type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#manager_confirmation" style="margin-top: 2px;margin-left: 2px"><i class="fa fa-check-circle"><b> Xác nhận</b></i></button>
+                                                <button type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#director_confirmation" style="margin-top: 2px;margin-left: 2px"><i class="fa fa-check-circle"><b> Xác nhận</b></i></button>
                                             </span>
-                                            <div class="modal fade" id="manager_confirmation" style="overflow:hidden;" role="dialog" aria-labelledby="ManagerConfirmationModalLabel">
+                                            <div class="modal fade" id="director_confirmation" style="overflow:hidden;" role="dialog" aria-labelledby="DirectorConfirmationModalLabel">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                            <h4 class="modal-title" id="ManagerConfirmationModalLabel">Xác nhận phiếu C.A.R</h4>
+                                                            <h4 class="modal-title" id="DirectorConfirmationModalLabel">Xác nhận phiếu C.A.R</h4>
                                                         </div>
                                                         <div class="modal-body">
                                                             {!! Form::model($ticket, [
                                                                     'method' => 'PATCH',
-                                                                    'route' => ['managerConfirm', $ticket->id],
+                                                                    'route' => ['directorConfirm', $ticket->id],
                                                                     'files'=>true,
                                                                     'enctype' => 'multipart/form-data'
                                                                     ]) !!}
                                                             <div class="form-group">
-                                                                {!! Form::label('manager_confirmation_result_id', __('Nguồn gốc') , ['class' => 'control-label']) !!}
-                                                                {!! Form::select('manager_confirmation_result_id', $results, null, ['placeholder' => '', 'id'=>'manager_confirmation_result_id', 'name'=>'manager_confirmation_result_id','class'=>'form-control', 'style' => 'width:100%']) !!}
+                                                                {!! Form::label('director_confirmation_result_id', __('Nguồn gốc') , ['class' => 'control-label']) !!}
+                                                                {!! Form::select('director_confirmation_result_id', $results, null, ['placeholder' => '', 'id'=>'director_confirmation_result_id', 'name'=>'director_confirmation_result_id','class'=>'form-control', 'style' => 'width:100%']) !!}
                                                             </div>
                                                             <div class="form-group">
-                                                                {!! Form::label('manager_confirmation_comment', __('Ý kiến'), ['class' => 'control-label']) !!}
-                                                                {!! Form::textarea('manager_confirmation_comment', null, ['class' => 'form-control']) !!}
+                                                                {!! Form::label('director_confirmation_comment', __('Ý kiến'), ['class' => 'control-label']) !!}
+                                                                {!! Form::textarea('director_confirmation_comment', null, ['class' => 'form-control']) !!}
                                                             </div>
                                                             {!! Form::submit(__('Cập nhật'), ['class' => 'btn btn-primary', 'style' => 'width:100%']) !!}
                                                             {!! Form::close() !!}
@@ -157,13 +157,13 @@
                                             <script>
 
                                             </script>
-                                            @if($ticket->manager_confirmation_result_id)
-                                                <p><b>Xác nhận: </b><b style="color:{{$ticket->manager_confirmation_result->color}}">{!! $ticket->manager_confirmation_result->name !!}</b> <i>(bởi {{$ticket->manager->name}})</i></p>
+                                            @if($ticket->director_confirmation_result_id)
+                                                <p><b>Xác nhận: </b><b style="color:{{$ticket->director_confirmation_result->color}}">{!! $ticket->director_confirmation_result->name !!}</b> <i>(bởi {{$ticket->director->name}})</i></p>
                                             @else
                                                 <p style="color:red"> Chưa xác nhận!</p>
                                             @endif
-                                            @if($ticket->manager_confirmation_comment)
-                                                <p><b>Góp ý:</b><i>{!! $ticket->manager_confirmation_comment !!}</i></p>
+                                            @if($ticket->director_confirmation_comment)
+                                                <p><b>Góp ý:</b><i>{!! $ticket->director_confirmation_comment !!}</i></p>
                                             @endif
                                         </th>
                                     </tr>
@@ -336,7 +336,7 @@
                                         <p><b>Kết quả duyệt:</b> <b style="color: {{$ticket->evaluation_result->color}};">{{$ticket->evaluation_result->name}}</b>
                                             (bởi {{$ticket->root_cause_approver->name}})
                                         </p>
-                                    @else
+                                    @elseif($ticket->evaluation_result)
                                         <p><b>Kết quả duyệt:</b> Chưa phê duyệt</p>
                                     @endif
                                 </div>
@@ -470,7 +470,7 @@
 
 @push('scripts')
     <script type="text/javascript">
-        $("#manager_confirmation_result_id").select2({
+        $("#director_confirmation_result_id").select2({
             placeholder: "Chọn",
             allowClear: true
         });

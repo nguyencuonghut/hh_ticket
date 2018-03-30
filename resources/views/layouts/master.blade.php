@@ -232,7 +232,7 @@ $('body').click(function(e) {
 </body>
 <script>
     $(document).ready(function() {
-        $('#manager_confirmation_comment').summernote({
+        $('#director_confirmation_comment').summernote({
             height: 300,
         });
     });

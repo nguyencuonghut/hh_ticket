@@ -28,19 +28,19 @@ class CreateTicketsTable extends Migration
             $table->string('how_1');
             $table->integer('how_2')->unsigned();
             $table->string('image_path')->nullable();
-            $table->integer('manager_id')->unsigned();
-            $table->foreign('manager_id')->references('id')->on('users');
+            $table->integer('director_id')->unsigned();
+            $table->foreign('director_id')->references('id')->on('users');
             $table->integer('creator_id')->unsigned();
             $table->foreign('creator_id')->references('id')->on('users');
             $table->integer('department_id')->unsigned();
             $table->foreign('department_id')->references('id')->on('departments');
             //~Description for ticket
 
-            //Confirmation of manager
-            $table->integer('manager_confirmation_result_id')->unsigned();
-            $table->foreign('manager_confirmation_result_id')->references('id')->on('approve_results');
-            $table->text('manager_confirmation_comment')->nullable();
-            //~Confirmation of manager
+            //Confirmation of director
+            $table->integer('director_confirmation_result_id')->unsigned();
+            $table->foreign('director_confirmation_result_id')->references('id')->on('approve_results');
+            $table->text('director_confirmation_comment')->nullable();
+            //~Confirmation of director
 
             //Identify the responsibility of ticket
             $table->integer('responsibility_id')->unsigned();

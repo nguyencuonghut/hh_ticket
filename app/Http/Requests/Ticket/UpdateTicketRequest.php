@@ -32,7 +32,7 @@ class UpdateTicketRequest extends FormRequest
             'where' => 'required',
             'how_1' => 'required',
             'how_2' => 'required',
-            'manager_id' => 'required',
+            'director_id' => 'required',
         ];
     }
 
@@ -49,7 +49,7 @@ class UpdateTicketRequest extends FormRequest
             'where.required' => 'Yêu cầu bạn PHẢI điền "Phát hiện ra ở đâu?"',
             'how_1.required' => 'Yêu cầu bạn PHẢI điền "Bằng cách nào?"',
             'how_2.required' => 'Yêu cầu bạn PHẢI điền "Có bao nhiêu sự không phù hợp?"',
-            'manager_id.required' => 'Yêu cầu bạn PHẢI điền "Trưởng bộ phận (nơi xảy ra SKPH)"',
+            'director_id.required' => 'Yêu cầu bạn PHẢI điền "Giám đốc khối (nơi xảy ra SKPH)"',
         ];
     }
 }

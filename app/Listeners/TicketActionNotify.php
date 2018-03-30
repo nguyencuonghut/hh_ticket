@@ -30,13 +30,13 @@ class TicketActionNotify
         $action = $event->getAction();switch ($event->getAction()) {
         case 'created':
         case 'updated_description':
-            $ticket->managerUser->notify(new TicketActionNotification(
+            $ticket->directorUser->notify(new TicketActionNotification(
                 $ticket,
                 $action
             ));
             break;
-        case 'manager_approved':
-        case 'manager_rejected':
+        case 'director_approved':
+        case 'director_rejected':
             $ticket->creatorUser->notify(new TicketActionNotification(
                 $ticket,
                 $action
@@ -51,7 +51,7 @@ class TicketActionNotify
         case 'root_cause_approved':
         case 'root_cause_rejected':
         case 'asset_effectiveness':
-            $ticket->managerUser->notify(new TicketActionNotification(
+            $ticket->directorUser->notify(new TicketActionNotification(
                 $ticket,
                 $action
             ));

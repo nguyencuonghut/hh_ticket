@@ -32,32 +32,32 @@ class TicketActionLog
                 $text = __('<b><i>:title</i></b> được tạo bởi :creator và giao cho :assignee', [
                         'title' => $event->getTicket()->title,
                         'creator' => $event->getTicket()->creator->name,
-                        'assignee' => $event->getTicket()->manager->name
+                        'assignee' => $event->getTicket()->director->name
                     ]);
                 break;
             case 'updated_description':
                 $text = __('<b><i>:title</i></b> được sửa đổi bởi :creator và giao cho :assignee', [
                     'title' => $event->getTicket()->title,
                     'creator' => $event->getTicket()->creator->name,
-                    'assignee' => $event->getTicket()->manager->name
+                    'assignee' => $event->getTicket()->director->name
                 ]);
                 break;
-            case 'manager_approved':
-                $text = __('<b><i>:title</i></b> được đồng ý bởi :manager', [
+            case 'director_approved':
+                $text = __('<b><i>:title</i></b> được đồng ý bởi :director', [
                     'title' => $event->getTicket()->title,
-                    'manager' => $event->getTicket()->manager->name
+                    'director' => $event->getTicket()->director->name
                 ]);
                 break;
-            case 'manager_rejected':
-                $text = __('<b><i>:title</i></b> bị từ chối bởi :manager', [
+            case 'director_rejected':
+                $text = __('<b><i>:title</i></b> bị từ chối bởi :director', [
                     'title' => $event->getTicket()->title,
-                    'manager' => $event->getTicket()->manager->name
+                    'director' => $event->getTicket()->director->name
                 ]);
                 break;
             case 'req_approve_root_cause':
-                $text = __('<b><i>:title</i></b> :manager yêu cầu :root_cause_approver duyệt nguyên nhân gốc rễ', [
+                $text = __('<b><i>:title</i></b> :director yêu cầu :root_cause_approver duyệt nguyên nhân gốc rễ', [
                     'title' => $event->getTicket()->title,
-                    'manager' => $event->getTicket()->manager->name,
+                    'director' => $event->getTicket()->director->name,
                     'root_cause_approver' => $event->getTicket()->root_cause_approver->name
                 ]);
                 break;

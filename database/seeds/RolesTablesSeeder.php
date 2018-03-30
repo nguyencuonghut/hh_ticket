@@ -34,7 +34,7 @@ class RolesTablesSeeder extends Seeder
         $editorRole = new Role;
         $editorRole->display_name = 'Director';
         $editorRole->name = 'director';
-        $editorRole->description = 'System Manager';
+        $editorRole->description = 'Director';
         $editorRole->save();
     }
 }

@@ -10,8 +10,8 @@
     </div>
 
     <div class="form-group  col-sm-4 removeleft">
-        {!! Form::label('manager_id', __('Giám đốc khối (nơi xảy ra SKPH)'), ['class' => 'control-label']) !!}
-        {!! Form::select('manager_id', $directors, null, ['placeholder' => '', 'id'=>'manager_id', 'name'=>'manager_id','class'=>'form-control', 'style' => 'width:100%']) !!}
+        {!! Form::label('director_id', __('Giám đốc khối (nơi xảy ra SKPH)'), ['class' => 'control-label']) !!}
+        {!! Form::select('director_id', $directors, null, ['placeholder' => '', 'id'=>'director_id', 'name'=>'director_id','class'=>'form-control', 'style' => 'width:100%']) !!}
     </div>
 
     <div class="form-group col-sm-4 removeleft removeright">
@@ -72,8 +72,8 @@
         });
     </script>
     <script type="text/javascript">
-        $("#manager_id").select2({
-            placeholder: "Chọn trưởng bộ phận",
+        $("#director_id").select2({
+            placeholder: "Chọn giám đốc khối",
             allowClear: true
         });
     </script>

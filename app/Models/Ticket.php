@@ -20,11 +20,11 @@ class Ticket extends Model
         'how_1',
         'how_2',
         'image_path',
-        'manager_id',
+        'director_id',
         'creator_id',
         'department_id',
-        'manager_confirmation_result_id',
-        'manager_confirmation_comment',
+        'director_confirmation_result_id',
+        'director_confirmation_comment',
         'responsibility_id',
         'root_cause_type_id',
         'evaluation_id',
@@ -39,9 +39,9 @@ class Ticket extends Model
     {
         return $this->belongsTo(Source::class, 'source_id');
     }
-    public function manager()
+    public function director()
     {
-        return $this->belongsTo(User::class, 'manager_id');
+        return $this->belongsTo(User::class, 'director_id');
     }
     public function creator()
     {
@@ -75,17 +75,17 @@ class Ticket extends Model
     {
         return $this->belongsTo(User::class, 'effectiveness_assessor_id');
     }
-    public function manager_confirmation_result()
+    public function director_confirmation_result()
     {
-        return $this->belongsTo(ApproveResult::class, 'manager_confirmation_result_id');
+        return $this->belongsTo(ApproveResult::class, 'director_confirmation_result_id');
     }
     public function getCreatorUserAttribute()
     {
         return User::findOrFail($this->creator_id);
     }
-    public function getManagerUserAttribute()
+    public function getDirectorUserAttribute()
     {
-        return User::findOrFail($this->manager_id);
+        return User::findOrFail($this->director_id);
     }
     public function getRootCauseApproverUserAttribute()
     {
