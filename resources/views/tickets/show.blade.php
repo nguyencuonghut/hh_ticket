@@ -310,7 +310,7 @@
                             </el-tab-pane>
                             <el-tab-pane label="Phòng ngừa" name="prevention">
                                 <h5><b style="color:blue; float: left;">4. Xem xét mức độ sự không phù hợp:</b></h5>
-                                <span>
+                                <span style="float: left">
                                     <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#evaluation"><i class="fa fa-plus-circle"><b> Cập nhật</b></i></button>
                                 </span>
                                 <div class="modal fade" id="evaluation" role="dialog" aria-labelledby="EvaluationModalLabel">
@@ -352,9 +352,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <span> </span>
-                                <span>
-                                    <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#root_cause_approve" style="margin-top: 2px;margin-left: 2px"><i class="fa fa-check-circle"><b> Phê duyệt</b></i></button>
+                                <span style="float: left">
+                                    &nbsp;
+                                </span>
+                                <span style="float: left">
+                                    <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#root_cause_approve"><i class="fa fa-check-circle"><b> Phê duyệt</b></i></button>
                                 </span>
                                 <div class="modal fade" id="root_cause_approve" role="dialog" aria-labelledby="RootCauseApproveModalLabel">
                                     <div class="modal-dialog" role="document">
