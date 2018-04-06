@@ -27,6 +27,8 @@ class TicketRepository implements TicketRepositoryContract
     const ASSET_EFFECTIVENESS = 'asset_effectiveness';
     const ASSIGNED_TROUBLESHOOTER = 'assigned_troubleshooter';
     const REQUEST_TO_APPROVE_TROUBLESHOOT = 'request_to_approve_troubleshoot';
+    const TROUBLESHOOT_APPROVED = 'troubleshoot_approved';
+    const TROUBLESHOOT_REJECTED = 'troubleshoot_rejected';
 
     /**
      * @param $id
@@ -234,5 +236,25 @@ class TicketRepository implements TicketRepositoryContract
     {
         $ticket = Ticket::findOrFail($id);
         event(new \App\Events\TicketAction($ticket, self::REQUEST_TO_APPROVE_TROUBLESHOOT));
+    }
+
+    /**
+     * Approve troubleshoot actions
+     * @param  \Illuminate\Http\Request  $requestData
+     * @param $id
+     * @return mixed
+     */
+    public function approveTroubleshoot($id, $requestData)
+    {
+        $ticket = Ticket::findOrFail($id);
+        $ticket->approve_troubleshoot_result_id = $requestData->approve_troubleshoot_result_id;
+        $ticket->approve_troubleshoot_comment = $requestData->approve_troubleshoot_comment;
+        $ticket->save();
+        $ticket = $ticket->fresh();
+        if('Đồng ý' == $ticket->approve_troubleshoot_result->name){
+            event(new \App\Events\TicketAction($ticket, self::TROUBLESHOOT_APPROVED));
+        } else {
+            event(new \App\Events\TicketAction($ticket, self::TROUBLESHOOT_REJECTED));
+        }
     }
 }

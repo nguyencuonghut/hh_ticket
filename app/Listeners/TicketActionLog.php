@@ -94,6 +94,20 @@ class TicketActionLog
                     'assigned_troubleshooter' => $event->getTicket()->assigned_troubleshooter->name,
                 ]);
                 break;
+            case 'troubleshoot_approved':
+                $text = __('<b><i>:title</i></b>, :director đã đồng ý biện pháp khắc phục của :assigned_troubleshooter', [
+                    'title' => $event->getTicket()->title,
+                    'director' => $event->getTicket()->director->name,
+                    'assigned_troubleshooter' => $event->getTicket()->assigned_troubleshooter->name,
+                ]);
+                break;
+            case 'troubleshoot_rejected':
+                $text = __('<b><i>:title</i></b>, :director đã từ chối biện pháp khắc phục của :assigned_troubleshooter', [
+                    'title' => $event->getTicket()->title,
+                    'director' => $event->getTicket()->director->name,
+                    'assigned_troubleshooter' => $event->getTicket()->assigned_troubleshooter->name,
+                ]);
+                break;
             default:
                 break;
         }

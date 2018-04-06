@@ -58,6 +58,8 @@ class TicketActionNotify
             ));
             break;
         case 'assigned_troubleshooter':
+        case 'troubleshoot_approved':
+        case 'troubleshoot_rejected':
             $ticket->assignedTroubleshooterUser->notify(new TicketActionNotification(
                 $ticket,
                 $action

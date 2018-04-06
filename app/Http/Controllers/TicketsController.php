@@ -316,4 +316,24 @@ class TicketsController extends Controller
         Session()->flash('flash_message', 'Yêu cầu phê duyệt thành công!');
         return redirect()->back()->with('tab', 'troubleshoot');
     }
+
+    /**
+     * Approve  the troubleshoot actions
+     */
+    public function approveTroubleshoot(Request $request, $id)
+    {
+        //Validate the input value
+        $rules = [
+            'approve_troubleshoot_result_id' => 'required',
+        ];
+        $messages = [
+            'approve_troubleshoot_result_id.required' => 'Yêu cầu bạn PHẢI điền "Kết quả duyệt"',
+        ];
+        $this->validate($request, $rules, $messages);
+
+        $this->tickets->approveTroubleshoot($id, $request);
+        Session()->flash('flash_message', 'Duyệt biện pháp khắc phục thành công!');
+        return redirect()->back()->with('tab', 'troubleshoot');
+
+    }
 }

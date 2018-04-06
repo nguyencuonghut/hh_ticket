@@ -121,6 +121,20 @@ class TicketActionNotification extends Notification
                 ]);
                 $toName = $this->ticket->director->name;
                 break;
+            case 'troubleshoot_approved':
+                $text = __(':title, :director đã đồng ý biện pháp khắc phục của bạn', [
+                    'title' =>  $this->ticket->title,
+                    'director' => $this->ticket->director->name,
+                ]);
+                $toName = $this->ticket->assigned_troubleshooter->name;
+                break;
+            case 'troubleshoot_rejected':
+                $text = __(':title, :director đã từ chối biện pháp khắc phục của bạn', [
+                    'title' =>  $this->ticket->title,
+                    'director' => $this->ticket->director->name,
+                ]);
+                $toName = $this->ticket->assigned_troubleshooter->name;
+                break;
             default:
                 break;
         }
@@ -216,6 +230,22 @@ class TicketActionNotification extends Notification
                 $text = __(':title, :assigned_troubleshooter đề nghị bạn duyệt biện pháp khắc phục', [
                     'title' =>  $this->ticket->title,
                     'assigned_troubleshooter' => $this->ticket->assigned_troubleshooter->name,
+                ]);
+                $assigned_user = $this->ticket->director->name;
+                $created_user =$this->ticket->creator->name;
+                break;
+            case 'troubleshoot_approved':
+                $text = __(':title, :director đã đồng ý biện pháp khắc phục của bạn', [
+                    'title' =>  $this->ticket->title,
+                    'director' => $this->ticket->director->name,
+                ]);
+                $assigned_user = $this->ticket->director->name;
+                $created_user =$this->ticket->creator->name;
+                break;
+            case 'troubleshoot_rejected':
+                $text = __(':title, :director đã từ chối biện pháp khắc phục của bạn', [
+                    'title' =>  $this->ticket->title,
+                    'director' => $this->ticket->director->name,
                 ]);
                 $assigned_user = $this->ticket->director->name;
                 $created_user =$this->ticket->creator->name;

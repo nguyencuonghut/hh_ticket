@@ -139,13 +139,12 @@
                                                                     'enctype' => 'multipart/form-data'
                                                                     ]) !!}
                                                             <div class="form-group">
-                                                                {!! Form::label('director_confirmation_result_id', __('Nguồn gốc') , ['class' => 'control-label']) !!}
+                                                                {!! Form::label('director_confirmation_result_id', __('Kết quả') , ['class' => 'control-label']) !!}
                                                                 {!! Form::select('director_confirmation_result_id', $results, null, ['placeholder' => '', 'id'=>'director_confirmation_result_id', 'name'=>'director_confirmation_result_id','class'=>'form-control', 'style' => 'width:100%']) !!}
                                                             </div>
                                                             <div class="form-group">
                                                                 {!! Form::label('director_confirmation_comment', __('Ý kiến'), ['class' => 'control-label']) !!}
-                                                                {!! Form::textarea('director_confirmation_comment', null, ['class' => 'form-control']) !!}
-                                                            </div>
+                                                                {!! Form::textarea('director_confirmation_comment', null, ['class' => 'form-control']) !!}                                                       </div>
                                                             {!! Form::submit(__('Cập nhật'), ['class' => 'btn btn-primary', 'style' => 'width:100%']) !!}
                                                             {!! Form::close() !!}
                                                         </div>
@@ -255,6 +254,55 @@
                                         <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-paper-plane"> Yêu cầu duyệt</i></button>
                                     </form>
                                 </span>
+
+                                <span style="float: left">
+                                    &nbsp;
+                                </span>
+
+                                <span style="float: left">
+                                    <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#approve_troubleshoot"><i class="fa fa-check-circle"><b> Duyệt</b></i></button>
+                                </span>
+                                <div class="modal fade" id="approve_troubleshoot" role="dialog" aria-labelledby="ApproveTroubleshootModalLabel">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="ApproveTroubleshootModalLabel"><b>Duyệt biện pháp khắc phục</b></h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                {!! Form::model($ticket, [
+                                                        'method' => 'PATCH',
+                                                        'route' => ['approveTroubleshoot', $ticket->id],
+                                                        'files'=>true,
+                                                        'enctype' => 'multipart/form-data'
+                                                        ]) !!}
+
+                                                {!! Form::label('approve_troubleshoot_result_id', __('Kết quả duyệt'), ['class' => 'control-label']) !!}
+                                                {!! Form::select('approve_troubleshoot_result_id', $results, null, ['placeholder' => '', 'id'=>'approve_troubleshoot_result_id', 'name'=>'approve_troubleshoot_result_id','class'=>'form-control', 'style' => 'width:100%']) !!}
+
+                                                {!! Form::label('approve_troubleshoot_comment', __('Ý kiến'), ['class' => 'control-label']) !!}
+                                                {!! Form::textarea('approve_troubleshoot_comment', null, ['class' => 'form-control']) !!}
+
+                                                {!! Form::submit( __('Thêm') , ['class' => 'btn btn-primary']) !!}
+                                                {!! Form::close() !!}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-md-6"></div>
+                                @if($ticket->assigned_troubleshooter_id)
+                                    <div class="contactleft">
+                                        <p><b>Người đề xuất:</b> {{$ticket->assigned_troubleshooter->name}}</p>
+                                    </div>
+                                @endif
+                                <div class="contactright">
+                                    @if($ticket->approve_troubleshoot_result_id)
+                                    <p><b>Kết quả duyệt:</b> <b style="color: {{$ticket->approve_troubleshoot_result->color}}">{{$ticket->approve_troubleshoot_result->name}}</b> (bởi {{$ticket->director->name}})</p>
+                                    @endif
+                                    @if($ticket->approve_troubleshoot_comment)
+                                        <p><b>Ý kiến người duyệt:</b> <i>{!! $ticket->approve_troubleshoot_comment !!}</i></p>
+                                    @endif
+                                </div>
                                 @if($troubleshoots->count())
                                     @include('tickets.troubleshoots.index', ['subject' => $ticket])
                                 @endif
@@ -562,6 +610,12 @@
     </script>
     <script type="text/javascript">
         $("#assigned_troubleshooter_id").select2({
+            placeholder: "Chọn",
+            allowClear: true
+        });
+    </script>
+    <script type="text/javascript">
+        $("#troubleshoot_approve_result_id").select2({
             placeholder: "Chọn",
             allowClear: true
         });

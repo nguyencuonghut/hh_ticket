@@ -26,6 +26,8 @@ class Ticket extends Model
         'director_confirmation_result_id',
         'director_confirmation_comment',
         'assigned_troubleshooter_id',
+        'approve_troubleshoot_result_id',
+        'approve_troubleshoot_comment',
         'responsibility_id',
         'root_cause_type_id',
         'evaluation_id',
@@ -83,6 +85,10 @@ class Ticket extends Model
     public function assigned_troubleshooter()
     {
         return $this->belongsTo(User::class, 'assigned_troubleshooter_id');
+    }
+    public function approve_troubleshoot_result()
+    {
+        return $this->belongsTo(ApproveResult::class, 'approve_troubleshoot_result_id');
     }
     public function getCreatorUserAttribute()
     {

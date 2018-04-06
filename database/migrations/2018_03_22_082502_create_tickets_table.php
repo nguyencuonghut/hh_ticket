@@ -47,6 +47,12 @@ class CreateTicketsTable extends Migration
             $table->foreign('assigned_troubleshooter_id')->references('id')->on('users');
             //~Assign troubleshooter
 
+            //Approve troubleshooter
+            $table->integer('approve_troubleshoot_result_id')->unsigned();
+            $table->foreign('approve_troubleshoot_result_id')->references('id')->on('approve_results');
+            $table->longText('approve_troubleshoot_comment')->nullable();
+            //~Approve troubleshooter
+
             //Identify the responsibility of ticket
             $table->integer('responsibility_id')->unsigned();
             $table->foreign('responsibility_id')->references('id')->on('responsibilities');
