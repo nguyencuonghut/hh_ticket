@@ -30,6 +30,10 @@ class NotificationsController extends Controller
                     || 'req_approve_root_cause' == $action)
                 {
                     $tab = 'prevention';
+                } elseif ('assigned_troubleshooter' == $action
+                    || 'request_to_approve_troubleshoot' == $action)
+                {
+                    $tab = 'troubleshoot';
                 }
                 break;
             case 'App\Notifications\TroubleshootActionNotification':

@@ -51,6 +51,7 @@ class TicketActionNotify
         case 'root_cause_approved':
         case 'root_cause_rejected':
         case 'asset_effectiveness':
+        case 'request_to_approve_troubleshoot':
             $ticket->directorUser->notify(new TicketActionNotification(
                 $ticket,
                 $action

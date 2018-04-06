@@ -114,6 +114,13 @@ class TicketActionNotification extends Notification
                 ]);
                 $toName = $this->ticket->assigned_troubleshooter->name;
                 break;
+            case 'request_to_approve_troubleshoot':
+                $text = __(':title, :assigned_troubleshooter đề nghị bạn duyệt biện pháp khắc phục', [
+                    'title' =>  $this->ticket->title,
+                    'assigned_troubleshooter' => $this->ticket->assigned_troubleshooter->name,
+                ]);
+                $toName = $this->ticket->director->name;
+                break;
             default:
                 break;
         }
@@ -201,6 +208,14 @@ class TicketActionNotification extends Notification
                 $text = __(':title được :director giao cho bạn khắc phục', [
                     'title' =>  $this->ticket->title,
                     'director' => $this->ticket->director->name,
+                ]);
+                $assigned_user = $this->ticket->director->name;
+                $created_user =$this->ticket->creator->name;
+                break;
+            case 'request_to_approve_troubleshoot':
+                $text = __(':title, :assigned_troubleshooter đề nghị bạn duyệt biện pháp khắc phục', [
+                    'title' =>  $this->ticket->title,
+                    'assigned_troubleshooter' => $this->ticket->assigned_troubleshooter->name,
                 ]);
                 $assigned_user = $this->ticket->director->name;
                 $created_user =$this->ticket->creator->name;

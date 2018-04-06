@@ -211,7 +211,7 @@
                                 @endif
 
                                 <h5><b style="color:blue;float: left;">3. Thực hiện biện pháp khắc phục:</b></h5>
-                                <span>
+                                <span style="float: left">
                                     <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#troubleshootaction"><i class="fa fa-plus-circle"><b> Tạo thêm</b></i></button>
                                 </span>
                                 <div class="modal fade" id="troubleshootaction" role="dialog" aria-labelledby="TroubleshootModalLabel">
@@ -244,6 +244,17 @@
                                         </div>
                                     </div>
                                 </div>
+                                <span style="float: left">
+                                    &nbsp;
+                                </span>
+
+                                <span>
+                                    <form style="float: left;" action="{{ route('requestToApproveTroubleshoot', $ticket->id) }}" method="POST">
+                                        {{ csrf_field() }}
+                                        {{ method_field('PATCH') }}
+                                        <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-paper-plane"> Yêu cầu duyệt</i></button>
+                                    </form>
+                                </span>
                                 @if($troubleshoots->count())
                                     @include('tickets.troubleshoots.index', ['subject' => $ticket])
                                 @endif

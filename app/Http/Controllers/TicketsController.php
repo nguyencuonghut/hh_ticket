@@ -304,4 +304,16 @@ class TicketsController extends Controller
         Session()->flash('flash_message', 'Giao cho người khắc phục thành công!');
         return redirect()->back()->with('tab', 'troubleshoot');
     }
+
+    /**
+     * Request to approve troubleshoot action
+     * @param $id
+     * @return mixed
+     */
+    public function requestToApproveTroubleshoot(Request $request, $id)
+    {
+        $this->tickets->requestToApproveTroubleshoot($id, $request);
+        Session()->flash('flash_message', 'Yêu cầu phê duyệt thành công!');
+        return redirect()->back()->with('tab', 'troubleshoot');
+    }
 }
