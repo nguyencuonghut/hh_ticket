@@ -41,7 +41,7 @@ class TroubleshootRepository implements TroubleshootRepositoryContract
             $requestData->all(),
             ['ticket_id' => $ticket_id,
                 'pre_troubleshooter_id' => $requestData->troubleshooter_id,
-                'creator_id' => $ticket->director_id,
+                'creator_id' => \auth::id(),
                 'status_id' => 1, // Status is Open
                 'is_on_time' => false]
         );

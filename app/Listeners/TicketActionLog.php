@@ -80,6 +80,13 @@ class TicketActionLog
                     'effectiveness_assessor' => $event->getTicket()->effectiveness_assessor->name
                 ]);
                 break;
+            case 'assigned_troubleshooter':
+                $text = __('<b><i>:title</i></b> được :director giao cho :assigned_troubleshooter khắc phục', [
+                    'title' => $event->getTicket()->title,
+                    'director' => $event->getTicket()->director->name,
+                    'assigned_troubleshooter' => $event->getTicket()->assigned_troubleshooter->name,
+                ]);
+                break;
             default:
                 break;
         }

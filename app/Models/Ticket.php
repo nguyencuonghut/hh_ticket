@@ -25,6 +25,7 @@ class Ticket extends Model
         'department_id',
         'director_confirmation_result_id',
         'director_confirmation_comment',
+        'assigned_troubleshooter_id',
         'responsibility_id',
         'root_cause_type_id',
         'evaluation_id',
@@ -79,6 +80,10 @@ class Ticket extends Model
     {
         return $this->belongsTo(ApproveResult::class, 'director_confirmation_result_id');
     }
+    public function assigned_troubleshooter()
+    {
+        return $this->belongsTo(User::class, 'assigned_troubleshooter_id');
+    }
     public function getCreatorUserAttribute()
     {
         return User::findOrFail($this->creator_id);
@@ -90,6 +95,10 @@ class Ticket extends Model
     public function getRootCauseApproverUserAttribute()
     {
         return User::findOrFail($this->root_cause_approver_id);
+    }
+    public function getAssignedTroubleshooterUserAttribute()
+    {
+        return User::findOrFail($this->assigned_troubleshooter_id);
     }
     public function activity()
     {

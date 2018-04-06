@@ -283,4 +283,25 @@ class TicketsController extends Controller
                 return $tickets->department->name;
             })->make(true);
     }
+
+    /**
+     * Assign troubleshooter
+     * @param $id
+     * @return mixed
+     */
+    public function assignTroubleshooter(Request $request, $id)
+    {
+        //Validate the input value
+        $rules = [
+            'assigned_troubleshooter_id' => 'required',
+        ];
+        $messages = [
+            'assigned_troubleshooter_id.required' => 'Yêu cầu bạn PHẢI điền "Người khắc phục"',
+        ];
+        $this->validate($request, $rules, $messages);
+
+        $this->tickets->assignTroubleshooter($id, $request);
+        Session()->flash('flash_message', 'Giao cho người khắc phục thành công!');
+        return redirect()->back()->with('tab', 'troubleshoot');
+    }
 }

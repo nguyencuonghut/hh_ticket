@@ -56,6 +56,12 @@ class TicketActionNotify
                 $action
             ));
             break;
+        case 'assigned_troubleshooter':
+            $ticket->assignedTroubleshooterUser->notify(new TicketActionNotification(
+                $ticket,
+                $action
+            ));
+            break;
         default:
             $ticket->creatorUser->notify(new TicketActionNotification(
                 $ticket,

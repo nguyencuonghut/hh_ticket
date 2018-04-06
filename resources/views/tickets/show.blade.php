@@ -163,7 +163,7 @@
                                                 <p style="color:red"> Chưa xác nhận!</p>
                                             @endif
                                             @if($ticket->director_confirmation_comment)
-                                                <p><b>Góp ý:</b><i>{!! $ticket->director_confirmation_comment !!}</i></p>
+                                                <p><b>Ý kiến:</b><i>{!! $ticket->director_confirmation_comment !!}</i></p>
                                             @endif
                                         </th>
                                     </tr>
@@ -340,7 +340,6 @@
                                         <p><b>Kết quả duyệt:</b> Chưa phê duyệt</p>
                                     @endif
                                 </div>
-                                <br>
 
                                 @if($ticket->root_cause_type_id)
                                     <p><b>Phân loại nguyên nhân:</b> {{$ticket->root_cause_type->name}} - <i>{{$ticket->root_cause_type->description}}</i></p>
@@ -455,6 +454,33 @@
             <div class="sidebarheader" style="margin-top: 0px; background-color:#337ab7;">
                 <p style="text-align: center">{{ __('Phân công người xử lý') }}</p>
             </div>
+            @if(\Auth::id() == $ticket->director_id)
+                <button type="button" class="btn btn-primary form-control closebtn" data-toggle="modal" data-target="#AssignTroubleshooterModal">Giao cho người khắc phục</button>
+                <div class="modal fade" id="AssignTroubleshooterModal" role="dialog" aria-labelledby="AssignTroubleshooterModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="AssignTroubleshooterModalLabel">Chọn người khắc phục</h4>
+                            </div>
+                            <div class="modal-body" style="text-align: left">
+                                {!! Form::model($ticket, [
+                                        'method' => 'PATCH',
+                                        'route' => ['assignTroubleshooter', $ticket->id],
+                                    ]) !!}
+                                {!! Form::select('assigned_troubleshooter_id', $users, null, ['placeholder' => '', 'id'=>'assigned_troubleshooter_id', 'name'=>'assigned_troubleshooter_id','class'=>'form-control', 'style' => 'width:100%']) !!}
+                                <br>
+                                <br>
+                                {!! Form::submit(__('Cập nhật'), ['class' => 'btn btn-primary closebtn']) !!}
+                                {!! Form::close() !!}
+                            </div>
+                            <div class="modal-footer">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
 
             <div class="activity-feed movedown">
                 @foreach($activities as $activity)
@@ -519,6 +545,12 @@
     </script>
     <script type="text/javascript">
         $("#effectiveness_id").select2({
+            placeholder: "Chọn",
+            allowClear: true
+        });
+    </script>
+    <script type="text/javascript">
+        $("#assigned_troubleshooter_id").select2({
             placeholder: "Chọn",
             allowClear: true
         });
