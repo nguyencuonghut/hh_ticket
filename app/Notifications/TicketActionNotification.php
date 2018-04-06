@@ -135,6 +135,13 @@ class TicketActionNotification extends Notification
                 ]);
                 $toName = $this->ticket->assigned_troubleshooter->name;
                 break;
+            case 'assigned_preventer':
+                $text = __(':title được :director giao cho bạn đề xuất biện pháp phòng ngừa', [
+                    'title' =>  $this->ticket->title,
+                    'director' => $this->ticket->director->name,
+                ]);
+                $toName = $this->ticket->assigned_preventer->name;
+                break;
             default:
                 break;
         }
@@ -244,6 +251,14 @@ class TicketActionNotification extends Notification
                 break;
             case 'troubleshoot_rejected':
                 $text = __(':title, :director đã từ chối biện pháp khắc phục của bạn', [
+                    'title' =>  $this->ticket->title,
+                    'director' => $this->ticket->director->name,
+                ]);
+                $assigned_user = $this->ticket->director->name;
+                $created_user =$this->ticket->creator->name;
+                break;
+            case 'assigned_preventer':
+                $text = __(':title được :director giao cho bạn đề xuất biện pháp phòng ngừa', [
                     'title' =>  $this->ticket->title,
                     'director' => $this->ticket->director->name,
                 ]);

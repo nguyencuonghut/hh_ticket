@@ -336,4 +336,25 @@ class TicketsController extends Controller
         return redirect()->back()->with('tab', 'troubleshoot');
 
     }
+
+    /**
+     * Assign preventer
+     * @param $id
+     * @return mixed
+     */
+    public function assignPreventer(Request $request, $id)
+    {
+        //Validate the input value
+        $rules = [
+            'assigned_preventer_id' => 'required',
+        ];
+        $messages = [
+            'assigned_preventer_id.required' => 'Yêu cầu bạn PHẢI điền "Người phòng ngừa"',
+        ];
+        $this->validate($request, $rules, $messages);
+
+        $this->tickets->assignPreventer($id, $request);
+        Session()->flash('flash_message', 'Giao cho người đề xuất hành động phòng ngừa thành công!');
+        return redirect()->back()->with('tab', 'prevention');
+    }
 }

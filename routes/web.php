@@ -44,6 +44,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::patch('assigntroubleshooter/{id}', 'TicketsController@assignTroubleshooter')->name('assignTroubleshooter');
         Route::patch('requesttoapprovetroublehoot/{id}', 'TicketsController@requestToApproveTroubleshoot')->name('requestToApproveTroubleshoot');
         Route::patch('approvetroubleshoot/{id}', 'TicketsController@approveTroubleshoot')->name('approveTroubleshoot');
+        Route::patch('assignpreventer/{id}', 'TicketsController@assignPreventer')->name('assignPreventer');
     });
     Route::resource('tickets', 'TicketsController');
 

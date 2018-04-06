@@ -58,6 +58,11 @@ class CreateTicketsTable extends Migration
             $table->foreign('responsibility_id')->references('id')->on('responsibilities');
             //~Identify the responsibility of ticket
 
+            //Assign troubleshooter
+            $table->integer('assigned_preventer_id')->unsigned();
+            $table->foreign('assigned_preventer_id')->references('id')->on('users');
+            //~Assign troubleshooter
+
             //Evaluate the ticket
             $table->integer('root_cause_type_id')->unsigned();
             $table->foreign('root_cause_type_id')->references('id')->on('root_cause_types');

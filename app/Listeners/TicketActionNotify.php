@@ -65,6 +65,12 @@ class TicketActionNotify
                 $action
             ));
             break;
+        case 'assigned_preventer':
+            $ticket->assignedPreventerUser->notify(new TicketActionNotification(
+                $ticket,
+                $action
+            ));
+            break;
         default:
             $ticket->creatorUser->notify(new TicketActionNotification(
                 $ticket,

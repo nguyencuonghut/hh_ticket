@@ -27,7 +27,8 @@ class NotificationsController extends Controller
                 if('asset_effectiveness' == $action
                     || 'root_cause_approved' == $action
                     || 'root_cause_rejected' == $action
-                    || 'req_approve_root_cause' == $action)
+                    || 'req_approve_root_cause' == $action
+                    || 'assigned_preventer' == $action)
                 {
                     $tab = 'prevention';
                 } elseif ('assigned_troubleshooter' == $action

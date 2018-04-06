@@ -108,6 +108,13 @@ class TicketActionLog
                     'assigned_troubleshooter' => $event->getTicket()->assigned_troubleshooter->name,
                 ]);
                 break;
+            case 'assigned_preventer':
+                $text = __('<b><i>:title</i></b> được :director giao cho :assigned_preventer đề xuất biện pháp phòng ngừa', [
+                    'title' => $event->getTicket()->title,
+                    'director' => $event->getTicket()->director->name,
+                    'assigned_preventer' => $event->getTicket()->assigned_preventer->name,
+                ]);
+                break;
             default:
                 break;
         }

@@ -516,7 +516,7 @@
                 <p style="text-align: center">{{ __('Phân công người xử lý') }}</p>
             </div>
             @if(\Auth::id() == $ticket->director_id)
-                <button type="button" class="btn btn-primary form-control closebtn" data-toggle="modal" data-target="#AssignTroubleshooterModal">Giao cho người khắc phục</button>
+                <button type="button" class="btn btn-success form-control closebtn" data-toggle="modal" data-target="#AssignTroubleshooterModal">Giao cho người khắc phục</button>
                 <div class="modal fade" id="AssignTroubleshooterModal" role="dialog" aria-labelledby="AssignTroubleshooterModalLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -530,6 +530,31 @@
                                         'route' => ['assignTroubleshooter', $ticket->id],
                                     ]) !!}
                                 {!! Form::select('assigned_troubleshooter_id', $users, null, ['placeholder' => '', 'id'=>'assigned_troubleshooter_id', 'name'=>'assigned_troubleshooter_id','class'=>'form-control', 'style' => 'width:100%']) !!}
+                                <br>
+                                <br>
+                                {!! Form::submit(__('Cập nhật'), ['class' => 'btn btn-primary closebtn']) !!}
+                                {!! Form::close() !!}
+                            </div>
+                            <div class="modal-footer">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-warning form-control closebtn" data-toggle="modal" data-target="#AssignPreventerModal">Giao cho người phòng ngừa</button>
+                <div class="modal fade" id="AssignPreventerModal" role="dialog" aria-labelledby="AssignPreventerModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="AssignPreventerModalLabel">Chọn người phòng ngừa</h4>
+                            </div>
+                            <div class="modal-body" style="text-align: left">
+                                {!! Form::model($ticket, [
+                                        'method' => 'PATCH',
+                                        'route' => ['assignPreventer', $ticket->id],
+                                    ]) !!}
+                                {!! Form::select('assigned_preventer_id', $users, null, ['placeholder' => '', 'id'=>'assigned_preventer_id', 'name'=>'assigned_preventer_id','class'=>'form-control', 'style' => 'width:100%']) !!}
                                 <br>
                                 <br>
                                 {!! Form::submit(__('Cập nhật'), ['class' => 'btn btn-primary closebtn']) !!}
@@ -618,6 +643,12 @@
     </script>
     <script type="text/javascript">
         $("#troubleshoot_approve_result_id").select2({
+            placeholder: "Chọn",
+            allowClear: true
+        });
+    </script>
+    <script type="text/javascript">
+        $("#assigned_preventer_id").select2({
             placeholder: "Chọn",
             allowClear: true
         });

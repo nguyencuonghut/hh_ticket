@@ -29,6 +29,7 @@ class TicketRepository implements TicketRepositoryContract
     const REQUEST_TO_APPROVE_TROUBLESHOOT = 'request_to_approve_troubleshoot';
     const TROUBLESHOOT_APPROVED = 'troubleshoot_approved';
     const TROUBLESHOOT_REJECTED = 'troubleshoot_rejected';
+    const ASSIGNED_PREVENTER = 'assigned_preventer';
 
     /**
      * @param $id
@@ -256,5 +257,20 @@ class TicketRepository implements TicketRepositoryContract
         } else {
             event(new \App\Events\TicketAction($ticket, self::TROUBLESHOOT_REJECTED));
         }
+    }
+
+    /**
+     * Assign preventer
+     * @param  \Illuminate\Http\Request  $requestData
+     * @param $id
+     * @return mixed
+     */
+    public function assignPreventer($id, $requestData)
+    {
+        $ticket = Ticket::findOrFail($id);
+        $ticket->assigned_preventer_id = $requestData->assigned_preventer_id;
+        $ticket->save();
+        $ticket = $ticket->fresh();
+        event(new \App\Events\TicketAction($ticket, self::ASSIGNED_PREVENTER));
     }
 }
