@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon;
 
 class Prevention extends Model
 {
@@ -56,5 +57,12 @@ class Prevention extends Model
     public function activity()
     {
         return $this->morphMany(Activity::class, 'source');
+    }
+
+    public function getDaysUntilDeadlineAttribute()
+    {
+        return Carbon\Carbon::now()
+            ->startOfDay()
+            ->diffInDays(Carbon\Carbon::parse($this->when), false); // if you are past your deadline, the value returned will be negative.
     }
 }

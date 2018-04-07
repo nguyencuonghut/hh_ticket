@@ -36,7 +36,11 @@
                     <td>{{ $action->budget }}</td>
                     <td>{{ $action->preventor->name }}</td>
                     <td>{{ $action->where }}</td>
-                    <td>{{ date('d, F Y', strTotime($action->when)) }}</td>
+                    @if('Open' == $action->status->name)
+                        <td>{{date('d, F Y', strTotime($action->when))}} <i style="color: {{(0 < $action->DaysUntilDeadline) ? 'blue' : 'red'}}">({{$action->DaysUntilDeadline}} ngày)</i></td>
+                    @else
+                        <td>{{date('d, F Y', strTotime($action->when))}}</td>
+                    @endif
                     <td>{{ $action->how }}</td>
                     <td style="color: {{'Open' == $action->status->name ? "green": "black"}}">{{ $action->status->name}}</td>
                     <td style="text-align: center">
@@ -48,7 +52,7 @@
                             <button type="button" class="btn btn-warning btn-sm"><i class="fa fa-lock"></i></button>
                         @endif
                         <div class="modal fade" id="PreventionActionEditModal-{{$action->id}}" role="dialog" aria-labelledby="PreventionActionEditModalLabel">
-                            <div class="modal-dialog" role="document">
+                            <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -66,33 +70,37 @@
                                         {!! Form::text('name', null, ['class' => 'form-control', 'id' => 'action']) !!}
 
                                         <div class="form-inline">
-                                            <div class="form-group col-sm-6 removeleft ">
+                                            <div class="form-group col-sm-4 removeleft ">
                                                 {!! Form::label('budget', __('Ngân sách'), ['class' => 'control-label']) !!}
                                                 {!! Form::number('budget', null, ['class' => 'form-control', 'id' => 'action']) !!}
                                             </div>
-                                            <div class="form-group col-sm-6 removeleft removeright ">
+                                            <div class="form-group col-sm-4 removeleft">
                                                 {!! Form::label('preventor_id', __('Ai làm?'), ['class' => 'control-label']) !!}
                                                 {!! Form::select('preventor_id', $users, null, ['placeholder' => '', 'id'=>'preventor_id', 'name'=>'preventor_id','class'=>'form-control', 'style' => 'width:100%']) !!}
                                             </div>
-                                        </div>
-
-                                        <div class="form-inline">
-                                            <div class="form-group col-sm-6 removeleft ">
+                                            <div class="form-group col-sm-4 removeleft removeright">
                                                 {!! Form::label('where', __('Làm ở đâu?'), ['class' => 'control-label']) !!}
-                                                {!! Form::text('where', null, ['class' => 'form-control', 'id' => 'action']) !!}
-                                            </div>
-                                            <div class="form-group col-sm-6 removeleft removeright ">
-                                                {!! Form::label('when', __('Làm khi nào?'), ['class' => 'control-label']) !!}
-                                                {!! Form::date('when', \Carbon\Carbon::parse($action->when), ['class' => 'form-control']) !!}
+                                                {!! Form::text('where', null, ['class' => 'form-control', 'id' => 'action', 'style' => 'width:100%']) !!}
                                             </div>
                                         </div>
 
                                         <div class="form-inline">
-                                            <div class="form-group col-sm-6 removeleft ">
-                                                {!! Form::label('how', __('Làm như thế nào?'), ['class' => 'control-label']) !!}
-                                                {!! Form::text('how', null, ['class' => 'form-control', 'id' => 'action']) !!}
+                                            <div class="form-group col-sm-4 removeleft ">
+                                                {!! Form::label('where', __('Làm ở đâu?'), ['class' => 'control-label']) !!}
+                                                {!! Form::text('where', null, ['class' => 'form-control', 'id' => 'action', 'style' => 'width:100%']) !!}
                                             </div>
-                                            <div class="form-group col-sm-6 removeleft removeright ">
+                                            <div class="form-group col-sm-4 removeleft">
+                                                {!! Form::label('when', __('Làm khi nào?'), ['class' => 'control-label']) !!}
+                                                {!! Form::date('when', \Carbon\Carbon::parse($action->when), ['class' => 'form-control', 'style' => 'width:100%']) !!}
+                                            </div>
+                                            <div class="form-group col-sm-4 removeleft removeright">
+                                                {!! Form::label('how', __('Làm như thế nào?'), ['class' => 'control-label']) !!}
+                                                {!! Form::text('how', null, ['class' => 'form-control', 'id' => 'action', 'style' => 'width:100%']) !!}
+                                            </div>
+                                        </div>
+
+                                        <div class="form-inline">
+                                            <div class="form-group col-sm-4 removeleft removeright ">
                                                 {!! Form::label('status_id', __('Trạng thái'), ['class' => 'control-label']) !!}
                                                 {!! Form::select('status_id', $statuses, null, ['placeholder' => '', 'id'=>'status_id', 'name'=>'status_id','class'=>'form-control', 'style' => 'width:100%']) !!}
                                             </div>

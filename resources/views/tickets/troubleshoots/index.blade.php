@@ -31,7 +31,11 @@
                         <td><i class="fa fa-clock-o" style="color:red"></i> {{ $action->name }}</td>
                     @endif
                     <td>{{ $action->troubleshooter->name }}</td>
-                    <td>{{date('d, F Y', strTotime($action->deadline))}}</td>
+                    @if('Open' == $action->status->name)
+                            <td>{{date('d, F Y', strTotime($action->deadline))}} <i style="color: {{(0 < $action->DaysUntilDeadline) ? 'blue' : 'red'}}">({{$action->DaysUntilDeadline}} ngày)</i></td>
+                    @else
+                        <td>{{date('d, F Y', strTotime($action->deadline))}}</td>
+                    @endif
                     <td style="color: {{'Open' == $action->status->name ? "green": "black"}}">{{ $action->status->name}}</td>
                     <td style="text-align: center">
                         @if(\Auth::id() == $action->troubleshooter_id)

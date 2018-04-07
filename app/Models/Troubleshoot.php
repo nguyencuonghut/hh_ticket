@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon;
 
 class Troubleshoot extends Model
 {
@@ -54,6 +55,13 @@ class Troubleshoot extends Model
     public function activity()
     {
         return $this->morphMany(Activity::class, 'source');
+    }
+
+    public function getDaysUntilDeadlineAttribute()
+    {
+        return Carbon\Carbon::now()
+        ->startOfDay()
+        ->diffInDays(Carbon\Carbon::parse($this->deadline), false); // if you are past your deadline, the value returned will be negative.
     }
 
 }
