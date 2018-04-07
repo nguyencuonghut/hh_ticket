@@ -13,8 +13,8 @@
                 </div>
             </div>
         </span>
-        <table class="table" style="font-size: 12px">
-            <thead>
+        <table class="table" style="font-size: 12px;">
+            <thead style="background-color: purple; color: white">
             <th><b>Biện pháp khắc phục</b></th>
             <th><b>Người thực hiện</b></th>
             <th><b>Thời hạn</b></th>
@@ -24,7 +24,7 @@
             <th><b>Giao cho người khác</b></th>
             </thead>
             @foreach($troubleshoots as $action)
-                <tr>
+                <tr style="background-color: {{('Closed' == $action->status->name) ? '#C6CBCB' : '#adebad'}}">
                     @if($action->is_on_time == true)
                         <td><i class="fa fa-check-circle" style="color:green"></i> {{ $action->name }}</td>
                     @else

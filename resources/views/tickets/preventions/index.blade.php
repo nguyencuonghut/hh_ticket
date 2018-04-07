@@ -14,7 +14,7 @@
             </div>
         </span>
         <table class="table" style="font-size: 12px">
-            <thead>
+            <thead style="background-color: purple; color: white">
             <th><b>Biện pháp phòng ngừa</b></th>
             <th><b>Ngân sách dự kiến</b></th>
             <th><b>Ai làm?</b></th>
@@ -27,13 +27,13 @@
             <th><b>Giao cho người khác</b></th>
             </thead>
             @foreach($preventions as $action)
-                <tr>
+                <tr style="background-color: {{('Closed' == $action->status->name) ? '#C6CBCB' : '#adebad'}}">
                     @if($action->is_on_time == true)
                         <td><i class="fa fa-check-circle" style="color:green"></i> {{ $action->name }}</td>
                     @else
                         <td><i class="fa fa-clock-o" style="color:red"></i> {{ $action->name }}</td>
                     @endif
-                    <td>{{ $action->budget }}</td>
+                    <td>{{ number_format($action->budget,  0)}} VNĐ</td>
                     <td>{{ $action->preventor->name }}</td>
                     <td>{{ $action->where }}</td>
                     @if('Open' == $action->status->name)
