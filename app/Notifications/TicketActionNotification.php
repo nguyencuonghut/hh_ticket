@@ -100,12 +100,12 @@ class TicketActionNotification extends Notification
                 $toName = $this->ticket->director->name;
                 break;
             case 'asset_effectiveness':
-                $text = __(':title được đánh giá :effectiveness :effectiveness_assessor', [
+                $text = __(':title được đánh giá :effectiveness :director', [
                     'title' =>  $this->ticket->title,
                     'effectiveness' => $this->ticket->effectiveness->name,
-                    'effectiveness_assessor' => $this->ticket->effectiveness_assessor->name,
+                    'director' => $this->ticket->director->name,
                 ]);
-                $toName = $this->ticket->director->name;
+                $toName = $this->ticket->assigned_preventer->name;
                 break;
             case 'assigned_troubleshooter':
                 $text = __(':title được :director giao cho bạn khắc phục', [
@@ -239,10 +239,10 @@ class TicketActionNotification extends Notification
                 $created_user =$this->ticket->creator->name;
                 break;
             case 'asset_effectiveness':
-                $text = __(':title được đánh giá :effectiveness bởi :effectiveness_assessor', [
+                $text = __(':title được đánh giá :effectiveness bởi :director', [
                     'title' =>  $this->ticket->title,
                     'effectiveness' => $this->ticket->effectiveness->name,
-                    'effectiveness_assessor' => $this->ticket->effectiveness_assessor->name,
+                    'director' => $this->ticket->director->name,
                 ]);
                 $assigned_user = $this->ticket->director->name;
                 $created_user =$this->ticket->creator->name;

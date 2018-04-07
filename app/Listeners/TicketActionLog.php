@@ -74,10 +74,10 @@ class TicketActionLog
                 ]);
                 break;
             case 'asset_effectiveness':
-                $text = __('<b><i>:title</i></b> được đánh giá :effectiveness bởi :effectiveness_assessor', [
+                $text = __('<b><i>:title</i></b> được đánh giá :effectiveness bởi :director', [
                     'title' => $event->getTicket()->title,
                     'effectiveness' => $event->getTicket()->effectiveness->name,
-                    'effectiveness_assessor' => $event->getTicket()->effectiveness_assessor->name
+                    'director' => $event->getTicket()->director->name
                 ]);
                 break;
             case 'assigned_troubleshooter':

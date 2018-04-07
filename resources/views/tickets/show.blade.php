@@ -542,7 +542,7 @@
 
                                 <div class="col-md-12">
                                     @if($ticket->effectiveness_id)
-                                        <p><b>Ticket được đánh giá hiệu quả <b style="color: {{$ticket->effectiveness->color}}"> {{$ticket->effectiveness->name}}</b></b> (bởi {{$ticket->effectiveness_assessor->name}})</p>
+                                        <p><b>Ticket được đánh giá hiệu quả <b style="color: {{$ticket->effectiveness->color}}"> {{$ticket->effectiveness->name}}</b></b> (bởi {{$ticket->director->name}})</p>
                                     @endif
                                 </div>
 

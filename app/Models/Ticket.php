@@ -37,7 +37,6 @@ class Ticket extends Model
         'approve_prevention_result_id',
         'approve_prevention_comment',
         'effectiveness_id',
-        'effectiveness_assessor_id',
     ];
 
     public function source()
@@ -71,10 +70,6 @@ class Ticket extends Model
     public function effectiveness()
     {
         return $this->belongsTo(Effectiveness::class, 'effectiveness_id');
-    }
-    public function effectiveness_assessor()
-    {
-        return $this->belongsTo(User::class, 'effectiveness_assessor_id');
     }
     public function director_confirmation_result()
     {

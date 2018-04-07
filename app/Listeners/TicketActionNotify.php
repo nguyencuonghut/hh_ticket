@@ -54,6 +54,7 @@ class TicketActionNotify
         case 'assigned_preventer':
         case 'prevention_approved':
         case 'prevention_rejected':
+        case 'asset_effectiveness':
             $ticket->assignedPreventerUser->notify(new TicketActionNotification(
                 $ticket,
                 $action

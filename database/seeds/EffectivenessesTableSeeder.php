@@ -18,7 +18,7 @@ class EffectivenessesTableSeeder extends Seeder
                 array (
                     'id' => 1,
                     'name' => 'Cao',
-                    'color' => 'green',
+                    'color' => 'blue',
                     'created_at' => '2016-06-04 13:42:19',
                     'updated_at' => '2016-06-04 13:42:19',
                 ),
