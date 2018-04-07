@@ -55,22 +55,22 @@ class TicketActionLog
                 ]);
                 break;
             case 'req_approve_root_cause':
-                $text = __('<b><i>:title</i></b> :director yêu cầu :root_cause_approver duyệt nguyên nhân gốc rễ', [
+                $text = __('<b><i>:title</i></b> :director yêu cầu :director duyệt nguyên nhân gốc rễ', [
                     'title' => $event->getTicket()->title,
-                    'director' => $event->getTicket()->director->name,
-                    'root_cause_approver' => $event->getTicket()->root_cause_approver->name
+                    'assigned_preventer' => $event->getTicket()->assigned_preventer->name,
+                    'director' => $event->getTicket()->director->name
                 ]);
                 break;
             case 'root_cause_approved':
-                $text = __('<b><i>:title</i></b> nguyên nhân gốc rễ được đồng ý bởi :root_cause_approver', [
+                $text = __('<b><i>:title</i></b> nguyên nhân gốc rễ được đồng ý bởi :director', [
                     'title' => $event->getTicket()->title,
-                    'root_cause_approver' => $event->getTicket()->root_cause_approver->name
+                    'director' => $event->getTicket()->director->name
                 ]);
                 break;
             case 'root_cause_rejected':
-                $text = __('<b><i>:title</i></b> nguyên nhân gốc rễ bị từ chối bởi :root_cause_approver', [
+                $text = __('<b><i>:title</i></b> nguyên nhân gốc rễ bị từ chối bởi :director', [
                     'title' => $event->getTicket()->title,
-                    'root_cause_approver' => $event->getTicket()->root_cause_approver->name
+                    'director' => $event->getTicket()->director->name
                 ]);
                 break;
             case 'asset_effectiveness':

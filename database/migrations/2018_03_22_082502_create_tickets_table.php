@@ -69,8 +69,6 @@ class CreateTicketsTable extends Migration
             $table->integer('evaluation_id')->unsigned();
             $table->foreign('evaluation_id')->references('id')->on('evaluations');
             $table->longText('root_cause');
-            $table->integer('root_cause_approver_id')->unsigned();
-            $table->foreign('root_cause_approver_id')->references('id')->on('users');
             $table->integer('evaluation_result_id')->unsigned();
             $table->foreign('evaluation_result_id')->references('id')->on('approve_results');
             //~Evaluate the ticket

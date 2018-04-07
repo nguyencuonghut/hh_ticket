@@ -33,7 +33,6 @@ class Ticket extends Model
         'root_cause_type_id',
         'evaluation_id',
         'root_cause',
-        'root_cause_approver_id',
         'evaluation_result_id',
         'effectiveness_id',
         'effectiveness_assessor_id',
@@ -67,10 +66,6 @@ class Ticket extends Model
     {
         return $this->belongsTo(RootCauseType::class, 'root_cause_type_id');
     }
-    public function root_cause_approver()
-    {
-        return $this->belongsTo(User::class, 'root_cause_approver_id');
-    }
     public function effectiveness()
     {
         return $this->belongsTo(Effectiveness::class, 'effectiveness_id');
@@ -102,10 +97,6 @@ class Ticket extends Model
     public function getDirectorUserAttribute()
     {
         return User::findOrFail($this->director_id);
-    }
-    public function getRootCauseApproverUserAttribute()
-    {
-        return User::findOrFail($this->root_cause_approver_id);
     }
     public function getAssignedTroubleshooterUserAttribute()
     {

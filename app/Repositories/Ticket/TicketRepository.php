@@ -161,7 +161,6 @@ class TicketRepository implements TicketRepositoryContract
         $ticket->root_cause_type_id = $requestData->root_cause_type_id;
         $ticket->evaluation_id = $requestData->evaluation_id;
         $ticket->root_cause = $requestData->root_cause;
-        $ticket->root_cause_approver_id = $requestData->root_cause_approver_id;
         $ticket->save();
         $ticket = $ticket->fresh();
         event(new \App\Events\TicketAction($ticket, self::REQ_APPROVE_ROOT_CAUSE));

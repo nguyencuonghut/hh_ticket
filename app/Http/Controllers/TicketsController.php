@@ -195,13 +195,11 @@ class TicketsController extends Controller
             'evaluation_id' => 'required',
             'root_cause_type_id' => 'required',
             'root_cause' => 'required',
-            'root_cause_approver_id' => 'required',
         ];
         $messages = [
             'evaluation_id.required' => 'Yêu cầu bạn PHẢI điền "Mức độ"',
             'root_cause_type_id.required' => 'Yêu cầu bạn PHẢI điền "Phân loại nguyên nhân"',
             'root_cause.required' => 'Yêu cầu bạn PHẢI điền "Nguyên nhân gốc"',
-            'root_cause_approver_id.required' => 'Yêu cầu bạn PHẢI điền "Người phê duyệt"',
         ];
         $this->validate($request, $rules, $messages);
 

@@ -83,19 +83,19 @@ class TicketActionNotification extends Notification
                 $text = __(':title yêu cầu bạn duyệt nguyên nhân gốc rễ', [
                     'title' =>  $this->ticket->title,
                 ]);
-                $toName = $this->ticket->root_cause_approver->name;
+                $toName = $this->ticket->director->name;
                 break;
             case 'root_cause_approved':
-                $text = __(':title nguyên nhân gốc rễ được đồng ý bởi :root_cause_approver', [
+                $text = __(':title nguyên nhân gốc rễ được đồng ý bởi :director', [
                     'title' =>  $this->ticket->title,
-                    'root_cause_approver' => $this->ticket->root_cause_approver->name,
+                    'director' => $this->ticket->director->name,
                 ]);
                 $toName = $this->ticket->director->name;
                 break;
             case 'root_cause_rejected':
-                $text = __(':title nguyên nhân gốc rễ bị từ chối bởi :root_cause_approver', [
+                $text = __(':title nguyên nhân gốc rễ bị từ chối bởi :director', [
                     'title' =>  $this->ticket->title,
-                    'root_cause_approver' => $this->ticket->root_cause_approver->name,
+                    'director' => $this->ticket->director->name,
                 ]);
                 $toName = $this->ticket->director->name;
                 break;
@@ -194,24 +194,25 @@ class TicketActionNotification extends Notification
                 $created_user =$this->ticket->creator->name;
                 break;
             case 'req_approve_root_cause':
-                $text = __(':title yêu cầu bạn duyệt nguyên nhân gốc rễ', [
+                $text = __(':title, :assigned_preventer yêu cầu bạn duyệt nguyên nhân gốc rễ', [
                     'title' =>  $this->ticket->title,
+                    'assigned_preventer' => $this->ticket->assigned_preventer->name,
                 ]);
                 $assigned_user = $this->ticket->director->name;
                 $created_user =$this->ticket->creator->name;
                 break;
             case 'root_cause_approved':
-                $text = __(':title nguyên nhân gốc rễ được đồng ý bởi :root_cause_approver', [
+                $text = __(':title nguyên nhân gốc rễ được đồng ý bởi :director', [
                     'title' =>  $this->ticket->title,
-                    'root_cause_approver' => $this->ticket->root_cause_approver->name,
+                    'director' => $this->ticket->director->name,
                 ]);
                 $assigned_user = $this->ticket->director->name;
                 $created_user =$this->ticket->creator->name;
                 break;
             case 'root_cause_rejected':
-                $text = __(':title nguyên nhân gốc rễ bị từ chối bởi :root_cause_approver', [
+                $text = __(':title nguyên nhân gốc rễ bị từ chối bởi :director', [
                     'title' =>  $this->ticket->title,
-                    'root_cause_approver' => $this->ticket->root_cause_approver->name,
+                    'director' => $this->ticket->director->name,
                 ]);
                 $assigned_user = $this->ticket->director->name;
                 $created_user =$this->ticket->creator->name;

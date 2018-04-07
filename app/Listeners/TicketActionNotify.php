@@ -43,7 +43,7 @@ class TicketActionNotify
             ));
             break;
         case 'req_approve_root_cause':
-            $ticket->rootCauseApproverUser->notify(new TicketActionNotification(
+            $ticket->directorUser->notify(new TicketActionNotification(
                 $ticket,
                 $action
             ));
@@ -51,6 +51,11 @@ class TicketActionNotify
         case 'root_cause_approved':
         case 'root_cause_rejected':
         case 'asset_effectiveness':
+            $ticket->assignedPreventerUser->notify(new TicketActionNotification(
+                $ticket,
+                $action
+            ));
+            break;
         case 'request_to_approve_troubleshoot':
             $ticket->directorUser->notify(new TicketActionNotification(
                 $ticket,

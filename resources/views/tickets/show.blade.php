@@ -332,19 +332,14 @@
                                                     {!! Form::label('root_cause_type_id', __('Phân loại'), ['class' => 'control-label']) !!}
                                                     {!! Form::select('root_cause_type_id', $root_cause_types, null, ['placeholder' => '', 'id'=>'root_cause_type_id', 'name'=>'root_cause_type_id','class'=>'form-control', 'style' => 'width:100%']) !!}
                                                 </div>
-                                                <div class="form-inline">
-                                                    <div class="form-group col-sm-6 removeleft">
-                                                        {!! Form::label('evaluation_id', __('Mức độ'), ['class' => 'control-label']) !!}
-                                                        {!! Form::select('evaluation_id', $evaluations, null, ['placeholder' => '', 'id'=>'evaluation_id', 'name'=>'evaluation_id','class'=>'form-control', 'style' => 'width:100%']) !!}
-                                                    </div>
-                                                    <div class="form-group col-sm-6 removeleft removeright">
-                                                        {!! Form::label('root_cause_approver_id', __('Người duyệt'), ['class' => 'control-label']) !!}
-                                                        {!! Form::select('root_cause_approver_id', $directors, null, ['placeholder' => '', 'id'=>'root_cause_approver_id', 'name'=>'root_cause_approver_id','class'=>'form-control', 'style' => 'width:100%']) !!}
-                                                    </div>
+                                                <div class="form-group">
+                                                    {!! Form::label('evaluation_id', __('Mức độ'), ['class' => 'control-label']) !!}
+                                                    {!! Form::select('evaluation_id', $evaluations, null, ['placeholder' => '', 'id'=>'evaluation_id', 'name'=>'evaluation_id','class'=>'form-control', 'style' => 'width:100%']) !!}
                                                 </div>
-                                                {!! Form::label('root_cause', __('Nguyên nhân gốc'), ['class' => 'control-label']) !!}
-                                                {!! Form::textarea('root_cause', null, ['class' => 'form-control']) !!}
-
+                                                <div class="form-group">
+                                                    {!! Form::label('root_cause', __('Nguyên nhân gốc'), ['class' => 'control-label']) !!}
+                                                    {!! Form::textarea('root_cause', null, ['class' => 'form-control']) !!}
+                                                </div>
 
                                                 {!! Form::submit( __('Thêm') , ['class' => 'btn btn-primary']) !!}
                                                 {!! Form::close() !!}
@@ -387,24 +382,25 @@
 
                                 <br>
                                 <div class="contactleft">
-                                    @if($ticket->evaluation_id)
-                                        <p><b>Mức độ:</b> <b style="color:{{$ticket->evaluation->color}}">{{$ticket->evaluation->name}}</b>
-                                        </p>
+                                    @if($ticket->assigned_preventer_id)
+                                        <p><b>Người đề xuất:</b> {{$ticket->assigned_preventer->name}}</p>
+                                    @endif
+                                    @if($ticket->root_cause_type_id)
+                                        <p><b>Phân loại nguyên nhân:</b> {{$ticket->root_cause_type->name}}</p>
                                     @endif
                                 </div>
                                 <div class="contactright">
+                                    @if($ticket->evaluation_id)
+                                        <p><b>Mức độ:</b> <b style="color:{{$ticket->evaluation->color}}">{{$ticket->evaluation->name}}</b></p>
+                                    @endif
                                     @if($ticket->evaluation_result_id)
                                         <p><b>Kết quả duyệt:</b> <b style="color: {{$ticket->evaluation_result->color}};">{{$ticket->evaluation_result->name}}</b>
-                                            (bởi {{$ticket->root_cause_approver->name}})
+                                            (bởi {{$ticket->director->name}})
                                         </p>
                                     @elseif($ticket->evaluation_result)
                                         <p><b>Kết quả duyệt:</b> Chưa phê duyệt</p>
                                     @endif
                                 </div>
-
-                                @if($ticket->root_cause_type_id)
-                                    <p><b>Phân loại nguyên nhân:</b> {{$ticket->root_cause_type->name}} - <i>{{$ticket->root_cause_type->description}}</i></p>
-                                @endif
                                 @if($ticket->root_cause)
                                     <p><b>Nguyên nhân gốc rễ:</b>
                                         <i>{!! $ticket->root_cause !!}</i>
@@ -607,12 +603,6 @@
     </script>
     <script type="text/javascript">
         $("#evaluation_id").select2({
-            placeholder: "Chọn",
-            allowClear: true
-        });
-    </script>
-    <script type="text/javascript">
-        $("#root_cause_approver_id").select2({
             placeholder: "Chọn",
             allowClear: true
         });
