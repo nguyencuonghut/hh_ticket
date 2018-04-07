@@ -246,5 +246,10 @@ $('body').click(function(e) {
             height: 300,
         });
     });
+    $(document).ready(function () {
+        $('#approve_prevention_comment').summernote({
+            height: 300,
+        });
+    });
 </script>
 </html>

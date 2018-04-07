@@ -311,7 +311,7 @@
                             <el-tab-pane label="Phòng ngừa" name="prevention">
                                 <h5><b style="color:blue; float: left;">4. Xem xét mức độ sự không phù hợp:</b></h5>
                                 <span style="float: left">
-                                    <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#evaluation"><i class="fa fa-plus-circle"><b> Cập nhật</b></i></button>
+                                    <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#evaluation"><i class="fa fa-edit"><b> Cập nhật</b></i></button>
                                 </span>
                                 <div class="modal fade" id="evaluation" role="dialog" aria-labelledby="EvaluationModalLabel">
                                     <div class="modal-dialog modal-lg" role="document">
@@ -351,7 +351,7 @@
                                     &nbsp;
                                 </span>
                                 <span style="float: left">
-                                    <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#root_cause_approve"><i class="fa fa-check-circle"><b> Phê duyệt</b></i></button>
+                                    <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#root_cause_approve"><i class="fa fa-check-circle"><b> Duyệt</b></i></button>
                                 </span>
                                 <div class="modal fade" id="root_cause_approve" role="dialog" aria-labelledby="RootCauseApproveModalLabel">
                                     <div class="modal-dialog" role="document">
@@ -397,7 +397,7 @@
                                         <p><b>Kết quả duyệt:</b> <b style="color: {{$ticket->evaluation_result->color}};">{{$ticket->evaluation_result->name}}</b>
                                             (bởi {{$ticket->director->name}})
                                         </p>
-                                    @elseif($ticket->evaluation_result)
+                                    @else
                                         <p><b>Kết quả duyệt:</b> Chưa phê duyệt</p>
                                     @endif
                                 </div>
@@ -406,8 +406,10 @@
                                         <i>{!! $ticket->root_cause !!}</i>
                                     </p>
                                 @endif
+                                <br>
+
                                 <h5><b style="color:blue;float: left;">5. Hoạt động phòng ngừa:</b></h5>
-                                <span>
+                                <span style="float: left">
                                     <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#preventionaction"><i class="fa fa-plus-circle"><b> Tạo thêm</b></i></button>
                                 </span>
                                 <div class="modal fade" id="preventionaction" role="dialog" aria-labelledby="PreventionModalLabel">
@@ -455,9 +457,56 @@
                                         </div>
                                     </div>
                                 </div>
+                                <span style="float: left">
+                                    &nbsp;
+                                </span>
+                                <span style="float: left">
+                                    <form style="float: left;" action="{{ route('requestToApprovePrevention', $ticket->id) }}" method="POST">
+                                        {{ csrf_field() }}
+                                        {{ method_field('PATCH') }}
+                                        <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-paper-plane"> Yêu cầu duyệt</i></button>
+                                    </form>
+                                </span>
+
+                                <span style="float: left">
+                                    &nbsp;
+                                </span>
+
+                                <span style="float: left">
+                                    <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#approve_prevention"><i class="fa fa-check-circle"><b> Duyệt</b></i></button>
+                                </span>
+                                <div class="modal fade" id="approve_prevention" role="dialog" aria-labelledby="ApprovePreventionModalLabel">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="ApprovePreventionModalLabel"><b>Duyệt biện pháp phòng ngừa</b></h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                {!! Form::model($ticket, [
+                                                        'method' => 'PATCH',
+                                                        'route' => ['approvePrevention', $ticket->id],
+                                                        'files'=>true,
+                                                        'enctype' => 'multipart/form-data'
+                                                        ]) !!}
+
+                                                {!! Form::label('approve_prevention_result_id', __('Kết quả duyệt'), ['class' => 'control-label']) !!}
+                                                {!! Form::select('approve_prevention_result_id', $results, null, ['placeholder' => '', 'id'=>'approve_prevention_result_id', 'name'=>'approve_prevention_result_id','class'=>'form-control', 'style' => 'width:100%']) !!}
+
+                                                {!! Form::label('approve_prevention_comment', __('Ý kiến'), ['class' => 'control-label']) !!}
+                                                {!! Form::textarea('approve_prevention_comment', null, ['class' => 'form-control']) !!}
+
+                                                {!! Form::submit( __('Thêm') , ['class' => 'btn btn-primary']) !!}
+                                                {!! Form::close() !!}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 @if($preventions->count())
                                     @include('tickets.preventions.index', ['subject' => $ticket])
                                 @endif
+                                <br>
 
                                 <h5><b style="color:blue;float: left;">6. Đánh giá hiệu quả: &nbsp;</b></h5>
                                 <span>

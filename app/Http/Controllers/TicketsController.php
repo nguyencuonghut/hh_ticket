@@ -355,4 +355,36 @@ class TicketsController extends Controller
         Session()->flash('flash_message', 'Giao cho người đề xuất hành động phòng ngừa thành công!');
         return redirect()->back()->with('tab', 'prevention');
     }
+
+    /**
+     * Request to approve prevention actions
+     * @param $id
+     * @return mixed
+     */
+    public function requestToApprovePrevention(Request $request, $id)
+    {
+        $this->tickets->requestToApprovePrevention($id, $request);
+        Session()->flash('flash_message', 'Yêu cầu phê duyệt thành công!');
+        return redirect()->back()->with('tab', 'prevention');
+    }
+
+    /**
+     * Approve  the prevention actions
+     */
+    public function approvePrevention(Request $request, $id)
+    {
+        //Validate the input value
+        $rules = [
+            'approve_prevention_result_id' => 'required',
+        ];
+        $messages = [
+            'approve_prevention_result_id.required' => 'Yêu cầu bạn PHẢI điền "Kết quả duyệt"',
+        ];
+        $this->validate($request, $rules, $messages);
+
+        $this->tickets->approvePrevention($id, $request);
+        Session()->flash('flash_message', 'Duyệt biện pháp phòng ngừa thành công!');
+        return redirect()->back()->with('tab', 'prevention');
+
+    }
 }

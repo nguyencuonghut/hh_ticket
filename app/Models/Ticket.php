@@ -34,6 +34,8 @@ class Ticket extends Model
         'evaluation_id',
         'root_cause',
         'evaluation_result_id',
+        'approve_prevention_result_id',
+        'approve_prevention_comment',
         'effectiveness_id',
         'effectiveness_assessor_id',
     ];
@@ -89,6 +91,10 @@ class Ticket extends Model
     public function assigned_preventer()
     {
         return $this->belongsTo(User::class, 'assigned_preventer_id');
+    }
+    public function approve_prevention_result()
+    {
+        return $this->belongsTo(ApproveResult::class, 'approve_prevention_result_id');
     }
     public function getCreatorUserAttribute()
     {

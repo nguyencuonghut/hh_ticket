@@ -30,6 +30,9 @@ class TicketRepository implements TicketRepositoryContract
     const TROUBLESHOOT_APPROVED = 'troubleshoot_approved';
     const TROUBLESHOOT_REJECTED = 'troubleshoot_rejected';
     const ASSIGNED_PREVENTER = 'assigned_preventer';
+    const REQUEST_TO_APPROVE_PREVENTION = 'request_to_approve_prevention';
+    const PREVENTION_APPROVED = 'prevention_approved';
+    const PREVENTION_REJECTED = 'prevention_rejected';
 
     /**
      * @param $id
@@ -271,5 +274,37 @@ class TicketRepository implements TicketRepositoryContract
         $ticket->save();
         $ticket = $ticket->fresh();
         event(new \App\Events\TicketAction($ticket, self::ASSIGNED_PREVENTER));
+    }
+
+    /**
+     * Request to approve prevention actions
+     * @param  \Illuminate\Http\Request  $requestData
+     * @param $id
+     * @return mixed
+     */
+    public function requestToApprovePrevention($id, $requestData)
+    {
+        $ticket = Ticket::findOrFail($id);
+        event(new \App\Events\TicketAction($ticket, self::REQUEST_TO_APPROVE_PREVENTION));
+    }
+
+    /**
+     * Approve prevention actions
+     * @param  \Illuminate\Http\Request  $requestData
+     * @param $id
+     * @return mixed
+     */
+    public function approvePrevention($id, $requestData)
+    {
+        $ticket = Ticket::findOrFail($id);
+        $ticket->approve_prevention_result_id = $requestData->approve_prevention_result_id;
+        $ticket->approve_prevention_comment = $requestData->approve_prevention_comment;
+        $ticket->save();
+        $ticket = $ticket->fresh();
+        if('Đồng ý' == $ticket->approve_prevention_result->name){
+            event(new \App\Events\TicketAction($ticket, self::PREVENTION_APPROVED));
+        } else {
+            event(new \App\Events\TicketAction($ticket, self::PREVENTION_REJECTED));
+        }
     }
 }

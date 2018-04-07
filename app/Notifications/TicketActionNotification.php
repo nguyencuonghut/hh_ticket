@@ -142,6 +142,27 @@ class TicketActionNotification extends Notification
                 ]);
                 $toName = $this->ticket->assigned_preventer->name;
                 break;
+            case 'request_to_approve_prevention':
+                $text = __(':title, :assigned_preventer đề nghị bạn duyệt biện pháp phòng ngừa', [
+                    'title' =>  $this->ticket->title,
+                    'assigned_preventer' => $this->ticket->assigned_preventer->name,
+                ]);
+                $toName = $this->ticket->director->name;
+                break;
+            case 'prevention_approved':
+                $text = __(':title, :director đã đồng ý biện pháp phòng ngừa của bạn', [
+                    'title' =>  $this->ticket->title,
+                    'director' => $this->ticket->director->name,
+                ]);
+                $toName = $this->ticket->assigned_preventer->name;
+                break;
+            case 'prevention_rejected':
+                $text = __(':title, :director đã từ chối biện pháp phòng ngừa của bạn', [
+                    'title' =>  $this->ticket->title,
+                    'director' => $this->ticket->director->name,
+                ]);
+                $toName = $this->ticket->assigned_preventer->name;
+                break;
             default:
                 break;
         }
@@ -260,6 +281,31 @@ class TicketActionNotification extends Notification
                 break;
             case 'assigned_preventer':
                 $text = __(':title được :director giao cho bạn đề xuất biện pháp phòng ngừa', [
+                    'title' =>  $this->ticket->title,
+                    'director' => $this->ticket->director->name,
+                ]);
+                $assigned_user = $this->ticket->director->name;
+                $created_user =$this->ticket->creator->name;
+                break;
+
+            case 'request_to_approve_prevention':
+                $text = __(':title, :assigned_preventer đề nghị bạn duyệt biện pháp phòng ngừa', [
+                    'title' =>  $this->ticket->title,
+                    'assigned_preventer' => $this->ticket->assigned_preventer->name,
+                ]);
+                $assigned_user = $this->ticket->director->name;
+                $created_user =$this->ticket->creator->name;
+                break;
+            case 'prevention_approved':
+                $text = __(':title, :director đã đồng ý biện pháp phòng ngừa của bạn', [
+                    'title' =>  $this->ticket->title,
+                    'director' => $this->ticket->director->name,
+                ]);
+                $assigned_user = $this->ticket->director->name;
+                $created_user =$this->ticket->creator->name;
+                break;
+            case 'prevention_rejected':
+                $text = __(':title, :director đã từ chối biện pháp phòng ngừa của bạn', [
                     'title' =>  $this->ticket->title,
                     'director' => $this->ticket->director->name,
                 ]);

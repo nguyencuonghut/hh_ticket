@@ -73,6 +73,12 @@ class CreateTicketsTable extends Migration
             $table->foreign('evaluation_result_id')->references('id')->on('approve_results');
             //~Evaluate the ticket
 
+            //Approve troubleshooter
+            $table->integer('approve_prevention_result_id')->unsigned();
+            $table->foreign('approve_prevention_result_id')->references('id')->on('approve_results');
+            $table->longText('approve_prevention_comment')->nullable();
+            //~Approve troubleshooter
+
             //Asset effectiveness
             $table->integer('effectiveness_id')->unsigned();
             $table->foreign('effectiveness_id')->references('id')->on('effectivenesses');

@@ -115,6 +115,27 @@ class TicketActionLog
                     'assigned_preventer' => $event->getTicket()->assigned_preventer->name,
                 ]);
                 break;
+            case 'request_to_approve_prevention':
+                $text = __('<b><i>:title</i></b>, :assigned_preventer yêu cầu :director phê duyệt biện pháp phòng ngừa', [
+                    'title' => $event->getTicket()->title,
+                    'director' => $event->getTicket()->director->name,
+                    'assigned_preventer' => $event->getTicket()->assigned_preventer->name,
+                ]);
+                break;
+            case 'prevention_approved':
+                $text = __('<b><i>:title</i></b>, :director đã đồng ý biện pháp phòng ngừa của :assigned_preventer', [
+                    'title' => $event->getTicket()->title,
+                    'director' => $event->getTicket()->director->name,
+                    'assigned_preventer' => $event->getTicket()->assigned_preventer->name,
+                ]);
+                break;
+            case 'prevention_rejected':
+                $text = __('<b><i>:title</i></b>, :director đã từ chối biện pháp phòng ngừa của :assigned_preventer', [
+                    'title' => $event->getTicket()->title,
+                    'director' => $event->getTicket()->director->name,
+                    'assigned_preventer' => $event->getTicket()->assigned_preventer->name,
+                ]);
+                break;
             default:
                 break;
         }
