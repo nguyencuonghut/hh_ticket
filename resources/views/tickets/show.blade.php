@@ -502,7 +502,26 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="contactleft">
+                                    @if($ticket->assigned_preventer_id)
+                                        <p><b>Người đề xuất:</b> {{$ticket->assigned_preventer->name}}</p>
+                                    @endif
+                                </div>
+                                <div class="contactright">
+                                    @if($ticket->approve_prevention_result_id)
+                                        <p><b>Kết quả duyệt:</b> <b style="color: {{$ticket->approve_prevention_result->color}};">{{$ticket->approve_prevention_result->name}}</b>
+                                            (bởi {{$ticket->director->name}})
+                                        </p>
+                                    @else
+                                        <p><b>Kết quả duyệt:</b> Chưa phê duyệt</p>
+                                    @endif
+                                </div>
+                                <br>
+                                @if($ticket->approve_prevention_comment)
+                                    <p><b>Ý kiến:</b> {!! $ticket->approve_prevention_comment !!}</p>
+                                @endif
 
+                                <br>
                                 @if($preventions->count())
                                     @include('tickets.preventions.index', ['subject' => $ticket])
                                 @endif
