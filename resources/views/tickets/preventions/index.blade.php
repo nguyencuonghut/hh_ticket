@@ -28,10 +28,14 @@
             </thead>
             @foreach($preventions as $action)
                 <tr style="background-color: {{('Closed' == $action->status->name) ? '#C6CBCB' : '#adebad'}}">
-                    @if($action->is_on_time == true)
-                        <td><i class="fa fa-check-circle" style="color:green"></i> {{ $action->name }}</td>
+                    @if('Closed' == $action->status->name)
+                        @if($action->is_on_time == true)
+                            <td><i class="fa fa-check-circle" style="color:green"></i> {{ $action->name }}</td>
+                        @else
+                            <td><i class="fa fa-clock-o" style="color:red"></i> {{ $action->name }}</td>
+                        @endif
                     @else
-                        <td><i class="fa fa-clock-o" style="color:red"></i> {{ $action->name }}</td>
+                        <td><i></i> {{ $action->name }}</td>
                     @endif
                     <td>{{ number_format($action->budget,  0)}} VNĐ</td>
                     <td>{{ $action->preventor->name }}</td>

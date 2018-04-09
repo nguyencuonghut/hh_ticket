@@ -36,14 +36,13 @@ class PreventionRepository implements PreventionRepositoryContract
      */
     public function create($ticket_id, $requestData)
     {
-        $ticket = Ticket::findOrFail($ticket_id);
         $input = $requestData = array_merge(
             $requestData->all(),
             ['ticket_id' => $ticket_id,
                 'pre_preventor_id' => $requestData->preventor_id,
                 'creator_id' => \Auth::id(),
                 'status_id' => 1, // Status is Open
-                'is_on_time' => false]
+                'is_on_time' => true]
         );
 
         $prevention = Prevention::create($input);
@@ -66,7 +65,20 @@ class PreventionRepository implements PreventionRepositoryContract
         $prevention->when = $requestData->when;
         $prevention->how = $requestData->how;
         $prevention->status_id = $requestData->status_id;
-        $prevention->is_on_time = ($requestData->status_id == 1) ? 0:$prevention->is_on_time;
+        if($requestData->status_id == 2){ // Action is finished
+            $prevention->finished_at = \Carbon\Carbon::now();
+            $days_util_deadline = Carbon\Carbon::now()
+                ->startOfDay()
+                ->diffInDays(Carbon\Carbon::parse($prevention->when), false);
+            if($days_util_deadline >= 0) {
+                $prevention->is_on_time = true;
+            } else {
+                $prevention->is_on_time = false;
+            }
+        } else {
+            $prevention->finished_at = NULL;
+            $prevention->is_on_time = true;
+        }
         $prevention->save();
 
         Session::flash('flash_message', 'Sửa hành động phòng ngừa thành công!');
@@ -91,9 +103,16 @@ class PreventionRepository implements PreventionRepositoryContract
         $prevention = Prevention::findOrFail($id);
         if(\Auth::id() == $prevention->preventor_id) {
             $prevention->status_id = 2; //Status: Closed
-            $prevention->is_on_time = (strtotime($prevention->when .  "+ 1 days") >= time()) ? true:false;
+            $prevention->finished_at = \Carbon\Carbon::now();
+            $days_util_deadline = Carbon\Carbon::now()
+                ->startOfDay()
+                ->diffInDays(Carbon\Carbon::parse($prevention->when), false);
+            if($days_util_deadline >= 0) {
+                $prevention->is_on_time = true;
+            } else {
+                $prevention->is_on_time = false;
+            }
             $prevention->save();
-
             Session()->flash('flash_message', 'Đã hoàn thành một hành động phòng ngừa!');
         }else{
             Session()->flash('flash_message_warning', 'Bạn không có quyền đánh dấu hoàn thành!');

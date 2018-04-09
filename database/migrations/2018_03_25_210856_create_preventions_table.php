@@ -31,6 +31,7 @@ class CreatePreventionsTable extends Migration
             $table->integer('ticket_id')->unsigned();
             $table->foreign('ticket_id')->references('id')->on('tickets');
             $table->boolean('is_on_time')->default(false);
+            $table->dateTime('finished_at');
             $table->timestamps();
         });
     }

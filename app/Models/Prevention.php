@@ -20,6 +20,7 @@ class Prevention extends Model
         'status_id',
         'ticket_id',
         'is_on_time',
+        'finished_at',
     ];
 
     public function creator()

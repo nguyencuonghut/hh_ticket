@@ -73,6 +73,7 @@ class TroubleshootRepository implements TroubleshootRepositoryContract
                 $troubleshoot->is_on_time = false;
             }
         } else {
+            $troubleshoot->finished_at = NULL;
             $troubleshoot->is_on_time = true;
         }
         $troubleshoot->save();
