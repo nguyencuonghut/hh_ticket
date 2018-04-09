@@ -212,7 +212,7 @@
                                     <h5><b>Trách nhiệm:</b> {{$ticket->responsibility->name}}</h5>
                                 @endif
 
-                                <h5><b style="color:blue;float: {{(\Auth::id() == $ticket->assigned_troubleshooter_id) ? 'left' : ''}};">3. Thực hiện biện pháp khắc phục:</b></h5>
+                                <h5><b style="color:blue;float: {{(\Auth::id() == $ticket->assigned_troubleshooter_id) || (\Auth::id() == $ticket->director_id) ? 'left' : ''}};">3. Thực hiện biện pháp khắc phục:</b></h5>
                                 @if(\Auth::id() == $ticket->assigned_troubleshooter_id)
                                     <span style="float: left">
                                         <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#troubleshootaction"><i class="fa fa-plus-circle"><b> Tạo thêm</b></i></button>
