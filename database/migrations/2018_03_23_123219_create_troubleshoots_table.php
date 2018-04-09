@@ -28,6 +28,7 @@ class CreateTroubleshootsTable extends Migration
             $table->integer('status_id')->unsigned;
             $table->foreign('status_id')->references('id')->on('statuses');
             $table->integer('is_on_time');//true-Open, false-Closed
+            $table->dateTime('finished_at');//Time when action is finished
             $table->timestamps();
         });
     }

@@ -36,14 +36,13 @@ class TroubleshootRepository implements TroubleshootRepositoryContract
      */
     public function create($ticket_id, $requestData)
     {
-        $ticket = Ticket::findOrFail($ticket_id);
         $input = $requestData = array_merge(
             $requestData->all(),
             ['ticket_id' => $ticket_id,
                 'pre_troubleshooter_id' => $requestData->troubleshooter_id,
                 'creator_id' => \auth::id(),
                 'status_id' => 1, // Status is Open
-                'is_on_time' => false]
+                'is_on_time' => true]
         );
 
         $troubleshoot = Troubleshoot::create($input);
@@ -63,7 +62,19 @@ class TroubleshootRepository implements TroubleshootRepositoryContract
         $troubleshoot->name = $requestData->name;
         $troubleshoot->deadline = $requestData->deadline;
         $troubleshoot->status_id = $requestData->status_id;
-        $troubleshoot->is_on_time = ($requestData->status_id == 1) ? 0:$troubleshoot->is_on_time;
+        if($requestData->status_id == 2){ // Action is finished
+            $troubleshoot->finished_at = \Carbon\Carbon::now();
+            $days_util_deadline = Carbon\Carbon::now()
+                                            ->startOfDay()
+                                            ->diffInDays(Carbon\Carbon::parse($troubleshoot->deadline), false);
+            if($days_util_deadline >= 0) {
+                $troubleshoot->is_on_time = true;
+            } else {
+                $troubleshoot->is_on_time = false;
+            }
+        } else {
+            $troubleshoot->is_on_time = true;
+        }
         $troubleshoot->save();
 
         Session::flash('flash_message', 'Sửa hành động khắc phục thành công!');
@@ -88,9 +99,16 @@ class TroubleshootRepository implements TroubleshootRepositoryContract
         $troubleshoot = Troubleshoot::findOrFail($id);
         if(\Auth::id() == $troubleshoot->troubleshooter_id) {
             $troubleshoot->status_id = 2; //Status: Closed
-            $troubleshoot->is_on_time = (strtotime($troubleshoot->deadline .  "+ 1 days") >= time()) ? true:false;
+            $troubleshoot->finished_at = \Carbon\Carbon::now();
+            $days_util_deadline = Carbon\Carbon::now()
+                                            ->startOfDay()
+                                            ->diffInDays(Carbon\Carbon::parse($troubleshoot->deadline), false);
+            if($days_util_deadline >= 0) {
+                $troubleshoot->is_on_time = true;
+            } else {
+                $troubleshoot->is_on_time = false;
+            }
             $troubleshoot->save();
-
             Session()->flash('flash_message', 'Đã hoàn thành một hành động khắc phục!');
         }else{
             Session()->flash('flash_message_warning', 'Bạn không có quyền đánh dấu hoàn thành!');

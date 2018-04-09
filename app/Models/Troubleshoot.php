@@ -18,6 +18,7 @@ class Troubleshoot extends Model
         'deadline',
         'status_id',
         'is_on_time',
+        'finished_at',
     ];
 
     public function troubleshooter()
