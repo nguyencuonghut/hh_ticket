@@ -23,9 +23,7 @@
             <th><b>Làm như thế nào?</b></th>
             <th><b>Trạng thái</b></th>
             <th><b>Sửa</b></th>
-            @if('Đồng ý' == $ticket->approve_prevention_result->name)
             <th><b>Đánh dấu hoàn thành</b></th>
-            @endif
             <th><b>Giao cho người khác</b></th>
             </thead>
             @foreach($preventions as $action)
@@ -121,7 +119,6 @@
                             </div>
                         </div>
                     </td>
-                    @if('Đồng ý' == $ticket->approve_prevention_result->name)
                     <td style="text-align: center">
                             <span>
                                 @if(\Auth::id() == $action->preventor_id)
@@ -135,7 +132,6 @@
                                 @endif
                             </span>
                     </td>
-                    @endif
                     <td style="text-align: center">
                         @if(\Auth::id() == $action->creator_id)
                             <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#UpdatePreventionAssignModal-{{$action->id}}"

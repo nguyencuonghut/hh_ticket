@@ -47,6 +47,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::patch('assignpreventer/{id}', 'TicketsController@assignPreventer')->name('assignPreventer');
         Route::patch('requesttoapproveprevention/{id}', 'TicketsController@requestToApprovePrevention')->name('requestToApprovePrevention');
         Route::patch('approveprevention/{id}', 'TicketsController@approvePrevention')->name('approvePrevention');
+        Route::get('tickets/mycreateddata', 'TicketsController@myCreatedData')->name('tickets.mycreateddata');
+        Route::get('tickets/myconfirmeddata', 'TicketsController@myConfirmedData')->name('tickets.myconfirmeddata');
     });
     Route::resource('tickets', 'TicketsController');
 
@@ -59,6 +61,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::patch('troubleshoots/updateassign/{id}', 'TroubleshootsController@updateAssign')->name('troubleshootUpdateAssign');
     Route::post('troubleshoots/{id}/store',
         ['as' => 'troubleshoots.store', 'uses' => 'TroubleshootsController@store']);
+    Route::get('troubleshoots/myactionsdata', 'TroubleshootsController@myActionsData')->name('troubleshoots.myactionsdata');
     Route::resource('troubleshoots', 'TroubleshootsController', ['except' => ['store'] ]);
 
     /**
@@ -70,6 +73,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::patch('preventions/updateassign/{id}', 'PreventionsController@updateAssign')->name('preventionUpdateAssign');
     Route::post('preventions/{id}/store',
         ['as' => 'preventions.store', 'uses' => 'PreventionsController@store']);
+    Route::get('preventions/myactionsdata', 'PreventionsController@myActionsData')->name('preventions.myactionsdata');
     Route::resource('preventions', 'PreventionsController', ['except' => ['store'] ]);
 
 	 /**

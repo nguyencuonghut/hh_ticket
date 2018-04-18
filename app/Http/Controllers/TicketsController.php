@@ -387,4 +387,59 @@ class TicketsController extends Controller
         return redirect()->back()->with('tab', 'prevention');
 
     }
+
+    /**
+     * List all created ticket for each user
+     */
+    public function myCreatedData()
+    {
+        $tickets = Ticket::select(
+            ['id', 'title', 'created_at', 'deadline', 'source_id']
+        )->where('creator_id', \Auth::id())->orderBy('id', 'desc');
+        return Datatables::of($tickets)
+            ->addColumn('titlelink', function ($tickets) {
+                return '<a href="../tickets/' . $tickets->id . '" ">' . $tickets->title . '</a>';
+
+            })
+            ->editColumn('issue_date', function ($tickets) {
+                return $tickets->created_at ? with(new Carbon($tickets->created_at))
+                    ->format('d/m/Y') : '';
+            })
+            ->editColumn('answer_date', function ($tickets) {
+                return $tickets->deadline ? with(new Carbon($tickets->deadline))
+                    ->format('d/m/Y') : '';
+            })
+            ->editColumn('source_id', function ($tickets) {
+                return $tickets->source->name;
+            })->make(true);
+    }
+
+    /**
+     * List all ticket that user has to confirm
+     */
+    public function myConfirmedData()
+    {
+        $tickets = Ticket::select(
+            ['id', 'title', 'created_at', 'deadline', 'source_id', 'director_confirmation_result_id']
+        )->where('director_id', \Auth::id())->orderBy('id', 'desc');
+        return Datatables::of($tickets)
+            ->addColumn('titlelink', function ($tickets) {
+                return '<a href="../tickets/' . $tickets->id . '" ">' . $tickets->title . '</a>';
+
+            })
+            ->editColumn('issue_date', function ($tickets) {
+                return $tickets->created_at ? with(new Carbon($tickets->created_at))
+                    ->format('d/m/Y') : '';
+            })
+            ->editColumn('answer_date', function ($tickets) {
+                return $tickets->deadline ? with(new Carbon($tickets->deadline))
+                    ->format('d/m/Y') : '';
+            })
+            ->editColumn('source_id', function ($tickets) {
+                return $tickets->source->name;
+            })
+            ->addColumn('confirmation_result', function ($tickets) {
+                return $tickets->director_confirmation_result->name;
+            })->make(true);
+    }
 }
