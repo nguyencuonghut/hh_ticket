@@ -314,7 +314,7 @@
 
                             </el-tab-pane>
                             <el-tab-pane label="Phòng ngừa" name="prevention">
-                                <h5><b style="color:blue; float: {{(\Auth::id() == $ticket->assigned_preventer_id) || ((\Auth::id() == $ticket->director_id)) ? 'left' : ''}};">4. Xem xét mức độ sự không phù hợp:</b></h5>
+                                <h5><b style="color:blue; float: {{(\Auth::id() == $ticket->assigned_preventer_id) || ((\Auth::id() == $ticket->director_id)) ? 'left' : ''}};">4. Đánh giá sự không phù hợp:</b></h5>
                                 @if(\Auth::id() == $ticket->assigned_preventer_id)
                                     <span style="float: left">
                                         <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#evaluation"><i class="fa fa-edit"><b> Cập nhật</b></i></button>
