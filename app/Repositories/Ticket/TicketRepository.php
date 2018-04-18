@@ -309,4 +309,42 @@ class TicketRepository implements TicketRepositoryContract
             event(new \App\Events\TicketAction($ticket, self::PREVENTION_REJECTED));
         }
     }
+
+
+    /**
+     * @param
+     */
+    public function allDepartmentStatistic()
+    {
+        $hcns_cnt =  Ticket::all()->where('department_id', 1)->count();
+        $sale_cnt =  Ticket::all()->where('department_id', 2)->count();
+        $ketoan_cnt =  Ticket::all()->where('department_id', 3)->count();
+        $ksnb_cnt =  Ticket::all()->where('department_id', 4)->count();
+        $baotri_cnt =  Ticket::all()->where('department_id', 5)->count();
+        $sx_cnt =  Ticket::all()->where('department_id', 6)->count();
+        $thumua_cnt =  Ticket::all()->where('department_id', 7)->count();
+        $kythuat_cnt =  Ticket::all()->where('department_id', 8)->count();
+        $qlcl_cnt =  Ticket::all()->where('department_id', 9)->count();
+        $kho_cnt =  Ticket::all()->where('department_id', 10)->count();
+
+        return collect([$hcns_cnt, $sale_cnt, $ketoan_cnt, $ksnb_cnt, $baotri_cnt,
+            $sx_cnt, $thumua_cnt, $kythuat_cnt, $qlcl_cnt, $kho_cnt]);
+        //return collect([12, 20, 31, 14, 55, 26, 57, 88, 9, 10]);
+    }
+    /**
+     * @param
+     */
+    public function allReasonStatistic()
+    {
+        $human_cnt =  Ticket::all()->where('root_cause_type_id', 1)->count();
+        $machine_cnt =  Ticket::all()->where('root_cause_type_id', 2)->count();
+        $material_cnt =  Ticket::all()->where('root_cause_type_id', 3)->count();
+        $method_cnt =  Ticket::all()->where('root_cause_type_id', 4)->count();
+        $measurement_cnt =  Ticket::all()->where('root_cause_type_id', 5)->count();
+        $environment_cnt =  Ticket::all()->where('root_cause_type_id', 6)->count();
+
+        return collect([$human_cnt, $machine_cnt, $material_cnt, $method_cnt, $measurement_cnt, $environment_cnt]);
+        //return collect([24, 7, 55, 16, 25, 86]);
+    }
+
 }

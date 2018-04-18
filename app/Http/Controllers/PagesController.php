@@ -9,6 +9,7 @@ use App\Repositories\Lead\LeadRepositoryContract;
 use App\Repositories\User\UserRepositoryContract;
 use App\Repositories\Client\ClientRepositoryContract;
 use App\Repositories\Setting\SettingRepositoryContract;
+use App\Repositories\Ticket\TicketRepositoryContract;
 
 class PagesController extends Controller
 {
@@ -18,19 +19,22 @@ class PagesController extends Controller
     protected $settings;
     protected $tasks;
     protected $leads;
+    protected $tickets;
 
     public function __construct(
         UserRepositoryContract $users,
         ClientRepositoryContract $clients,
         SettingRepositoryContract $settings,
         TaskRepositoryContract $tasks,
-        LeadRepositoryContract $leads
+        LeadRepositoryContract $leads,
+        TicketRepositoryContract $tickets
     ) {
         $this->users = $users;
         $this->clients = $clients;
         $this->settings = $settings;
         $this->tasks = $tasks;
         $this->leads = $leads;
+        $this->tickets = $tickets;
     }
 
     /**
@@ -105,6 +109,8 @@ class PagesController extends Controller
       */
         $completedLeadsMonthly = $this->leads->createdLeadsMonthly();
         $createdLeadsMonthly = $this->leads->completedLeadsMonthly();
+        $allDepartmentTickets = $this->tickets->allDepartmentStatistic();
+        $allReasonTickets = $this->tickets->allReasonStatistic();
        
         return view('pages.dashboard', compact(
             'completedTasksToday',
@@ -126,7 +132,9 @@ class PagesController extends Controller
             'totalPercentageTasks',
             'allleads',
             'allCompletedLeads',
-            'totalPercentageLeads'
+            'totalPercentageLeads',
+            'allDepartmentTickets',
+            'allReasonTickets'
         ));
     }
 }
