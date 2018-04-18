@@ -249,5 +249,10 @@ $('body').click(function(e) {
             height: 300,
         });
     });
+    $(document).ready(function () {
+        $('#effectiveness_comment').summernote({
+            height: 200,
+        });
+    });
 </script>
 </html>

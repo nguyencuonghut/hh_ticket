@@ -82,6 +82,7 @@ class CreateTicketsTable extends Migration
             //Asset effectiveness
             $table->integer('effectiveness_id')->unsigned();
             $table->foreign('effectiveness_id')->references('id')->on('effectivenesses');
+            $table->longText('effectiveness_comment')->nullable();
             //~Asset effectiveness
 
             //State of ticket

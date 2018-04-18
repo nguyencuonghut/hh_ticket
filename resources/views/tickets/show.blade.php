@@ -562,8 +562,10 @@
 
                                                 {!! Form::label('effectiveness_id', __('Hiệu quả'), ['class' => 'control-label']) !!}
                                                 {!! Form::select('effectiveness_id', $effectivenesses, null, ['placeholder' => '', 'id'=>'effectiveness_id', 'name'=>'effectiveness_id','class'=>'form-control', 'style' => 'width: 100%']) !!}
-                                                <br>
-                                                <br>
+
+                                                {!! Form::label('effectiveness_comment', __('Ý kiến'), ['class' => 'control-label']) !!}
+                                                {!! Form::textarea('effectiveness_comment', null, ['class' => 'form-control']) !!}
+
                                                 {!! Form::submit(__('Cập nhật'), ['class' => 'btn btn-primary', 'style' => 'width:100%']) !!}
                                                 {!! Form::close() !!}
                                             </div>
@@ -575,7 +577,12 @@
 
                                 <div class="col-md-12">
                                     @if($ticket->effectiveness_id)
-                                        <p><b>Ticket được đánh giá hiệu quả <b style="color: {{$ticket->effectiveness->color}}"> {{$ticket->effectiveness->name}}</b></b> (bởi {{$ticket->director->name}})</p>
+                                        <p>Ticket được đánh giá hiệu quả <b style="color: {{$ticket->effectiveness->color}}"> {{$ticket->effectiveness->name}}</b> (bởi {{$ticket->director->name}}).
+                                        @if($ticket->effectiveness_comment)
+                                            <br>
+                                            Với ý kiến: <i>{!! $ticket->effectiveness_comment !!}</i>
+                                        @endif
+                                        </p>
                                     @endif
                                 </div>
 

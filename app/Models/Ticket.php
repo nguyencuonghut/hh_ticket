@@ -37,6 +37,7 @@ class Ticket extends Model
         'approve_prevention_result_id',
         'approve_prevention_comment',
         'effectiveness_id',
+        'effectiveness_comment',
     ];
 
     public function source()

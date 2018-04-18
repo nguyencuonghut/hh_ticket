@@ -216,6 +216,7 @@ class TicketRepository implements TicketRepositoryContract
     {
         $ticket = Ticket::findOrFail($id);
         $ticket->effectiveness_id = $requestData->effectiveness_id;
+        $ticket->effectiveness_comment = $requestData->effectiveness_comment;
         $ticket->save();
         $ticket = $ticket->fresh();
         event(new \App\Events\TicketAction($ticket, self::ASSET_EFFECTIVENESS));
