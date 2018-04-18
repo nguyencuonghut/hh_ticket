@@ -83,6 +83,11 @@ class CreateTicketsTable extends Migration
             $table->integer('effectiveness_id')->unsigned();
             $table->foreign('effectiveness_id')->references('id')->on('effectivenesses');
             //~Asset effectiveness
+
+            //State of ticket
+            $table->integer('state_id')->unsigned();
+            $table->foreign('state_id')->references('id')->on('states');
+            //~State of ticket
             $table->timestamps();
         });
     }

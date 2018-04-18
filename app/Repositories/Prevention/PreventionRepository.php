@@ -75,6 +75,9 @@ class PreventionRepository implements PreventionRepositoryContract
             } else {
                 $prevention->is_on_time = false;
             }
+
+            //Update the flag of ticket
+            $this->updateTicketState($prevention->ticket_id);
         } else {
             $prevention->finished_at = NULL;
             $prevention->is_on_time = true;
@@ -113,6 +116,10 @@ class PreventionRepository implements PreventionRepositoryContract
                 $prevention->is_on_time = false;
             }
             $prevention->save();
+
+            //Update the flag of ticket
+            $this->updateTicketState($prevention->ticket_id);
+
             Session()->flash('flash_message', 'Đã hoàn thành một hành động phòng ngừa!');
         }else{
             Session()->flash('flash_message_warning', 'Bạn không có quyền đánh dấu hoàn thành!');
@@ -132,5 +139,26 @@ class PreventionRepository implements PreventionRepositoryContract
         $prevention->preventor_id = $requestData->preventor_id;
         $prevention->save();
         event(new \App\Events\PreventionAction($prevention, self::UPDATED_ASSIGN));
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    private function updateTicketState($ticket_id)
+    {
+        $is_all_completed = true;
+        //Find all the actions according to description id
+        $actions = Prevention::all()->where('ticket_id', $ticket_id);
+        foreach ($actions as $action) {
+            if('Open' == $action->status->name){
+                $is_all_completed = false;
+            }
+        }
+        if(true == $is_all_completed) {
+            $ticket = Ticket::findOrFail($ticket_id);
+            $ticket->state_id = 5; //Phiếu CAR đã hoàn thành hành động KPPN
+            $ticket->save();
+        }
     }
 }
