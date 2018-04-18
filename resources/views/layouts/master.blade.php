@@ -238,7 +238,7 @@ $('body').click(function(e) {
     });
     $(document).ready(function() {
         $('#root_cause').summernote({
-            height: 300,
+            height: 200,
         });
     });
     $(document).ready(function () {

@@ -241,7 +241,7 @@
                                                             {!! Form::date('deadline', \Carbon\Carbon::now()->addDays(3), ['class' => 'form-control']) !!}
                                                         </div>
                                                     </div>
-                                                    {!! Form::submit( __('Thêm') , ['class' => 'btn btn-primary']) !!}
+                                                    {!! Form::submit( __('Thêm') , ['class' => 'btn btn-primary', 'style' => 'width:100%']) !!}
                                                     {!! Form::close() !!}
                                                 </div>
                                             </div>
@@ -288,7 +288,7 @@
                                                     {!! Form::label('approve_troubleshoot_comment', __('Ý kiến'), ['class' => 'control-label']) !!}
                                                     {!! Form::textarea('approve_troubleshoot_comment', null, ['class' => 'form-control']) !!}
 
-                                                    {!! Form::submit( __('Thêm') , ['class' => 'btn btn-primary']) !!}
+                                                    {!! Form::submit( __('Duyệt') , ['class' => 'btn btn-primary', 'style' => 'width:100%']) !!}
                                                     {!! Form::close() !!}
                                                 </div>
                                             </div>
@@ -347,7 +347,7 @@
                                                         {!! Form::textarea('root_cause', null, ['class' => 'form-control']) !!}
                                                     </div>
 
-                                                    {!! Form::submit( __('Thêm') , ['class' => 'btn btn-primary']) !!}
+                                                    {!! Form::submit( __('Cập nhật') , ['class' => 'btn btn-primary', 'style' => 'width:100%']) !!}
                                                     {!! Form::close() !!}
                                                 </div>
                                             </div>
@@ -508,7 +508,7 @@
                                                     {!! Form::label('approve_prevention_comment', __('Ý kiến'), ['class' => 'control-label']) !!}
                                                     {!! Form::textarea('approve_prevention_comment', null, ['class' => 'form-control']) !!}
 
-                                                    {!! Form::submit( __('Thêm') , ['class' => 'btn btn-primary']) !!}
+                                                    {!! Form::submit( __('Duyệt') , ['class' => 'btn btn-primary', 'style' => 'width:100%']) !!}
                                                     {!! Form::close() !!}
                                                 </div>
                                             </div>

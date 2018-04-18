@@ -126,7 +126,7 @@
                                             {!! Form::label('troubleshooter_id', __('Người thực hiện'), ['class' => 'control-label']) !!}
                                             {!! Form::select('troubleshooter_id', $users, null, ['placeholder' => '', 'id'=>'troubleshooter_id', 'name'=>'troubleshooter_id','class'=>'form-control', 'style' => 'width:100%']) !!}
                                         </div>
-                                        {!! Form::submit('Cập nhật', ['class' => 'btn btn-primary', 'style' => 'width:100%']) !!}
+                                        {!! Form::submit('Thực hiện', ['class' => 'btn btn-primary', 'style' => 'width:100%']) !!}
 
                                         {!! Form::close() !!}
                                     </div>
