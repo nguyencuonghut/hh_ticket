@@ -601,7 +601,7 @@
                                 {!! Form::select('assigned_troubleshooter_id', $users, null, ['placeholder' => '', 'id'=>'assigned_troubleshooter_id', 'name'=>'assigned_troubleshooter_id','class'=>'form-control', 'style' => 'width:100%']) !!}
                                 <br>
                                 <br>
-                                {!! Form::submit(__('Cập nhật'), ['class' => 'btn btn-primary closebtn']) !!}
+                                {!! Form::submit(__('Cập nhật'), ['class' => 'btn btn-primary closebtn','style' => 'width:100%']) !!}
                                 {!! Form::close() !!}
                             </div>
                             <div class="modal-footer">
@@ -626,7 +626,7 @@
                                 {!! Form::select('assigned_preventer_id', $users, null, ['placeholder' => '', 'id'=>'assigned_preventer_id', 'name'=>'assigned_preventer_id','class'=>'form-control', 'style' => 'width:100%']) !!}
                                 <br>
                                 <br>
-                                {!! Form::submit(__('Cập nhật'), ['class' => 'btn btn-primary closebtn']) !!}
+                                {!! Form::submit(__('Cập nhật'), ['class' => 'btn btn-primary closebtn','style' => 'width:100%']) !!}
                                 {!! Form::close() !!}
                             </div>
                             <div class="modal-footer">
