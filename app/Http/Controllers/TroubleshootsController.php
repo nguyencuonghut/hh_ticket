@@ -147,7 +147,7 @@ class TroubleshootsController extends Controller
             ['id', 'name', 'troubleshooter_id', 'ticket_id', 'status_id', 'deadline','is_on_time']
         )->where('troubleshooter_id', \Auth::id())->orderBy('id', 'desc');
         return Datatables::of($actions)
-            ->editColumn('action', function ($actions) {
+            ->editColumn('name', function ($actions) {
                 if($actions->is_on_time == true) {
                     return '<span><i class="fa fa-check-circle" style="color:green"></i></span>' .  ' ' . $actions->name;
                 } else {
