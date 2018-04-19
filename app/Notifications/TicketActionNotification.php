@@ -79,6 +79,14 @@ class TicketActionNotification extends Notification
                 ]);
                 $toName = $this->ticket->creator->name;
                 break;
+            case 'evaluated':
+                $text = __(':title, :director đã đánh giá là :evaluation', [
+                    'title' =>  $this->ticket->title,
+                    'director' => $this->ticket->director->name,
+                    'evaluation' => $this->ticket->evaluation->name,
+                ]);
+                $toName = $this->ticket->creator->name;
+                break;
             case 'req_approve_root_cause':
                 $text = __(':title yêu cầu bạn duyệt nguyên nhân gốc rễ', [
                     'title' =>  $this->ticket->title,
@@ -218,6 +226,15 @@ class TicketActionNotification extends Notification
                 $text = __(':title, :assigned_preventer yêu cầu bạn duyệt nguyên nhân gốc rễ', [
                     'title' =>  $this->ticket->title,
                     'assigned_preventer' => $this->ticket->assigned_preventer->name,
+                ]);
+                $assigned_user = $this->ticket->director->name;
+                $created_user =$this->ticket->creator->name;
+                break;
+            case 'evaluated':
+                $text = __(':title, :director đã đánh giá sự không phù hợp là :evaluation', [
+                    'title' =>  $this->ticket->title,
+                    'director' => $this->ticket->director->name,
+                    'evaluation' => $this->ticket->evaluation->name,
                 ]);
                 $assigned_user = $this->ticket->director->name;
                 $created_user =$this->ticket->creator->name;

@@ -320,7 +320,7 @@
                                         <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#evaluation"><i class="fa fa-edit"><b> Cập nhật</b></i></button>
                                     </span>
                                     <div class="modal fade" id="evaluation" role="dialog" aria-labelledby="EvaluationModalLabel">
-                                        <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-dialog modal-md" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -335,54 +335,12 @@
                                                             ]) !!}
 
                                                     <div class="form-group">
-                                                        {!! Form::label('root_cause_type_id', __('Phân loại'), ['class' => 'control-label']) !!}
-                                                        {!! Form::select('root_cause_type_id', $root_cause_types, null, ['placeholder' => '', 'id'=>'root_cause_type_id', 'name'=>'root_cause_type_id','class'=>'form-control', 'style' => 'width:100%']) !!}
-                                                    </div>
-                                                    <div class="form-group">
                                                         {!! Form::label('evaluation_id', __('Mức độ'), ['class' => 'control-label']) !!}
                                                         {!! Form::select('evaluation_id', $evaluations, null, ['placeholder' => '', 'id'=>'evaluation_id', 'name'=>'evaluation_id','class'=>'form-control', 'style' => 'width:100%']) !!}
-                                                    </div>
-                                                    <div class="form-group">
-                                                        {!! Form::label('root_cause', __('Nguyên nhân gốc'), ['class' => 'control-label']) !!}
-                                                        {!! Form::textarea('root_cause', null, ['class' => 'form-control']) !!}
                                                     </div>
 
                                                     {!! Form::submit( __('Cập nhật') , ['class' => 'btn btn-primary', 'style' => 'width:100%']) !!}
                                                     {!! Form::close() !!}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endif
-                                @if(\Auth::id() == $ticket->director_id)
-                                    <span style="float: left">
-                                        &nbsp;
-                                    </span>
-                                    <span style="float: left">
-                                        <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#root_cause_approve"><i class="fa fa-check-circle"><b> Duyệt</b></i></button>
-                                    </span>
-                                    <div class="modal fade" id="root_cause_approve" role="dialog" aria-labelledby="RootCauseApproveModalLabel">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                    <h4 class="modal-title" id="RootCauseApproveModalLabel">Duyệt nguyên nhân gốc rễ</h4>
-                                                </div>
-                                                <div class="modal-body">
-                                                    {!! Form::model($ticket, [
-                                                            'method' => 'PATCH',
-                                                            'route' => ['rootCauseApprove', $ticket->id],
-                                                            'files'=>true,
-                                                            'enctype' => 'multipart/form-data'
-                                                            ]) !!}
-                                                    <div class="form-group">
-                                                        {!! Form::label('evaluation_result_id', __('Duyệt') , ['class' => 'control-label']) !!}
-                                                        {!! Form::select('evaluation_result_id', $results, null, ['placeholder' => '', 'id'=>'evaluation_result_id', 'name'=>'evaluation_result_id','class'=>'form-control', 'style' => 'width:100%']) !!}
-                                                    </div>
-                                                    {!! Form::submit(__('Duyệt'), ['class' => 'btn btn-primary', 'style' => 'width:100%']) !!}
-                                                    {!! Form::close() !!}
-                                                </div>
-                                                <div class="modal-footer">
                                                 </div>
                                             </div>
                                         </div>
@@ -396,7 +354,45 @@
                                 <h5><b style="color:blue;float: {{(\Auth::id() == $ticket->assigned_preventer_id) || (\Auth::id() == $ticket->director_id)? 'left' : ''}};">5. Hoạt động phòng ngừa:</b></h5>
                                 @if(\Auth::id() == $ticket->assigned_preventer_id)
                                     <span style="float: left">
-                                        <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#preventionaction"><i class="fa fa-plus-circle"><b> Tạo thêm</b></i></button>
+                                        <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#update_root_cause"><i class="fa fa-edit"><b> Cập nhật nguyên nhân gốc</b></i></button>
+                                    </span>
+                                    <div class="modal fade" id="update_root_cause" role="dialog" aria-labelledby="UpdateRootCauseModalLabel">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    <h4 class="modal-title" id="UpdateRootCauseModalLabel"><b>Cập nhật nguyên nhân gốc rễ</b></h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    {!! Form::model($ticket, [
+                                                            'method' => 'PATCH',
+                                                            'route' => ['updateRootCause', $ticket->id],
+                                                            'files'=>true,
+                                                            'enctype' => 'multipart/form-data'
+                                                            ]) !!}
+
+                                                    <div class="form-group">
+                                                        {!! Form::label('root_cause_type_id', __('Phân loại'), ['class' => 'control-label']) !!}
+                                                        {!! Form::select('root_cause_type_id', $root_cause_types, null, ['placeholder' => '', 'id'=>'root_cause_type_id', 'name'=>'root_cause_type_id','class'=>'form-control', 'style' => 'width:100%']) !!}
+                                                    </div>
+                                                    <div class="form-group">
+                                                        {!! Form::label('root_cause', __('Nguyên nhân gốc'), ['class' => 'control-label']) !!}
+                                                        {!! Form::textarea('root_cause', null, ['class' => 'form-control']) !!}
+                                                    </div>
+
+                                                    {!! Form::submit( __('Cập nhật') , ['class' => 'btn btn-primary', 'style' => 'width:100%']) !!}
+                                                    {!! Form::close() !!}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+                                <span style="float: left">
+                                        &nbsp;
+                                </span>
+                                @if(\Auth::id() == $ticket->assigned_preventer_id)
+                                    <span style="float: left">
+                                        <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#preventionaction"><i class="fa fa-plus-circle"><b> Thêm HĐ phòng ngừa</b></i></button>
                                     </span>
                                     <div class="modal fade" id="preventionaction" role="dialog" aria-labelledby="PreventionModalLabel">
                                         <div class="modal-dialog" role="document">
@@ -504,7 +500,12 @@
                                 </div>
                                 <br>
                                 @if($ticket->root_cause)
-                                    <p><b>Nguyên nhân gốc rễ:</b>(<b style="color: {{$ticket->approve_prevention_result->color}};">{{$ticket->approve_prevention_result->name}}</b> bởi <b>{{$ticket->director->name}}</b>)
+                                    <p><b>Nguyên nhân gốc rễ:</b>
+                                        @if($ticket->approve_prevention_result_id)
+                                            (<b style="color: {{$ticket->approve_prevention_result->color}};">{{$ticket->approve_prevention_result->name}}</b> bởi <b>{{$ticket->director->name}}</b>)
+                                        @else
+                                            (<b style="color:red">Chưa được duyệt</b>)
+                                        @endif
                                         <div class="col-md-12">
                                             <i>{!! $ticket->root_cause !!}</i>
                                         </div>
@@ -563,7 +564,7 @@
                                         <p>Ticket được đánh giá hiệu quả <b style="color: {{$ticket->effectiveness->color}}"> {{$ticket->effectiveness->name}}</b> (bởi {{$ticket->director->name}}).
                                         @if($ticket->effectiveness_comment)
                                             <br>
-                                            Với ý kiến: <i>{!! $ticket->effectiveness_comment !!}</i>
+                                            <b>Với ý kiến:</b> <i>{!! $ticket->effectiveness_comment !!}</i>
                                         @endif
                                         </p>
                                     @endif

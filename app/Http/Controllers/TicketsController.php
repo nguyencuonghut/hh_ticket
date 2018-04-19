@@ -193,13 +193,9 @@ class TicketsController extends Controller
         //Validate the input value
         $rules = [
             'evaluation_id' => 'required',
-            'root_cause_type_id' => 'required',
-            'root_cause' => 'required',
         ];
         $messages = [
             'evaluation_id.required' => 'Yêu cầu bạn PHẢI điền "Mức độ"',
-            'root_cause_type_id.required' => 'Yêu cầu bạn PHẢI điền "Phân loại nguyên nhân"',
-            'root_cause.required' => 'Yêu cầu bạn PHẢI điền "Nguyên nhân gốc"',
         ];
         $this->validate($request, $rules, $messages);
 
@@ -207,6 +203,29 @@ class TicketsController extends Controller
         Session()->flash('flash_message', 'Xem xét mức độ SKPH thành công!');
         return redirect()->back()->with('tab', 'prevention');
     }
+
+    /**
+     * Update the root cause
+     */
+    public function updateRootCause(Request $request, $id)
+    {
+        //Validate the input value
+        $rules = [
+            'root_cause_type_id' => 'required',
+            'root_cause' => 'required',
+        ];
+        $messages = [
+            'root_cause_type_id.required' => 'Yêu cầu bạn PHẢI điền "Phân loại nguyên nhân"',
+            'root_cause.required' => 'Yêu cầu bạn PHẢI điền "Nguyên nhân gốc"',
+        ];
+        $this->validate($request, $rules, $messages);
+
+        $this->tickets->updateRootCause($id, $request);
+        Session()->flash('flash_message', 'Cập nhật nguyên nhân gốc rễ thành công!');
+        return redirect()->back()->with('tab', 'prevention');
+
+    }
+
 
     /**
      * Approver confirm the root cause

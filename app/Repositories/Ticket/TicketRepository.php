@@ -33,6 +33,7 @@ class TicketRepository implements TicketRepositoryContract
     const REQUEST_TO_APPROVE_PREVENTION = 'request_to_approve_prevention';
     const PREVENTION_APPROVED = 'prevention_approved';
     const PREVENTION_REJECTED = 'prevention_rejected';
+    const EVALUATED = 'evaluated';
 
     /**
      * @param $id
@@ -165,12 +166,25 @@ class TicketRepository implements TicketRepositoryContract
     public function evaluateTicket($id, $requestData)
     {
         $ticket = Ticket::findOrFail($id);
-        $ticket->root_cause_type_id = $requestData->root_cause_type_id;
         $ticket->evaluation_id = $requestData->evaluation_id;
+        $ticket->save();
+        $ticket = $ticket->fresh();
+        event(new \App\Events\TicketAction($ticket, self::EVALUATED));
+    }
+
+    /**
+     * Update root cause
+     * @param  \Illuminate\Http\Request  $requestData
+     * @param $id
+     * @return mixed
+     */
+    public function updateRootCause($id, $requestData)
+    {
+        $ticket = Ticket::findOrFail($id);
+        $ticket->root_cause_type_id = $requestData->root_cause_type_id;
         $ticket->root_cause = $requestData->root_cause;
         $ticket->save();
         $ticket = $ticket->fresh();
-        event(new \App\Events\TicketAction($ticket, self::REQ_APPROVE_ROOT_CAUSE));
     }
 
     /**

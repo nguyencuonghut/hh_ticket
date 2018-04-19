@@ -61,6 +61,13 @@ class TicketActionLog
                     'director' => $event->getTicket()->director->name
                 ]);
                 break;
+            case 'evaluated':
+                $text = __('<b><i>:title</i></b> :director đã đánh giá sự không phù hợp là :evaluation', [
+                    'title' => $event->getTicket()->title,
+                    'director' => $event->getTicket()->director->name,
+                    'evaluation' => $event->getTicket()->evaluation->name,
+                ]);
+                break;
             case 'root_cause_approved':
                 $text = __('<b><i>:title</i></b> nguyên nhân gốc rễ được đồng ý bởi :director', [
                     'title' => $event->getTicket()->title,

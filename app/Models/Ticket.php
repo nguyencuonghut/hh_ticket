@@ -92,6 +92,7 @@ class Ticket extends Model
     {
         return $this->belongsTo(ApproveResult::class, 'approve_prevention_result_id');
     }
+
     public function getCreatorUserAttribute()
     {
         return User::findOrFail($this->creator_id);
