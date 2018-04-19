@@ -461,4 +461,24 @@ class TicketsController extends Controller
                 return $tickets->director_confirmation_result->name;
             })->make(true);
     }
+
+    /**
+     * Mark ticket completed
+     */
+    public function markTicketCompleted(Request $request, $id)
+    {
+        //Validate the input value
+        $rules = [
+            'ticket_status_id' => 'required',
+        ];
+        $messages = [
+            'ticket_status_id.required' => 'Yêu cầu bạn PHẢI điền "Trạng thái"',
+        ];
+        $this->validate($request, $rules, $messages);
+
+        $this->tickets->markTicketCompleted($id, $request);
+        Session()->flash('flash_message', 'Cập nhật trạng thái ticket thành công!');
+        return redirect()->back()->with('tab', 'prevention');
+
+    }
 }

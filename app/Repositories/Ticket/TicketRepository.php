@@ -34,6 +34,7 @@ class TicketRepository implements TicketRepositoryContract
     const PREVENTION_APPROVED = 'prevention_approved';
     const PREVENTION_REJECTED = 'prevention_rejected';
     const EVALUATED = 'evaluated';
+    const MARK_TICKET_COMPLETED = 'mark_ticket_completed';
 
     /**
      * @param $id
@@ -69,7 +70,8 @@ class TicketRepository implements TicketRepositoryContract
                 'department_id' => User::findOrFail($requestData->director_id)->department->first()->id,
                 'assigned_troubleshooter_id' => $requestData->director_id,
                 'assigned_preventer_id' => $requestData->director_id,
-                'state_id' => 1
+                'state_id' => 1,
+                'ticket_status_id' => 1,
             ]
         );
 
@@ -576,6 +578,22 @@ class TicketRepository implements TicketRepositoryContract
 
         return collect([$hcns_cnt, $sale_cnt, $ketoan_cnt, $ksnb_cnt, $baotri_cnt,
             $sx_cnt, $thumua_cnt, $kythuat_cnt, $qlcl_cnt, $kho_cnt]);
+    }
+
+    /**
+     * Mark ticket completed
+     * @param  \Illuminate\Http\Request  $requestData
+     * @param $id
+     * @return mixed
+     */
+    public function markTicketCompleted($id, $requestData)
+    {
+        $ticket = Ticket::findOrFail($id);
+        $ticket->ticket_status_id = $requestData->ticket_status_id;
+        $ticket->mark_completed_comment = $requestData->mark_completed_comment;
+        $ticket->save();
+        $ticket = $ticket->fresh();
+        event(new \App\Events\TicketAction($ticket, self::MARK_TICKET_COMPLETED));
     }
 
 }

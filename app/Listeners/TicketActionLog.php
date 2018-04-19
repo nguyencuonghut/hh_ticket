@@ -143,6 +143,13 @@ class TicketActionLog
                     'assigned_preventer' => $event->getTicket()->assigned_preventer->name,
                 ]);
                 break;
+            case 'mark_ticket_completed':
+                $text = __('<b><i>:title</i></b>, :director đã chuyển trạng thái phiếu sang<b>:ticket_status</b>', [
+                    'title' => $event->getTicket()->title,
+                    'director' => $event->getTicket()->director->name,
+                    'ticket_status' => $event->getTicket()->ticket_status->name,
+                ]);
+                break;
             default:
                 break;
         }

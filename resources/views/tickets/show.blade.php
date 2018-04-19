@@ -315,7 +315,7 @@
                             </el-tab-pane>
                             <el-tab-pane label="Phòng ngừa" name="prevention">
                                 <h5><b style="color:blue; float: {{(\Auth::id() == $ticket->assigned_preventer_id) || ((\Auth::id() == $ticket->director_id)) ? 'left' : ''}};">4. Đánh giá sự không phù hợp:</b></h5>
-                                @if(\Auth::id() == $ticket->assigned_preventer_id)
+                                @if(\Auth::id() == $ticket->director_id)
                                     <span style="float: left">
                                         <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#evaluation"><i class="fa fa-edit"><b> Cập nhật</b></i></button>
                                     </span>
@@ -524,7 +524,6 @@
                                     @include('tickets.preventions.index', ['subject' => $ticket])
                                 @endif
                                 <br>
-
                                 <h5><b style="color:blue;float: left;">6. Đánh giá hiệu quả: &nbsp;</b></h5>
                                 <span>
                                     <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#effectiveness"><i class="fa fa-edit"><b> Cập nhật</b></i></button>
@@ -569,6 +568,16 @@
                                         </p>
                                     @endif
                                 </div>
+
+                                @if('Closed' == $ticket->ticket_status->name)
+                                <h5><b style="color:blue">7. Đóng ticket &nbsp;</b></h5>
+                                    <p>Ticket được đóng (bởi {{$ticket->director->name}}).
+                                        @if($ticket->mark_completed_comment)
+                                            <br>
+                                            <b>Với ý kiến:</b> <i>{!! $ticket->mark_completed_comment !!}</i>
+                                        @endif
+                                    </p>
+                                @endif
 
                             </el-tab-pane>
                         </el-tabs>
@@ -625,6 +634,34 @@
                                     ]) !!}
                                 {!! Form::select('assigned_preventer_id', $users, null, ['placeholder' => '', 'id'=>'assigned_preventer_id', 'name'=>'assigned_preventer_id','class'=>'form-control', 'style' => 'width:100%']) !!}
                                 <br>
+                                <br>
+                                {!! Form::submit(__('Cập nhật'), ['class' => 'btn btn-primary closebtn','style' => 'width:100%']) !!}
+                                {!! Form::close() !!}
+                            </div>
+                            <div class="modal-footer">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-primary form-control closebtn" data-toggle="modal" data-target="#MarkTicketCompletedModal">Đóng ticket</button>
+                <div class="modal fade" id="MarkTicketCompletedModal" role="dialog" aria-labelledby="MarkTicketCompletedModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="MarkTicketCompletedModalLabel">Đóng ticket</h4>
+                            </div>
+                            <div class="modal-body" style="text-align: left">
+                                {!! Form::model($ticket, [
+                                        'method' => 'PATCH',
+                                        'route' => ['markTicketCompleted', $ticket->id],
+                                    ]) !!}
+                                {!! Form::label('ticket_status_id', __('Trạng thái' ), ['class' => 'control-label']) !!}
+                                {!! Form::select('ticket_status_id', $statuses, null, ['placeholder' => '', 'id'=>'ticket_status_id', 'name'=>'ticket_status_id','class'=>'form-control', 'style' => 'width:100%']) !!}
+
+                                {!! Form::label('mark_completed_comment', __('Ý kiến'), ['class' => 'control-label']) !!}
+                                {!! Form::textarea('mark_completed_comment', null, ['class' => 'form-control']) !!}
                                 <br>
                                 {!! Form::submit(__('Cập nhật'), ['class' => 'btn btn-primary closebtn','style' => 'width:100%']) !!}
                                 {!! Form::close() !!}

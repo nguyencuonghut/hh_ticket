@@ -38,6 +38,8 @@ class Ticket extends Model
         'approve_prevention_comment',
         'effectiveness_id',
         'effectiveness_comment',
+        'ticket_status_id',
+        'mark_completed_comment',
     ];
 
     public function source()
@@ -91,6 +93,10 @@ class Ticket extends Model
     public function approve_prevention_result()
     {
         return $this->belongsTo(ApproveResult::class, 'approve_prevention_result_id');
+    }
+    public function ticket_status()
+    {
+        return $this->belongsTo(Status::class, 'ticket_status_id');
     }
 
     public function getCreatorUserAttribute()

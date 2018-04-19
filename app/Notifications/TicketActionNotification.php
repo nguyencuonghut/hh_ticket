@@ -171,6 +171,14 @@ class TicketActionNotification extends Notification
                 ]);
                 $toName = $this->ticket->assigned_preventer->name;
                 break;
+            case 'mark_ticket_completed':
+                $text = __(':title, :director đã chuyển trạng thái ticket sang :ticket_status', [
+                    'title' =>  $this->ticket->title,
+                    'director' => $this->ticket->director->name,
+                    'ticket_status' => $this->ticket->ticket_status->name,
+                ]);
+                $toName = $this->ticket->creator->name;
+                break;
             default:
                 break;
         }
@@ -325,6 +333,15 @@ class TicketActionNotification extends Notification
                 $text = __(':title, :director đã từ chối biện pháp phòng ngừa của bạn', [
                     'title' =>  $this->ticket->title,
                     'director' => $this->ticket->director->name,
+                ]);
+                $assigned_user = $this->ticket->director->name;
+                $created_user =$this->ticket->creator->name;
+                break;
+            case 'mark_ticket_completed':
+                $text = __(':title, :director chuyển trạng thái ticket sang :ticket_status', [
+                    'title' =>  $this->ticket->title,
+                    'director' => $this->ticket->director->name,
+                    'ticket_status' => $this->ticket->ticket_status->name,
                 ]);
                 $assigned_user = $this->ticket->director->name;
                 $created_user =$this->ticket->creator->name;

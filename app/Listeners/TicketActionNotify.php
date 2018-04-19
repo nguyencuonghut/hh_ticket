@@ -44,6 +44,7 @@ class TicketActionNotify
             break;
         case 'req_approve_root_cause':
         case 'evaluated':
+        case 'mark_ticket_completed':
             $ticket->directorUser->notify(new TicketActionNotification(
                 $ticket,
                 $action

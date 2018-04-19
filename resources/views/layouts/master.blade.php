@@ -254,5 +254,10 @@ $('body').click(function(e) {
             height: 200,
         });
     });
+    $(document).ready(function () {
+        $('#mark_completed_comment').summernote({
+            height: 200,
+        });
+    });
 </script>
 </html>

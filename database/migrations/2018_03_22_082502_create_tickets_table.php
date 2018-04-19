@@ -89,6 +89,12 @@ class CreateTicketsTable extends Migration
             $table->integer('state_id')->unsigned();
             $table->foreign('state_id')->references('id')->on('states');
             //~State of ticket
+
+            //Mark ticket completed
+            $table->integer('ticket_status_id')->unsigned();
+            $table->foreign('ticket_status_id')->references('id')->on('statuses');
+            $table->longText('mark_completed_comment')->nullable();
+            //~Mark ticket completed
             $table->timestamps();
         });
     }

@@ -50,6 +50,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::patch('approveprevention/{id}', 'TicketsController@approvePrevention')->name('approvePrevention');
         Route::get('tickets/mycreateddata', 'TicketsController@myCreatedData')->name('tickets.mycreateddata');
         Route::get('tickets/myconfirmeddata', 'TicketsController@myConfirmedData')->name('tickets.myconfirmeddata');
+        Route::patch('tickets/markticketcompleted/{id}', 'TicketsController@markTicketCompleted')->name('markTicketCompleted');
     });
     Route::resource('tickets', 'TicketsController');
 
