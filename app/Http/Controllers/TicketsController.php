@@ -275,8 +275,8 @@ class TicketsController extends Controller
      */
     public function anyData()
     {
-        $tickets = Ticket::with(['creator', 'source', 'department'])->select(
-            ['id', 'title', 'created_at', 'deadline', 'source_id', 'creator_id', 'department_id']
+        $tickets = Ticket::with(['creator', 'source', 'department', 'ticket_status'])->select(
+            ['id', 'title', 'created_at', 'deadline', 'source_id', 'creator_id', 'department_id', 'ticket_status_id']
         )->orderBy('id', 'desc');
         return Datatables::of($tickets)
             ->addColumn('titlelink', function ($tickets) {
@@ -298,6 +298,9 @@ class TicketsController extends Controller
             })
             ->editColumn('department', function ($tickets) {
                 return $tickets->department->name;
+            })
+            ->editColumn('ticket_status', function ($tickets) {
+                return $tickets->ticket_status->name;
             })->make(true);
     }
 
@@ -413,7 +416,7 @@ class TicketsController extends Controller
     public function myCreatedData()
     {
         $tickets = Ticket::select(
-            ['id', 'title', 'created_at', 'deadline', 'source_id']
+            ['id', 'title', 'created_at', 'deadline', 'source_id', 'ticket_status_id']
         )->where('creator_id', \Auth::id())->orderBy('id', 'desc');
         return Datatables::of($tickets)
             ->addColumn('titlelink', function ($tickets) {
@@ -430,6 +433,9 @@ class TicketsController extends Controller
             })
             ->editColumn('source_id', function ($tickets) {
                 return $tickets->source->name;
+            })
+            ->editColumn('ticket_status', function ($tickets) {
+                return $tickets->ticket_status_id;
             })->make(true);
     }
 
@@ -439,7 +445,7 @@ class TicketsController extends Controller
     public function myConfirmedData()
     {
         $tickets = Ticket::select(
-            ['id', 'title', 'created_at', 'deadline', 'source_id', 'director_confirmation_result_id']
+            ['id', 'title', 'created_at', 'deadline', 'source_id', 'director_confirmation_result_id', 'ticket_status_id']
         )->where('director_id', \Auth::id())->orderBy('id', 'desc');
         return Datatables::of($tickets)
             ->addColumn('titlelink', function ($tickets) {
@@ -459,6 +465,9 @@ class TicketsController extends Controller
             })
             ->addColumn('confirmation_result', function ($tickets) {
                 return $tickets->director_confirmation_result->name;
+            })
+            ->addColumn('ticket_status_id', function ($tickets) {
+                return $tickets->ticket_status_id;
             })->make(true);
     }
 

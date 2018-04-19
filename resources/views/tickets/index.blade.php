@@ -14,6 +14,7 @@
             <th>{{ __('Nguồn gốc') }}</th>
             <th>{{ __('Người tạo') }}</th>
             <th>{{ __('Phòng/Ban') }}</th>
+            <th>{{ __('Trạng thái') }}</th>
         </tr>
         </thead>
     </table>
@@ -35,7 +36,15 @@
                 {data: 'source', name: 'source.name'},
                 {data: 'name', name: 'creator.name'},
                 {data: 'department', name: 'department.name'},
-            ]
+                {data: 'ticket_status', name: 'ticket_status.name'},
+            ],
+            createdRow: function ( row, data, index ) {
+                if ( data['ticket_status'] == 'Open' ) {
+                    $('td', row).addClass('success');
+                } else {
+                    $('td', row).addClass('primary');
+                }
+            },
         });
     });
 </script>

@@ -168,7 +168,14 @@
                     {data: 'titlelink', name: 'title'},
                     {data: 'issue_date', name: 'issue_date'},
                     {data: 'answer_date', name: 'answer_date'},
-                ]
+                ],
+                createdRow: function ( row, data, index ) {
+                    if ( data['ticket_status'] == '1' ) {
+                        $('td', row).addClass('success');
+                    } else {
+                        $('td', row).addClass('primary');
+                    }
+                },
             });
 
             $('#my-troubleshootactions-table').DataTable({
@@ -181,7 +188,14 @@
                     {data: 'status', name: 'status'},
                     { data: 'edit', name: 'edit', orderable: false, searchable: false},
                     { data: 'markCompleted', name: 'markCompleted', orderable: false, searchable: false},
-                ]
+                ],
+                createdRow: function ( row, data, index ) {
+                    if ( data['status'] == 'Open' ) {
+                        $('td', row).addClass('success');
+                    } else {
+                        $('td', row).addClass('primary');
+                    }
+                },
             });
 
             $('#my-confirmed-table').DataTable({
@@ -194,7 +208,14 @@
                     {data: 'issue_date', name: 'issue_date'},
                     {data: 'answer_date', name: 'answer_date'},
                     {data: 'confirmation_result', name: 'confirmation_result'},
-                ]
+                ],
+                createdRow: function ( row, data, index ) {
+                    if ( data['ticket_status_id'] == '1' ) {
+                        $('td', row).addClass('success');
+                    } else {
+                        $('td', row).addClass('primary');
+                    }
+                },
             });
 
             $('#my-preventionactions-table').DataTable({
@@ -207,7 +228,14 @@
                     {data: 'status', name: 'status'},
                     { data: 'edit', name: 'edit', orderable: false, searchable: false},
                     { data: 'markCompleted', name: 'markCompleted', orderable: false, searchable: false},
-                ]
+                ],
+                createdRow: function ( row, data, index ) {
+                    if ( data['status'] == 'Open' ) {
+                        $('td', row).addClass('success');
+                    } else {
+                        $('td', row).addClass('primary');
+                    }
+                },
             });
         });
     </script>
