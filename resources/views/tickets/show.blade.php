@@ -389,33 +389,9 @@
                                     </div>
                                 @endif
                                 <br>
-
-                                <div class="contactleft">
-                                    @if($ticket->assigned_preventer_id)
-                                        <p><b>Người đề xuất:</b> {{$ticket->assigned_preventer->name}}</p>
-                                    @endif
-                                    @if($ticket->root_cause_type_id)
-                                        <p><b>Phân loại nguyên nhân:</b> {{$ticket->root_cause_type->name}}</p>
-                                    @endif
-                                </div>
-                                <div class="contactright">
-                                    @if($ticket->evaluation_id)
-                                        <p><b>Mức độ:</b> <b style="color:{{$ticket->evaluation->color}}">{{$ticket->evaluation->name}}</b></p>
-                                    @endif
-                                    @if($ticket->evaluation_result_id)
-                                        <p><b>Kết quả duyệt:</b> <b style="color: {{$ticket->evaluation_result->color}};">{{$ticket->evaluation_result->name}}</b>
-                                            (bởi {{$ticket->director->name}})
-                                        </p>
-                                    @else
-                                        <p><b>Kết quả duyệt:</b> Chưa phê duyệt</p>
-                                    @endif
-                                </div>
-                                @if($ticket->root_cause)
-                                    <p><b>Nguyên nhân gốc rễ:</b>
-                                        <i>{!! $ticket->root_cause !!}</i>
-                                    </p>
+                                @if($ticket->evaluation_id)
+                                    <p><b>Mức độ:</b> <b style="color:{{$ticket->evaluation->color}}">{{$ticket->evaluation->name}}</b> (đánh giá bởi <b>{{$ticket->assigned_preventer->name}}</b>)</p>
                                 @endif
-                                <br>
 
                                 <h5><b style="color:blue;float: {{(\Auth::id() == $ticket->assigned_preventer_id) || (\Auth::id() == $ticket->director_id)? 'left' : ''}};">5. Hoạt động phòng ngừa:</b></h5>
                                 @if(\Auth::id() == $ticket->assigned_preventer_id)
@@ -522,17 +498,24 @@
                                     @endif
                                 </div>
                                 <div class="contactright">
-                                    @if($ticket->approve_prevention_result_id)
-                                        <p><b>Kết quả duyệt:</b> <b style="color: {{$ticket->approve_prevention_result->color}};">{{$ticket->approve_prevention_result->name}}</b>
-                                            (bởi {{$ticket->director->name}})
-                                        </p>
-                                    @else
-                                        <p><b>Kết quả duyệt:</b> Chưa phê duyệt</p>
+                                    @if($ticket->root_cause_type_id)
+                                        <p><b>Phân loại nguyên nhân:</b> {{$ticket->root_cause_type->name}}</p>
                                     @endif
                                 </div>
                                 <br>
+                                @if($ticket->root_cause)
+                                    <p><b>Nguyên nhân gốc rễ:</b>(<b style="color: {{$ticket->approve_prevention_result->color}};">{{$ticket->approve_prevention_result->name}}</b> bởi <b>{{$ticket->director->name}}</b>)
+                                        <div class="col-md-12">
+                                            <i>{!! $ticket->root_cause !!}</i>
+                                        </div>
+                                    </p>
+                                @endif
                                 @if($ticket->approve_prevention_comment)
-                                    <p><b>Ý kiến:</b> {!! $ticket->approve_prevention_comment !!}</p>
+                                    <p><b>Ý kiến:</b>
+                                        <div class="col-md-12">
+                                            <i>{!! $ticket->approve_prevention_comment !!}</i>
+                                        </div>
+                                    </p>
                                 @endif
 
                                 <br>
