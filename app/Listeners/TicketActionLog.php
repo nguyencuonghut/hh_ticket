@@ -43,13 +43,13 @@ class TicketActionLog
                 ]);
                 break;
             case 'director_approved':
-                $text = __('<b><i>:title</i></b> được đồng ý bởi :director', [
+                $text = __('<b><i>:title</i></b> được <b style="color:blue">Đồng ý</b> bởi :director', [
                     'title' => $event->getTicket()->title,
                     'director' => $event->getTicket()->director->name
                 ]);
                 break;
             case 'director_rejected':
-                $text = __('<b><i>:title</i></b> bị từ chối bởi :director', [
+                $text = __('<b><i>:title</i></b> bị <b style="color:red">Từ chối</b> bởi :director', [
                     'title' => $event->getTicket()->title,
                     'director' => $event->getTicket()->director->name
                 ]);
@@ -62,26 +62,26 @@ class TicketActionLog
                 ]);
                 break;
             case 'evaluated':
-                $text = __('<b><i>:title</i></b> :director đã đánh giá sự không phù hợp là :evaluation', [
+                $text = __('<b><i>:title</i></b> :director đã đánh giá sự không phù hợp là <b>:evaluation</b>', [
                     'title' => $event->getTicket()->title,
                     'director' => $event->getTicket()->director->name,
                     'evaluation' => $event->getTicket()->evaluation->name,
                 ]);
                 break;
             case 'root_cause_approved':
-                $text = __('<b><i>:title</i></b> nguyên nhân gốc rễ được đồng ý bởi :director', [
+                $text = __('<b><i>:title</i></b> nguyên nhân gốc rễ được <b style="color:blue">Đồng ý</b> bởi :director', [
                     'title' => $event->getTicket()->title,
                     'director' => $event->getTicket()->director->name
                 ]);
                 break;
             case 'root_cause_rejected':
-                $text = __('<b><i>:title</i></b> nguyên nhân gốc rễ bị từ chối bởi :director', [
+                $text = __('<b><i>:title</i></b> nguyên nhân gốc rễ bị <b style="color:red">Từ chối</b> bởi :director', [
                     'title' => $event->getTicket()->title,
                     'director' => $event->getTicket()->director->name
                 ]);
                 break;
             case 'asset_effectiveness':
-                $text = __('<b><i>:title</i></b> được đánh giá :effectiveness bởi :director', [
+                $text = __('<b><i>:title</i></b> được đánh giá <b>:effectiveness</b> bởi :director', [
                     'title' => $event->getTicket()->title,
                     'effectiveness' => $event->getTicket()->effectiveness->name,
                     'director' => $event->getTicket()->director->name
@@ -102,14 +102,14 @@ class TicketActionLog
                 ]);
                 break;
             case 'troubleshoot_approved':
-                $text = __('<b><i>:title</i></b>, :director đã đồng ý biện pháp khắc phục của :assigned_troubleshooter', [
+                $text = __('<b><i>:title</i></b>, :director đã <b style="color:blue">Đồng ý</b> biện pháp khắc phục của :assigned_troubleshooter', [
                     'title' => $event->getTicket()->title,
                     'director' => $event->getTicket()->director->name,
                     'assigned_troubleshooter' => $event->getTicket()->assigned_troubleshooter->name,
                 ]);
                 break;
             case 'troubleshoot_rejected':
-                $text = __('<b><i>:title</i></b>, :director đã từ chối biện pháp khắc phục của :assigned_troubleshooter', [
+                $text = __('<b><i>:title</i></b>, :director đã <b style="color:red">Từ chối</b> biện pháp khắc phục của :assigned_troubleshooter', [
                     'title' => $event->getTicket()->title,
                     'director' => $event->getTicket()->director->name,
                     'assigned_troubleshooter' => $event->getTicket()->assigned_troubleshooter->name,
@@ -130,14 +130,14 @@ class TicketActionLog
                 ]);
                 break;
             case 'prevention_approved':
-                $text = __('<b><i>:title</i></b>, :director đã đồng ý biện pháp phòng ngừa của :assigned_preventer', [
+                $text = __('<b><i>:title</i></b>, :director đã <b style="color:blue">Đồng ý</b> biện pháp phòng ngừa của :assigned_preventer', [
                     'title' => $event->getTicket()->title,
                     'director' => $event->getTicket()->director->name,
                     'assigned_preventer' => $event->getTicket()->assigned_preventer->name,
                 ]);
                 break;
             case 'prevention_rejected':
-                $text = __('<b><i>:title</i></b>, :director đã từ chối biện pháp phòng ngừa của :assigned_preventer', [
+                $text = __('<b><i>:title</i></b>, :director đã <b style="color:red">Từ chối</b> biện pháp phòng ngừa của :assigned_preventer', [
                     'title' => $event->getTicket()->title,
                     'director' => $event->getTicket()->director->name,
                     'assigned_preventer' => $event->getTicket()->assigned_preventer->name,
