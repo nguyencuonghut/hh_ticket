@@ -30,6 +30,14 @@ class ApproveResultsTableSeeder extends Seeder
                     'created_at' => '2016-06-04 13:42:19',
                     'updated_at' => '2016-06-04 13:42:19',
                 ),
+            2 =>
+                array (
+                    'id' => 3,
+                    'name' => 'Chưa duyệt',
+                    'color' => 'orange',
+                    'created_at' => '2016-06-04 13:42:19',
+                    'updated_at' => '2016-06-04 13:42:19',
+                ),
         ));
     }
 }

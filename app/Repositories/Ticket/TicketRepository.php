@@ -68,6 +68,7 @@ class TicketRepository implements TicketRepositoryContract
             ['creator_id' => auth()->id(),
                 'image_path' => $filename,
                 'department_id' => User::findOrFail($requestData->director_id)->department->first()->id,
+                'director_confirmation_result_id' => 3, //Default value
                 'assigned_troubleshooter_id' => $requestData->director_id,
                 'assigned_preventer_id' => $requestData->director_id,
                 'state_id' => 1,

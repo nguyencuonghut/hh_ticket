@@ -159,8 +159,6 @@
                                             @endif
                                             @if($ticket->director_confirmation_result_id)
                                                 <p><b>Xác nhận: </b><b style="color:{{$ticket->director_confirmation_result->color}}">{!! $ticket->director_confirmation_result->name !!}</b> <i>(bởi {{$ticket->director->name}})</i></p>
-                                            @else
-                                                <p style="color:red"> Chưa xác nhận!</p>
                                             @endif
                                             @if($ticket->director_confirmation_comment)
                                                 <p><b>Ý kiến:</b><i>{!! $ticket->director_confirmation_comment !!}</i></p>
