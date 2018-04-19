@@ -42,8 +42,8 @@
                         <div class="media">
                             <div class="media-left">
                                 <a href="{{route('tickets.show', $ticket->id)}}">
-                                    @if($ticket->image)
-                                        <img class="media-object" style="width: 100px;" src={{url('/upload/' . $ticket->image)}} alt="...">
+                                    @if($ticket->image_path)
+                                        <img class="media-object" style="width: 100px;" src={{url('/upload/' . $ticket->image_path)}} alt="...">
                                     @else
                                         <img class="media-object" style="width: 100px;" src={{url('/images/no-evidence.jpg')}} alt="...">
                                     @endif
@@ -114,6 +114,7 @@
                             </div>
                         </div>
                     @endforeach
+                        {!! $tickets->render() !!}
                 </div>
             </div>
         </div>

@@ -19,6 +19,7 @@ use App\Repositories\Department\DepartmentRepositoryContract;
 use App\Repositories\Setting\SettingRepositoryContract;
 use App\Repositories\Task\TaskRepositoryContract;
 use App\Repositories\Lead\LeadRepositoryContract;
+use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
 {
@@ -192,7 +193,7 @@ class UsersController extends Controller
             ->withCompanyname($this->settings->getCompanyName())
             ->withTaskStatistics($this->tasks->totalOpenAndClosedTasks($id))
             ->withLeadStatistics($this->leads->totalOpenAndClosedLeads($id))
-            ->withTickets(Ticket::all()->sortByDesc('created_at'));
+            ->withTickets(Ticket::with('creator')->orderByDesc('created_at')->paginate(3));
     }
 
     /**
