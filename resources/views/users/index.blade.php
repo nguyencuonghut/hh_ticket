@@ -1,15 +1,15 @@
 @extends('layouts.master')
 @section('heading')
-    <h1>{{ __('All users') }}</h1>
+    <h1>{{ __('Tất cả người dùng') }}</h1>
 @stop
 
 @section('content')
     <table class="table table-hover" id="users-table">
         <thead>
         <tr>
-            <th>{{ __('Name') }}</th>
+            <th>{{ __('Tên') }}</th>
             <th>{{ __('Mail') }}</th>
-            <th>{{ __('Work number') }}</th>
+            <th>{{ __('Số điện thoại (công ty)') }}</th>
             <th></th>
             <th></th>
         </tr>

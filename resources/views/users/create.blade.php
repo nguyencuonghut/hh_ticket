@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('heading')
-    <h1>{{ __('Create user') }}</h1>
+    <h1>{{ __('Tạo người dùng') }}</h1>
 @stop
 
 @section('content')
@@ -10,7 +10,7 @@
             'enctype' => 'multipart/form-data'
 
             ]) !!}
-    @include('users.form', ['submitButtonText' => __('Create user')])
+    @include('users.form', ['submitButtonText' => __('Tạo mới')])
 
     {!! Form::close() !!}
 

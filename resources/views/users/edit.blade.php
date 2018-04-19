@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('heading')
-    <h1>{{ __('Edit user') }}</h1>
+    <h1>{{ __('Sửa người dùng') }}</h1>
 @stop
 
 @section('content')
@@ -14,7 +14,7 @@
             'enctype' => 'multipart/form-data'
             ]) !!}
 
-    @include('users.form', ['submitButtonText' =>  __('Update user')])
+    @include('users.form', ['submitButtonText' =>  __('Cập nhật')])
 
     {!! Form::close() !!}
 

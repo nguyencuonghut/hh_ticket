@@ -68,10 +68,10 @@ class UsersController extends Controller
                 return '<a href="users/' . $users->id . '" ">' . $users->name . '</a>';
             })
             ->addColumn('edit', function ($user) {
-                return '<a href="' . route("users.edit", $user->id) . '" class="btn btn-success"> Edit</a>';
+                return '<a href="' . route("users.edit", $user->id) . '" class="btn btn-success"> Sửa</a>';
             })
             ->add_column('delete', function ($user) { 
-                return '<button type="button" class="btn btn-danger delete_client" data-client_id="' . $user->id . '" onClick="openModal(' . $user->id. ')" id="myBtn">Delete</button>';
+                return '<button type="button" class="btn btn-danger delete_client" data-client_id="' . $user->id . '" onClick="openModal(' . $user->id. ')" id="myBtn">Xóa</button>';
             })->make(true);
     }
 
