@@ -19,6 +19,11 @@
         .select2-container .select2-selection--single {
             height: 34px !important;
         }
+         .required:after {
+             content: '*';
+             color: red;
+             padding-left: 5px;
+         }
     </style>
 </head>
 <body>

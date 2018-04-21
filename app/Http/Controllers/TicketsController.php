@@ -258,9 +258,11 @@ class TicketsController extends Controller
         //Validate the input value
         $rules = [
             'effectiveness_id' => 'required',
+            'effectiveness_comment' => 'required'
         ];
         $messages = [
             'effectiveness_id.required' => 'Yêu cầu bạn PHẢI điền "Hiệu quả"',
+            'effectiveness_comment.required' => 'Yêu cầu bạn PHẢI điền "Ý kiến"',
         ];
         $this->validate($request, $rules, $messages);
 

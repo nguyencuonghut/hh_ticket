@@ -142,7 +142,7 @@
                                                                         'enctype' => 'multipart/form-data'
                                                                         ]) !!}
                                                                 <div class="form-group">
-                                                                    {!! Form::label('director_confirmation_result_id', __('Kết quả') , ['class' => 'control-label']) !!}
+                                                                    {!! Form::label('director_confirmation_result_id', __('Kết quả') , ['class' => 'control-label required']) !!}
                                                                     {!! Form::select('director_confirmation_result_id', $results, null, ['placeholder' => '', 'id'=>'director_confirmation_result_id', 'name'=>'director_confirmation_result_id','class'=>'form-control', 'style' => 'width:100%']) !!}
                                                                 </div>
                                                                 <div class="form-group">
@@ -229,15 +229,15 @@
                                                             'route' => ['troubleshoots.store', $ticket->id],
                                                             ]) !!}
 
-                                                    {!! Form::label('name', __('Biện pháp khắc phục'), ['class' => 'control-label']) !!}
+                                                    {!! Form::label('name', __('Biện pháp khắc phục'), ['class' => 'control-label required']) !!}
                                                     {!! Form::text('name', null, ['class' => 'form-control', 'id' => 'action']) !!}
                                                     <div class="form-inline">
                                                         <div class="form-group col-sm-6 removeleft ">
-                                                            {!! Form::label('troubleshooter_id', __('Người thực hiện'), ['class' => 'control-label']) !!}
+                                                            {!! Form::label('troubleshooter_id', __('Người thực hiện'), ['class' => 'control-label required']) !!}
                                                             {!! Form::select('troubleshooter_id', $users, null, ['placeholder' => '', 'id'=>'troubleshooter_id', 'name'=>'troubleshooter_id','class'=>'form-control', 'style' => 'width:100%']) !!}
                                                         </div>
                                                         <div class="form-group col-sm-6 removeright ">
-                                                            {!! Form::label('deadline', __('Thời hạn'), ['class' => 'control-label']) !!}
+                                                            {!! Form::label('deadline', __('Thời hạn'), ['class' => 'control-label required']) !!}
                                                             {!! Form::date('deadline', \Carbon\Carbon::now()->addDays(3), ['class' => 'form-control']) !!}
                                                         </div>
                                                     </div>
@@ -282,7 +282,7 @@
                                                             'enctype' => 'multipart/form-data'
                                                             ]) !!}
 
-                                                    {!! Form::label('approve_troubleshoot_result_id', __('Kết quả duyệt'), ['class' => 'control-label']) !!}
+                                                    {!! Form::label('approve_troubleshoot_result_id', __('Kết quả duyệt'), ['class' => 'control-label required']) !!}
                                                     {!! Form::select('approve_troubleshoot_result_id', $results, null, ['placeholder' => '', 'id'=>'approve_troubleshoot_result_id', 'name'=>'approve_troubleshoot_result_id','class'=>'form-control', 'style' => 'width:100%']) !!}
 
                                                     {!! Form::label('approve_troubleshoot_comment', __('Ý kiến'), ['class' => 'control-label']) !!}
@@ -335,7 +335,7 @@
                                                             ]) !!}
 
                                                     <div class="form-group">
-                                                        {!! Form::label('evaluation_id', __('Mức độ'), ['class' => 'control-label']) !!}
+                                                        {!! Form::label('evaluation_id', __('Mức độ'), ['class' => 'control-label required']) !!}
                                                         {!! Form::select('evaluation_id', $evaluations, null, ['placeholder' => '', 'id'=>'evaluation_id', 'name'=>'evaluation_id','class'=>'form-control', 'style' => 'width:100%']) !!}
                                                     </div>
 
@@ -372,11 +372,11 @@
                                                             ]) !!}
 
                                                     <div class="form-group">
-                                                        {!! Form::label('root_cause_type_id', __('Phân loại'), ['class' => 'control-label']) !!}
+                                                        {!! Form::label('root_cause_type_id', __('Phân loại'), ['class' => 'control-label required']) !!}
                                                         {!! Form::select('root_cause_type_id', $root_cause_types, null, ['placeholder' => '', 'id'=>'root_cause_type_id', 'name'=>'root_cause_type_id','class'=>'form-control', 'style' => 'width:100%']) !!}
                                                     </div>
                                                     <div class="form-group">
-                                                        {!! Form::label('root_cause', __('Nguyên nhân gốc'), ['class' => 'control-label']) !!}
+                                                        {!! Form::label('root_cause', __('Nguyên nhân gốc'), ['class' => 'control-label required']) !!}
                                                         {!! Form::textarea('root_cause', null, ['class' => 'form-control']) !!}
                                                     </div>
 
@@ -406,31 +406,31 @@
                                                             'route' => ['preventions.store', $ticket->id],
                                                             ]) !!}
 
-                                                    {!! Form::label('name', __('Biện pháp phòng ngừa'), ['class' => 'control-label']) !!}
+                                                    {!! Form::label('name', __('Biện pháp phòng ngừa'), ['class' => 'control-label required']) !!}
                                                     {!! Form::text('name', null, ['class' => 'form-control', 'id' => 'action']) !!}
                                                     <div class="form-inline">
                                                         <div class="form-group col-sm-6 removeleft ">
-                                                            {!! Form::label('budget', __('Ngân sách'), ['class' => 'control-label']) !!}
+                                                            {!! Form::label('budget', __('Ngân sách'), ['class' => 'control-label required']) !!}
                                                             {!! Form::number('budget', null, ['class' => 'form-control', 'id' => 'action']) !!}
                                                         </div>
                                                         <div class="form-group col-sm-6 removeright ">
-                                                            {!! Form::label('where', __('Làm ở đâu?'), ['class' => 'control-label']) !!}
+                                                            {!! Form::label('where', __('Làm ở đâu?'), ['class' => 'control-label required']) !!}
                                                             {!! Form::text('where', null, ['class' => 'form-control', 'id' => 'action']) !!}
                                                         </div>
                                                     </div>
                                                     <div class="form-inline">
                                                         <div class="form-group col-sm-6 removeleft ">
-                                                            {!! Form::label('when', __('Làm khi nào?'), ['class' => 'control-label']) !!}
+                                                            {!! Form::label('when', __('Làm khi nào?'), ['class' => 'control-label required']) !!}
                                                             {!! Form::date('when', \Carbon\Carbon::now()->addDays(3), ['class' => 'form-control', 'style' => 'width:100%']) !!}
                                                         </div>
                                                         <div class="form-group col-sm-6 removeright ">
-                                                            {!! Form::label('how', __('Làm như thế nào?'), ['class' => 'control-label']) !!}
+                                                            {!! Form::label('how', __('Làm như thế nào?'), ['class' => 'control-label required']) !!}
                                                             {!! Form::text('how', null, ['class' => 'form-control', 'id' => 'action', 'style' => 'width:100%']) !!}
                                                         </div>
                                                     </div>
 
                                                         <div class="form-group">
-                                                            {!! Form::label('preventor_id', __('Ai làm?'), ['class' => 'control-label']) !!}
+                                                            {!! Form::label('preventor_id', __('Ai làm?'), ['class' => 'control-label required']) !!}
                                                             {!! Form::select('preventor_id', $users, null, ['placeholder' => '', 'id'=>'preventor_id', 'name'=>'preventor_id','class'=>'form-control', 'style' => 'width:100%']) !!}
                                                         </div>
                                                     {!! Form::submit( __('Thêm') , ['class' => 'btn btn-primary', 'style' => 'width:100%']) !!}
@@ -474,7 +474,7 @@
                                                             'enctype' => 'multipart/form-data'
                                                             ]) !!}
 
-                                                    {!! Form::label('approve_prevention_result_id', __('Kết quả duyệt'), ['class' => 'control-label']) !!}
+                                                    {!! Form::label('approve_prevention_result_id', __('Kết quả duyệt'), ['class' => 'control-label required required']) !!}
                                                     {!! Form::select('approve_prevention_result_id', $results, null, ['placeholder' => '', 'id'=>'approve_prevention_result_id', 'name'=>'approve_prevention_result_id','class'=>'form-control', 'style' => 'width:100%']) !!}
 
                                                     {!! Form::label('approve_prevention_comment', __('Ý kiến'), ['class' => 'control-label']) !!}
@@ -544,10 +544,10 @@
                                                             'enctype' => 'multipart/form-data'
                                                             ]) !!}
 
-                                                    {!! Form::label('effectiveness_id', __('Hiệu quả'), ['class' => 'control-label']) !!}
+                                                    {!! Form::label('effectiveness_id', __('Hiệu quả'), ['class' => 'control-label required']) !!}
                                                     {!! Form::select('effectiveness_id', $effectivenesses, null, ['placeholder' => '', 'id'=>'effectiveness_id', 'name'=>'effectiveness_id','class'=>'form-control', 'style' => 'width: 100%']) !!}
 
-                                                    {!! Form::label('effectiveness_comment', __('Ý kiến'), ['class' => 'control-label']) !!}
+                                                    {!! Form::label('effectiveness_comment', __('Ý kiến'), ['class' => 'control-label required']) !!}
                                                     {!! Form::textarea('effectiveness_comment', null, ['class' => 'form-control']) !!}
 
                                                     {!! Form::submit(__('Cập nhật'), ['class' => 'btn btn-primary', 'style' => 'width:100%']) !!}
@@ -659,7 +659,7 @@
                                         'method' => 'PATCH',
                                         'route' => ['markTicketCompleted', $ticket->id],
                                     ]) !!}
-                                {!! Form::label('ticket_status_id', __('Trạng thái' ), ['class' => 'control-label']) !!}
+                                {!! Form::label('ticket_status_id', __('Trạng thái' ), ['class' => 'control-label required']) !!}
                                 {!! Form::select('ticket_status_id', $statuses, null, ['placeholder' => '', 'id'=>'ticket_status_id', 'name'=>'ticket_status_id','class'=>'form-control', 'style' => 'width:100%']) !!}
 
                                 {!! Form::label('mark_completed_comment', __('Ý kiến'), ['class' => 'control-label']) !!}
