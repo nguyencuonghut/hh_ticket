@@ -193,7 +193,7 @@ class UsersController extends Controller
             ->withCompanyname($this->settings->getCompanyName())
             ->withTaskStatistics($this->tasks->totalOpenAndClosedTasks($id))
             ->withLeadStatistics($this->leads->totalOpenAndClosedLeads($id))
-            ->withTickets(Ticket::with('creator')->orderByDesc('created_at')->paginate(3));
+            ->withTickets(Ticket::with('creator')->orderByDesc('created_at')->paginate(5));
     }
 
     /**

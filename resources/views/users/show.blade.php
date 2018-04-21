@@ -36,7 +36,7 @@
             </div>
 
             <div class="panel panel-primary">
-                <div class="panel-heading">Ticket tạo gần đây</div>
+                <div class="panel-heading">Tất cả ticket</div>
                 <div class="panel-body">
                     @foreach($tickets->slice(0, 5) as $ticket)
                         <div class="media">
