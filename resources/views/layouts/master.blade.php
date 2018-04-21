@@ -149,6 +149,7 @@ $('body').click(function(e) {
                     <a href="{{ route('users.create')}}"
                        class="list-group-item childlist">{{ __('Tạo mới') }}</a>
                 @endif
+                <a href="{{ route('users.edit', \auth()->id())}}" class="list-group-item childlist">{{ __('Cập nhật thông tin') }}</a>
             </div>
 
             <!--

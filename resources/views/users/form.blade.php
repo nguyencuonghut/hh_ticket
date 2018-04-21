@@ -37,6 +37,7 @@
     {!! Form::label('password_confirmation', __('Xác nhận mật khẩu'), ['class' => 'control-label']) !!}
     {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
 </div>
+@if(Entrust::hasRole('administrator'))
 <div class="form-group form-inline">
     {!! Form::label('roles', __('Vai trò'), ['class' => 'control-label']) !!}
     {!!
@@ -54,5 +55,6 @@
         ? $user->department->first()->id : null,
         ['class' => 'form-control']) !!}
 </div>
+@endif
 
 {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary']) !!}

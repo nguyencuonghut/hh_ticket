@@ -32,8 +32,6 @@ class UpdateUserRequest extends FormRequest
             'password' => 'sometimes',
             'password_confirmation' => 'sometimes',
             'image_path' => '',
-            'roles' => 'required',
-            'departments' => ''
         ];
     }
 }
