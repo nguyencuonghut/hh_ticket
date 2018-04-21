@@ -525,38 +525,40 @@
                                 @endif
                                 <br>
                                 <h5><b style="color:blue;float: left;">5. Đánh giá hiệu quả: &nbsp;</b></h5>
-                                <span>
-                                    <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#effectiveness"><i class="fa fa-edit"><b> Cập nhật</b></i></button>
-                                </span>
-                                <div class="modal fade" id="effectiveness" role="dialog" aria-labelledby="EffectivenessModalLabel">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                <h4 class="modal-title" id="EffectivenessModalLabel">Đánh giá hiệu quả</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                {!! Form::model($ticket, [
-                                                        'method' => 'PATCH',
-                                                        'route' => ['assetEffectiveness', $ticket->id],
-                                                        'files'=>true,
-                                                        'enctype' => 'multipart/form-data'
-                                                        ]) !!}
+                                @if(Auth::id()== $ticket->director_id)
+                                    <span>
+                                        <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#effectiveness"><i class="fa fa-edit"><b> Cập nhật</b></i></button>
+                                    </span>
+                                    <div class="modal fade" id="effectiveness" role="dialog" aria-labelledby="EffectivenessModalLabel">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    <h4 class="modal-title" id="EffectivenessModalLabel">Đánh giá hiệu quả</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    {!! Form::model($ticket, [
+                                                            'method' => 'PATCH',
+                                                            'route' => ['assetEffectiveness', $ticket->id],
+                                                            'files'=>true,
+                                                            'enctype' => 'multipart/form-data'
+                                                            ]) !!}
 
-                                                {!! Form::label('effectiveness_id', __('Hiệu quả'), ['class' => 'control-label']) !!}
-                                                {!! Form::select('effectiveness_id', $effectivenesses, null, ['placeholder' => '', 'id'=>'effectiveness_id', 'name'=>'effectiveness_id','class'=>'form-control', 'style' => 'width: 100%']) !!}
+                                                    {!! Form::label('effectiveness_id', __('Hiệu quả'), ['class' => 'control-label']) !!}
+                                                    {!! Form::select('effectiveness_id', $effectivenesses, null, ['placeholder' => '', 'id'=>'effectiveness_id', 'name'=>'effectiveness_id','class'=>'form-control', 'style' => 'width: 100%']) !!}
 
-                                                {!! Form::label('effectiveness_comment', __('Ý kiến'), ['class' => 'control-label']) !!}
-                                                {!! Form::textarea('effectiveness_comment', null, ['class' => 'form-control']) !!}
+                                                    {!! Form::label('effectiveness_comment', __('Ý kiến'), ['class' => 'control-label']) !!}
+                                                    {!! Form::textarea('effectiveness_comment', null, ['class' => 'form-control']) !!}
 
-                                                {!! Form::submit(__('Cập nhật'), ['class' => 'btn btn-primary', 'style' => 'width:100%']) !!}
-                                                {!! Form::close() !!}
-                                            </div>
-                                            <div class="modal-footer">
+                                                    {!! Form::submit(__('Cập nhật'), ['class' => 'btn btn-primary', 'style' => 'width:100%']) !!}
+                                                    {!! Form::close() !!}
+                                                </div>
+                                                <div class="modal-footer">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endif
 
                                 <div class="col-md-12">
                                     @if($ticket->effectiveness_id)
