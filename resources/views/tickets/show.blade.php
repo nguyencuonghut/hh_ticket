@@ -172,6 +172,7 @@
                                 </table>
                             </el-tab-pane>
                             <el-tab-pane label="Khắc phục" name="troubleshoot">
+                                <!--
                                 <h5><b style="color:blue;float: {{(\Auth::id() == $ticket->assigned_troubleshooter_id) ? 'left' : ''}}">2. Xác định trách nhiệm:</b></h5>
                                 @if(\Auth::id() == $ticket->assigned_troubleshooter_id)
                                     <span>
@@ -209,8 +210,9 @@
                                 @if($ticket->responsibility_id)
                                     <h5><b>Trách nhiệm:</b> {{$ticket->responsibility->name}}</h5>
                                 @endif
+                                -->
 
-                                <h5><b style="color:blue;float: {{(\Auth::id() == $ticket->assigned_troubleshooter_id) || (\Auth::id() == $ticket->director_id) ? 'left' : ''}};">3. Thực hiện biện pháp khắc phục:</b></h5>
+                                <h5><b style="color:blue;float: {{(\Auth::id() == $ticket->assigned_troubleshooter_id) || (\Auth::id() == $ticket->director_id) ? 'left' : ''}};">2. Thực hiện biện pháp khắc phục:</b></h5>
                                 @if(\Auth::id() == $ticket->assigned_troubleshooter_id)
                                     <span style="float: left">
                                         <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#troubleshootaction"><i class="fa fa-plus-circle"><b> Tạo thêm</b></i></button>
@@ -312,7 +314,7 @@
 
                             </el-tab-pane>
                             <el-tab-pane label="Phòng ngừa" name="prevention">
-                                <h5><b style="color:blue; float: {{(\Auth::id() == $ticket->assigned_preventer_id) || ((\Auth::id() == $ticket->director_id)) ? 'left' : ''}};">4. Đánh giá sự không phù hợp:</b></h5>
+                                <h5><b style="color:blue; float: {{(\Auth::id() == $ticket->assigned_preventer_id) || ((\Auth::id() == $ticket->director_id)) ? 'left' : ''}};">3. Đánh giá sự không phù hợp:</b></h5>
                                 @if(\Auth::id() == $ticket->director_id)
                                     <span style="float: left">
                                         <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#evaluation"><i class="fa fa-edit"><b> Cập nhật</b></i></button>
@@ -349,7 +351,7 @@
                                     <p><b>Mức độ:</b> <b style="color:{{$ticket->evaluation->color}}">{{$ticket->evaluation->name}}</b> (đánh giá bởi <b>{{$ticket->assigned_preventer->name}}</b>)</p>
                                 @endif
 
-                                <h5><b style="color:blue;float: {{(\Auth::id() == $ticket->assigned_preventer_id) || (\Auth::id() == $ticket->director_id)? 'left' : ''}};">5. Hoạt động phòng ngừa:</b></h5>
+                                <h5><b style="color:blue;float: {{(\Auth::id() == $ticket->assigned_preventer_id) || (\Auth::id() == $ticket->director_id)? 'left' : ''}};">4. Hoạt động phòng ngừa:</b></h5>
                                 @if(\Auth::id() == $ticket->assigned_preventer_id)
                                     <span style="float: left">
                                         <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#update_root_cause"><i class="fa fa-edit"><b> Cập nhật nguyên nhân gốc</b></i></button>
@@ -522,7 +524,7 @@
                                     @include('tickets.preventions.index', ['subject' => $ticket])
                                 @endif
                                 <br>
-                                <h5><b style="color:blue;float: left;">6. Đánh giá hiệu quả: &nbsp;</b></h5>
+                                <h5><b style="color:blue;float: left;">5. Đánh giá hiệu quả: &nbsp;</b></h5>
                                 <span>
                                     <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#effectiveness"><i class="fa fa-edit"><b> Cập nhật</b></i></button>
                                 </span>
@@ -568,7 +570,7 @@
                                 </div>
 
                                 @if('Closed' == $ticket->ticket_status->name)
-                                <h5><b style="color:blue">7. Đóng ticket &nbsp;</b></h5>
+                                <h5><b style="color:blue">6. Đóng ticket &nbsp;</b></h5>
                                     <p>Ticket được đóng (bởi {{$ticket->director->name}}).
                                         @if($ticket->mark_completed_comment)
                                             <br>
