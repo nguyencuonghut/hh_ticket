@@ -348,7 +348,7 @@
                                 @endif
                                 <br>
                                 @if($ticket->evaluation_id)
-                                    <p><b>Mức độ:</b> <b style="color:{{$ticket->evaluation->color}}">{{$ticket->evaluation->name}}</b> (đánh giá bởi <b>{{$ticket->assigned_preventer->name}}</b>)</p>
+                                    <p><b>Mức độ:</b> <b style="color:{{$ticket->evaluation->color}}">{{$ticket->evaluation->name}}</b> (đánh giá bởi <b>{{$ticket->director->name}}</b>)</p>
                                 @endif
 
                                 <h5><b style="color:blue;float: {{(\Auth::id() == $ticket->assigned_preventer_id) || (\Auth::id() == $ticket->director_id)? 'left' : ''}};">4. Hoạt động phòng ngừa:</b></h5>
