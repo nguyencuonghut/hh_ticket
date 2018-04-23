@@ -120,7 +120,7 @@ class PagesController extends Controller
         $completedTicketsMonthly = $this->tickets->completedTicketsMothly();
         $departments = Department::all()->pluck('name', 'id');
         $department_name = 'Tất cả';
-        $opened_tickets_cnt = Ticket::all()->where('ticket_status_id', '1')->count();
+        $opened_tickets_cnt = Ticket::all()->count();
         $closed_tickets_cnt = Ticket::all()->where('ticket_status_id', '2')->count();
        
         return view('pages.dashboard', compact(

@@ -515,7 +515,6 @@ class TicketsController extends Controller
             $department_name = Department::findOrFail($request->department_id)->name;
             $opened_tickets_cnt = Ticket::all()
                 ->where('department_id', $request->department_id)
-                ->where('ticket_status_id', '1')
                 ->count();
             $closed_tickets_cnt = Ticket::all()
                 ->where('department_id', $request->department_id)
