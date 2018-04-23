@@ -69,3 +69,23 @@ $factory->define(App\Models\Lead::class, function (Faker\Generator $faker) {
         'updated_at' => $faker->dateTimeThisYear($max = 'now'),
     ];
 });
+
+$factory->define(App\Models\Ticket::class, function (Faker\Generator $faker) {
+    return [
+        'title' => $faker->sentence,
+        'deadline' => $faker->dateTimeThisYear($max = 'now'),
+        'source_id' => $faker->numberBetween($min = 1, $max = 4),
+        'what' => $faker->sentence,
+        'why' => $faker->sentence,
+        'when' => $faker->dateTimeThisYear($max = 'now'),
+        'who' => $faker->name,
+        'where' => $faker->city,
+        'how_1' => $faker->sentence,
+        'how_2' => $faker->sentence,
+        'ticket_status_id' =>$faker->numberBetween($min = 1, $max = 2),
+        'created_at' => $faker->dateTimeBetween($startDate = '-3 months', $endDate = 'now'),
+        'updated_at' => $faker->dateTimeBetween($startDate = '-3 months', $endDate = 'now'),
+        'creator_id' => $faker->numberBetween($min = 1, $max = 10),
+        'department_id' => $faker->numberBetween($min = 1, $max = 12)
+    ];
+});

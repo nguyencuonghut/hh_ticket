@@ -610,4 +610,27 @@ class TicketRepository implements TicketRepositoryContract
         return collect([$high_cnt, $medium_cnt, $low_cnt]);
         //return collect([24, 7, 55]);
     }
+
+    /**
+     * @return mixed
+     */
+    public function createdTicketsMothly()
+    {
+        return DB::table('tickets')
+            ->select(DB::raw('count(*) as month, created_at'))
+            ->groupBy(DB::raw('YEAR(created_at), MONTH(created_at)'))
+            ->get();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function completedTicketsMothly()
+    {
+        return DB::table('tickets')
+            ->select(DB::raw('count(*) as month, updated_at'))
+            ->where('ticket_status_id', 2)
+            ->groupBy(DB::raw('YEAR(updated_at), MONTH(updated_at)'))
+            ->get();
+    }
 }

@@ -26,5 +26,6 @@ class DatabaseSeeder extends Seeder
         $this->call('RootCauseTypesTableSeeder');
         $this->call('EffectivenessesTableSeeder');
         $this->call('ApproveResultsTableSeeder');
+        //$this->call('TicketsTableSeeder');
     }
 }
