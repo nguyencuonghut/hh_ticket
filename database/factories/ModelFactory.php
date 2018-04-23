@@ -86,6 +86,8 @@ $factory->define(App\Models\Ticket::class, function (Faker\Generator $faker) {
         'created_at' => $faker->dateTimeBetween($startDate = '-3 months', $endDate = 'now'),
         'updated_at' => $faker->dateTimeBetween($startDate = '-3 months', $endDate = 'now'),
         'creator_id' => $faker->numberBetween($min = 1, $max = 10),
-        'department_id' => $faker->numberBetween($min = 1, $max = 12)
+        'department_id' => $faker->numberBetween($min = 1, $max = 10),
+        'root_cause_type_id' => $faker->numberBetween($min = 1, $max = 6),
+        'effectiveness_id' => $faker->numberBetween($min = 1, $max = 3),
     ];
 });

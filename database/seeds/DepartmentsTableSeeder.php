@@ -63,16 +63,6 @@ class DepartmentsTableSeeder extends Seeder
         $createDep->name = 'BP Kho';
         $createDep->save();
 
-        $createDep = new Department;
-        $createDep->id = '11';
-        $createDep->name = 'Phòng Thí Nghiệm';
-        $createDep->save();
-
-        $createDep = new Department;
-        $createDep->id = '12';
-        $createDep->name = 'Ban Lãnh Đạo';
-        $createDep->save();
-
 
         \DB::table('department_user')->insert([
             'department_id' => 1,
@@ -95,7 +85,7 @@ class DepartmentsTableSeeder extends Seeder
             'user_id' => 5
         ]);
         \DB::table('department_user')->insert([
-            'department_id' => 12,
+            'department_id' => 9,
             'user_id' => 6
         ]);
         \DB::table('department_user')->insert([
@@ -107,15 +97,15 @@ class DepartmentsTableSeeder extends Seeder
             'user_id' => 8
         ]);
         \DB::table('department_user')->insert([
-            'department_id' => 11,
+            'department_id' => 9,
             'user_id' => 9
         ]);
         \DB::table('department_user')->insert([
-            'department_id' => 12,
+            'department_id' => 6,
             'user_id' => 10
         ]);
         \DB::table('department_user')->insert([
-            'department_id' => 12,
+            'department_id' => 3,
             'user_id' => 11
         ]);
         \DB::table('department_user')->insert([
