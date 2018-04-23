@@ -6,6 +6,7 @@ use App\Http\Requests\Ticket\StoreTicketRequest;
 use App\Http\Requests\Ticket\UpdateTicketRequest;
 use App\Models\Activity;
 use App\Models\ApproveResult;
+use App\Models\Department;
 use App\Models\Effectiveness;
 use App\Models\Evaluation;
 use App\Models\Prevention;
@@ -491,5 +492,36 @@ class TicketsController extends Controller
         Session()->flash('flash_message', 'Cập nhật trạng thái ticket thành công!');
         return redirect()->back()->with('tab', 'prevention');
 
+    }
+
+    /**
+     * Apply filter for effectiveness of tickets
+     */
+    public function effectivenessFiltered(Request $request)
+    {
+        $allDepartmentTickets = $this->tickets->allDepartmentStatistic();
+        $allReasonTickets = $this->tickets->allReasonStatistic();
+        $allDepartmentStateTickets = $this->tickets->allDepartmentStateStatistic();
+        $allDepartmentReasonTickets = $this->tickets->allDepartmentReasonStatistic();
+        $allEffectivenessTickets = $this->tickets->allEffectivenessFilteredStatistic($request);
+        $createdTicketsMonthly = $this->tickets->createdTicketsMothly();
+        $completedTicketsMonthly = $this->tickets->completedTicketsMothly();
+        $departments = Department::all()->pluck('name', 'id');
+        if(0 == $request->department_id) { // All departments
+            $department_name = 'Tất cả';
+        } else {
+            $department_name = Department::findOrFail($request->department_id)->name;
+        }
+        return view('pages.dashboard', compact(
+            'allDepartmentTickets',
+            'allReasonTickets',
+            'allDepartmentStateTickets',
+            'allDepartmentReasonTickets',
+            'allEffectivenessTickets',
+            'createdTicketsMonthly',
+            'completedTicketsMonthly',
+            'departments',
+            'department_name'
+        ));
     }
 }

@@ -612,6 +612,27 @@ class TicketRepository implements TicketRepositoryContract
     }
 
     /**
+     * Effectiveness statistic with filter based on department
+     * @param
+     */
+    public function allEffectivenessFilteredStatistic($requestData)
+    {
+        $department_id = $requestData->department_id;
+        if(0 == $department_id) {
+            $high_cnt =  Ticket::all()->where('effectiveness_id', 1)->count();
+            $medium_cnt =  Ticket::all()->where('effectiveness_id', 2)->count();
+            $low_cnt =  Ticket::all()->where('effectiveness_id', 3)->count();
+        } else {
+            $high_cnt =  Ticket::all()->where('department_id', $department_id)->where('effectiveness_id', 1)->count();
+            $medium_cnt =  Ticket::all()->where('department_id', $department_id)->where('effectiveness_id', 2)->count();
+            $low_cnt =  Ticket::all()->where('department_id', $department_id)->where('effectiveness_id', 3)->count();
+        }
+
+        return collect([$high_cnt, $medium_cnt, $low_cnt]);
+        //return collect([24, 7, 55]);
+    }
+
+    /**
      * @return mixed
      */
     public function createdTicketsMothly()

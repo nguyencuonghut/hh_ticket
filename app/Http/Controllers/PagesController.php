@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Department;
 use DB;
 use Carbon;
 use App\Http\Requests;
@@ -116,6 +117,8 @@ class PagesController extends Controller
         $allEffectivenessTickets = $this->tickets->allEffectivenessStatistic();
         $createdTicketsMonthly = $this->tickets->createdTicketsMothly();
         $completedTicketsMonthly = $this->tickets->completedTicketsMothly();
+        $departments = Department::all()->pluck('name', 'id');
+        $department_name = 'Tất cả';
        
         return view('pages.dashboard', compact(
             'completedTasksToday',
@@ -144,7 +147,9 @@ class PagesController extends Controller
             'allDepartmentReasonTickets',
             'allEffectivenessTickets',
             'createdTicketsMonthly',
-            'completedTicketsMonthly'
+            'completedTicketsMonthly',
+            'departments',
+            'department_name'
         ));
     }
 }
