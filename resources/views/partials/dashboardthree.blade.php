@@ -1,7 +1,7 @@
 <br/><br/>
 <div class="col-md-12">
     {!! Form::open([
-        'route' => 'tickets.effectivenessfiltered',
+        'route' => 'tickets.ticketstatisticfiltered',
         'files'=>true,
         'enctype' => 'multipart/form-data'
     ]) !!}
@@ -48,11 +48,11 @@
         </div>
 
         <div class="panel panel-primary">
-            <div class="panel-heading"><b>Tổng hợp SKPH hàng tháng</b></div>
+            <div class="panel-heading"><b>Tổng hợp SKPH hàng tháng<i style="color: gold">({{$department_name}})</i></b>&nbsp;<span style="color:blue" class="badge">{{$opened_tickets_cnt}}/{{$closed_tickets_cnt}}</span></div>
             <div class="panel-body">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h4 class="box-title">Tổng hợp SKPH hàng tháng</h4>
+                        <h4 class="box-title"></h4>
                         <div class="box-tools pull-right">
                             <button type="button" id="collapse1" class="btn btn-box-tool" data-toggle="collapse"
                                     data-target="#collapseOne"><i id="toggler1" class="fa fa-minus"></i>

@@ -644,6 +644,27 @@ class TicketRepository implements TicketRepositoryContract
     }
 
     /**
+     * Effectiveness statistic with filter based on department
+     * @param
+     */
+    public function createdTicketsMothlyFiltered($requestData)
+    {
+        $department_id = $requestData->department_id;
+        if(0 == $department_id) {
+            return DB::table('tickets')
+                ->select(DB::raw('count(*) as month, created_at'))
+                ->groupBy(DB::raw('YEAR(created_at), MONTH(created_at)'))
+                ->get();
+        } else {
+            return DB::table('tickets')
+                ->where('department_id', $department_id)
+                ->select(DB::raw('count(*) as month, created_at'))
+                ->groupBy(DB::raw('YEAR(created_at), MONTH(created_at)'))
+                ->get();
+        }
+    }
+
+    /**
      * @return mixed
      */
     public function completedTicketsMothly()
@@ -653,5 +674,29 @@ class TicketRepository implements TicketRepositoryContract
             ->where('ticket_status_id', 2)
             ->groupBy(DB::raw('YEAR(updated_at), MONTH(updated_at)'))
             ->get();
+    }
+
+
+    /**
+     * Effectiveness statistic with filter based on department
+     * @param
+     */
+    public function completedTicketsMothlyFiltered($requestData)
+    {
+        $department_id = $requestData->department_id;
+        if(0 == $department_id) {
+            return DB::table('tickets')
+                ->select(DB::raw('count(*) as month, updated_at'))
+                ->where('ticket_status_id', 2)
+                ->groupBy(DB::raw('YEAR(updated_at), MONTH(updated_at)'))
+                ->get();
+        } else {
+            return DB::table('tickets')
+                ->select(DB::raw('count(*) as month, updated_at'))
+                ->where('department_id', $department_id)
+                ->where('ticket_status_id', 2)
+                ->groupBy(DB::raw('YEAR(updated_at), MONTH(updated_at)'))
+                ->get();
+        }
     }
 }

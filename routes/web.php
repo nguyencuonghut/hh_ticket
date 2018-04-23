@@ -18,8 +18,7 @@ Route::group(['middleware' => ['auth']], function () {
      */
         Route::get('/', 'PagesController@dashboard');
         Route::get('dashboard', 'PagesController@dashboard')->name('dashboard');
-        Route::post('/effectivenessfiltered', 'TicketsController@effectivenessFiltered')->name('tickets.effectivenessfiltered');
-        
+        Route::post('/ticketstatisticfiltered', 'TicketsController@ticketStatisticFiltered')->name('tickets.ticketstatisticfiltered');
     /**
      * Users
      */

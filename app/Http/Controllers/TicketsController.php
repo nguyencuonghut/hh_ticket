@@ -495,22 +495,32 @@ class TicketsController extends Controller
     }
 
     /**
-     * Apply filter for effectiveness of tickets
+     * Apply filter for tickets
      */
-    public function effectivenessFiltered(Request $request)
+    public function ticketStatisticFiltered(Request $request)
     {
         $allDepartmentTickets = $this->tickets->allDepartmentStatistic();
         $allReasonTickets = $this->tickets->allReasonStatistic();
         $allDepartmentStateTickets = $this->tickets->allDepartmentStateStatistic();
         $allDepartmentReasonTickets = $this->tickets->allDepartmentReasonStatistic();
         $allEffectivenessTickets = $this->tickets->allEffectivenessFilteredStatistic($request);
-        $createdTicketsMonthly = $this->tickets->createdTicketsMothly();
-        $completedTicketsMonthly = $this->tickets->completedTicketsMothly();
+        $createdTicketsMonthly = $this->tickets->createdTicketsMothlyFiltered($request);
+        $completedTicketsMonthly = $this->tickets->completedTicketsMothlyFiltered($request);
         $departments = Department::all()->pluck('name', 'id');
         if(0 == $request->department_id) { // All departments
             $department_name = 'Tất cả';
+            $opened_tickets_cnt = Ticket::all()->where('ticket_status_id', '1')->count();
+            $closed_tickets_cnt = Ticket::all()->where('ticket_status_id', '2')->count();
         } else {
             $department_name = Department::findOrFail($request->department_id)->name;
+            $opened_tickets_cnt = Ticket::all()
+                ->where('department_id', $request->department_id)
+                ->where('ticket_status_id', '1')
+                ->count();
+            $closed_tickets_cnt = Ticket::all()
+                ->where('department_id', $request->department_id)
+                ->where('ticket_status_id', '2')
+                ->count();
         }
         return view('pages.dashboard', compact(
             'allDepartmentTickets',
@@ -521,7 +531,9 @@ class TicketsController extends Controller
             'createdTicketsMonthly',
             'completedTicketsMonthly',
             'departments',
-            'department_name'
+            'department_name',
+            'opened_tickets_cnt',
+            'closed_tickets_cnt'
         ));
     }
 }
