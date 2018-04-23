@@ -20,7 +20,7 @@
                             "Kho" + ": " + this.statistics[9]],
                         datasets: [
                             {
-                                backgroundColor: ["#FF6384", "#71397C", "#61BA95", "red", "green", "gray", "blue", "orange", "black", "#000099"],
+                                backgroundColor: ["#FF6384", "#71397C", "#61BA95", "red", "green", "gray", "blue", "orange", "black", "brown"],
                                 data: this.statistics
                                 //data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
                             }
