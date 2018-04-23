@@ -11,6 +11,7 @@ import doughnut from './components/Doughnut.vue';
 import message from './components/Message.vue';
 import pie from './components/DepartmentStatisticChart.vue';
 import pie2 from './components/ReasonStatisticChart.vue';
+import pie3 from './components/EffectivenessStatisticChart.vue';
 import 'element-ui/lib/theme-default/index.css';
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -101,5 +102,6 @@ var app = new Vue({
         message,
         pie,
         pie2,
+        pie3,
     }
 });

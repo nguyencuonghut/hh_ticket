@@ -597,4 +597,17 @@ class TicketRepository implements TicketRepositoryContract
         event(new \App\Events\TicketAction($ticket, self::MARK_TICKET_COMPLETED));
     }
 
+    /**
+     * Effectiveness statistic
+     * @param
+     */
+    public function allEffectivenessStatistic()
+    {
+        $high_cnt =  Ticket::all()->where('effectiveness_id', 1)->count();
+        $medium_cnt =  Ticket::all()->where('effectiveness_id', 2)->count();
+        $low_cnt =  Ticket::all()->where('effectiveness_id', 3)->count();
+
+        return collect([$high_cnt, $medium_cnt, $low_cnt]);
+        //return collect([24, 7, 55]);
+    }
 }

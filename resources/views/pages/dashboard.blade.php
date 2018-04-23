@@ -37,6 +37,7 @@
     <div class="div">
         <div class="row">
             @include('partials.dashboardthree')
+            @include('partials.dashboardfive')
             @include('partials.dashboardfour')
         </div>
     </div>
