@@ -500,9 +500,9 @@ class TicketsController extends Controller
     public function ticketStatisticFiltered(Request $request)
     {
         $allDepartmentTickets = $this->tickets->allDepartmentStatistic();
-        $allReasonTickets = $this->tickets->allReasonStatistic();
+        $allReasonTickets = $this->tickets->allReasonStatisticFiltered($request);
         $allDepartmentStateTickets = $this->tickets->allDepartmentStateStatistic();
-        $allDepartmentReasonTickets = $this->tickets->allDepartmentReasonStatistic();
+        $allDepartmentReasonTickets = $this->tickets->allDepartmentReasonStatistic($request);
         $allEffectivenessTickets = $this->tickets->allEffectivenessFilteredStatistic($request);
         $createdTicketsMonthly = $this->tickets->createdTicketsMothlyFiltered($request);
         $completedTicketsMonthly = $this->tickets->completedTicketsMothlyFiltered($request);

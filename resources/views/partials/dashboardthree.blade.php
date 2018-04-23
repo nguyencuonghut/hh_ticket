@@ -41,7 +41,7 @@
 
 
         <div class="panel panel-primary">
-            <div class="panel-heading"><b>Tổng hợp SKPH theo nguyên nhân</b></div>
+            <div class="panel-heading"><b>Tổng hợp SKPH theo nguyên nhân<i style="color: gold">({{$department_name}})</i></b>&nbsp;</div>
             <div class="panel-body">
                 <pie2 :statistics="{{$allReasonTickets}}" ></pie2>
             </div>

@@ -378,6 +378,49 @@ class TicketRepository implements TicketRepositoryContract
         //return collect([24, 7, 55, 16, 25, 86]);
     }
 
+    /**
+     * @param
+     */
+    public function allReasonStatisticFiltered($requestData)
+    {
+        $department_id = $requestData->department_id;
+        if(0 == $department_id) {
+            $human_cnt =  Ticket::all()->where('root_cause_type_id', 1)->count();
+            $machine_cnt =  Ticket::all()->where('root_cause_type_id', 2)->count();
+            $material_cnt =  Ticket::all()->where('root_cause_type_id', 3)->count();
+            $method_cnt =  Ticket::all()->where('root_cause_type_id', 4)->count();
+            $measurement_cnt =  Ticket::all()->where('root_cause_type_id', 5)->count();
+            $environment_cnt =  Ticket::all()->where('root_cause_type_id', 6)->count();
+        } else {
+            $human_cnt =  Ticket::all()
+                ->where('department_id', $requestData->department_id)
+                ->where('root_cause_type_id', 1)
+                ->count();
+            $machine_cnt =  Ticket::all()
+                ->where('department_id', $requestData->department_id)
+                ->where('root_cause_type_id', 2)
+                ->count();
+            $material_cnt =  Ticket::all()
+                ->where('department_id', $requestData->department_id)
+                ->where('root_cause_type_id', 3)
+                ->count();
+            $method_cnt =  Ticket::all()
+                ->where('department_id', $requestData->department_id)
+                ->where('root_cause_type_id', 4)
+                ->count();
+            $measurement_cnt =  Ticket::all()
+                ->where('department_id', $requestData->department_id)
+                ->where('root_cause_type_id', 5)
+                ->count();
+            $environment_cnt =  Ticket::all()
+                ->where('department_id', $requestData->department_id)
+                ->where('root_cause_type_id', 6)
+                ->count();
+        }
+
+        return collect([$human_cnt, $machine_cnt, $material_cnt, $method_cnt, $measurement_cnt, $environment_cnt]);
+        //return collect([24, 7, 55, 16, 25, 86]);
+    }
 
     /**
      * @param
