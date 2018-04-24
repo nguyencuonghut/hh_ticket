@@ -144,7 +144,7 @@ class TicketActionLog
                 ]);
                 break;
             case 'mark_ticket_completed':
-                $text = __('<b><i>:title</i></b>, :director đã chuyển trạng thái phiếu sang<b>:ticket_status</b>', [
+                $text = __('<b><i>:title</i></b>, :director đã chuyển trạng thái phiếu sang <b>:ticket_status</b>', [
                     'title' => $event->getTicket()->title,
                     'director' => $event->getTicket()->director->name,
                     'ticket_status' => $event->getTicket()->ticket_status->name,
