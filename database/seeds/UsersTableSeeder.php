@@ -31,6 +31,7 @@ class UsersTableSeeder extends Seeder
                     'created_at' => '2016-06-04 13:42:19',
                     'updated_at' => '2016-06-04 13:42:19',
                 ),
+            /*
             1 =>
                 array (
                     'id' => 2,
@@ -395,6 +396,7 @@ class UsersTableSeeder extends Seeder
                     'created_at' => '2016-06-04 13:42:19',
                     'updated_at' => '2016-06-04 13:42:19',
                 ),
+            */
         ));
     }
 }
