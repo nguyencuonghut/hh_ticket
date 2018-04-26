@@ -14,7 +14,7 @@
                 this.Chart = new Chart(this.$refs.canvaschart.getContext('2d'), {
                     type: 'pie',
                     data: {
-                        labels: ["HCNS" + ": " + this.statistics[0], "Sale Admin" + ": " + this.statistics[1], "Kế Toán" + ": " + this.statistics[2]
+                        labels: ["HCNS" + ": " + this.statistics[0], "Kinh Doanh" + ": " + this.statistics[1], "Kế Toán" + ": " + this.statistics[2]
                             , "KSNB" + ": " + this.statistics[3], "Bảo Trì" + ": " + this.statistics[4], "Sản Xuất" + ": " + this.statistics[5]
                             , "Thu Mua" + ": " + this.statistics[6], "Kỹ Thuật" + ": " + this.statistics[7], "QLCL" + ": " + this.statistics[8],
                             "Kho" + ": " + this.statistics[9], "Pháp chế" + ": " + this.statistics[10]],

@@ -45,7 +45,7 @@
                     -->
                 </tr>
                 <tr>
-                    <td>Sale Admin</td>
+                    <td>Kinh Doanh</td>
                     <td>{{$allDepartmentTickets[1]}}</td>
                     <td>{{$allDepartmentStateTickets[1][0]}} <i>({{$allDepartmentStateTickets[1]->sum() ? (int)(100 * $allDepartmentStateTickets[1][0]/$allDepartmentStateTickets[1]->sum()) : 0}} %)</i></td>
                     <td>{{$allDepartmentStateTickets[1][1]}} <i>({{$allDepartmentStateTickets[1]->sum() ? (int)(100 * $allDepartmentStateTickets[1][1]/$allDepartmentStateTickets[1]->sum()) : 0}} %)</i></td>
