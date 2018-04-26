@@ -3,14 +3,14 @@
 @section('content')
     <div class="col-lg-12 currenttask">
         <table class="table table-hover">
-            <h3>All Departments</h3>
+            <h3>Tất cả phòng/ban</h3>
             <thead>
             <thead>
             <tr>
-                <th>{{ __('Name') }}</th>
-                <th>{{ __('Description') }}</th>
+                <th>{{ __('Tên') }}</th>
+                <th>{{ __('Mô tả') }}</th>
                 @if(Entrust::hasRole('administrator'))
-                    <th>{{ __('Action') }}</th>
+                    <th>{{ __('Thao tác') }}</th>
                 @endif
             </tr>
             </thead>
