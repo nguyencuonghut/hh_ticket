@@ -24,7 +24,6 @@ class UpdateTicketRequest extends FormRequest
     {
         return [
             'title' => 'required:tickets',
-            'deadline' => 'required',
             'source_id' => 'required',
             'what' => 'required',
             'why' => 'required',
@@ -40,7 +39,6 @@ class UpdateTicketRequest extends FormRequest
     {
         return [
             'title.required' => 'Yêu cầu bạn PHẢI điền "Tiêu Đề"',
-            'deadline.required' => 'Yêu cầu bạn PHẢI điền "Thời Hạn"',
             'source_id.required' => 'Yêu cầu bạn PHẢI điền "Nguồn Gốc"',
             'what.required' => 'Yêu cầu bạn PHẢI điền "Cái gì đã xảy ra?"',
             'why.required' => 'Yêu cầu bạn PHẢI điền "Tại sao đây là một vấn đề?"',

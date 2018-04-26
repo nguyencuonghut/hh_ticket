@@ -73,7 +73,6 @@ $factory->define(App\Models\Lead::class, function (Faker\Generator $faker) {
 $factory->define(App\Models\Ticket::class, function (Faker\Generator $faker) {
     return [
         'title' => $faker->sentence,
-        'deadline' => $faker->dateTimeThisYear($max = 'now'),
         'source_id' => $faker->numberBetween($min = 1, $max = 4),
         'what' => $faker->sentence,
         'why' => $faker->sentence,

@@ -279,7 +279,7 @@ class TicketsController extends Controller
     public function anyData()
     {
         $tickets = Ticket::with(['creator', 'source', 'department', 'ticket_status'])->select(
-            ['id', 'title', 'created_at', 'deadline', 'source_id', 'creator_id', 'department_id', 'ticket_status_id']
+            ['id', 'title', 'created_at', 'source_id', 'creator_id', 'department_id', 'ticket_status_id']
         )->orderBy('id', 'desc');
         return Datatables::of($tickets)
             ->addColumn('titlelink', function ($tickets) {
@@ -287,10 +287,6 @@ class TicketsController extends Controller
             })
             ->editColumn('created_at', function ($tickets) {
                 return $tickets->created_at ? with(new Carbon($tickets->created_at))
-                    ->format('d/m/Y') : '';
-            })
-            ->editColumn('deadline', function ($tickets) {
-                return $tickets->deadline ? with(new Carbon($tickets->deadline))
                     ->format('d/m/Y') : '';
             })
             ->editColumn('source', function ($tickets) {
@@ -419,7 +415,7 @@ class TicketsController extends Controller
     public function myCreatedData()
     {
         $tickets = Ticket::select(
-            ['id', 'title', 'created_at', 'deadline', 'source_id', 'ticket_status_id']
+            ['id', 'title', 'created_at', 'source_id', 'ticket_status_id']
         )->where('creator_id', \Auth::id())->orderBy('id', 'desc');
         return Datatables::of($tickets)
             ->addColumn('titlelink', function ($tickets) {
@@ -428,10 +424,6 @@ class TicketsController extends Controller
             })
             ->editColumn('issue_date', function ($tickets) {
                 return $tickets->created_at ? with(new Carbon($tickets->created_at))
-                    ->format('d/m/Y') : '';
-            })
-            ->editColumn('answer_date', function ($tickets) {
-                return $tickets->deadline ? with(new Carbon($tickets->deadline))
                     ->format('d/m/Y') : '';
             })
             ->editColumn('source_id', function ($tickets) {
@@ -448,7 +440,7 @@ class TicketsController extends Controller
     public function myConfirmedData()
     {
         $tickets = Ticket::select(
-            ['id', 'title', 'created_at', 'deadline', 'source_id', 'director_confirmation_result_id', 'ticket_status_id']
+            ['id', 'title', 'created_at', 'source_id', 'director_confirmation_result_id', 'ticket_status_id']
         )->where('director_id', \Auth::id())->orderBy('id', 'desc');
         return Datatables::of($tickets)
             ->addColumn('titlelink', function ($tickets) {
@@ -457,10 +449,6 @@ class TicketsController extends Controller
             })
             ->editColumn('issue_date', function ($tickets) {
                 return $tickets->created_at ? with(new Carbon($tickets->created_at))
-                    ->format('d/m/Y') : '';
-            })
-            ->editColumn('answer_date', function ($tickets) {
-                return $tickets->deadline ? with(new Carbon($tickets->deadline))
                     ->format('d/m/Y') : '';
             })
             ->editColumn('source_id', function ($tickets) {

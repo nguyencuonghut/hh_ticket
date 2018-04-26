@@ -17,7 +17,6 @@ class CreateTicketsTable extends Migration
             $table->increments('id');
             //Description for ticket
             $table->longText('title');
-            $table->dateTime('deadline');//Thời hạn đưa ra nguyên nhân gốc rễ và hành động phòng ngừa
             $table->integer('source_id')->unsigned();
             $table->foreign('source_id')->references('id')->on('sources');
             $table->string('what');

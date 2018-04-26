@@ -10,7 +10,6 @@
         <tr>
             <th>{{ __('Tiêu đề') }}</th>
             <th>{{ __('Ngày tạo') }}</th>
-            <th>{{ __('Hạn trả lời') }}</th>
             <th>{{ __('Nguồn gốc') }}</th>
             <th>{{ __('Người tạo') }}</th>
             <th>{{ __('Phòng/Ban') }}</th>
@@ -32,7 +31,6 @@
             columns: [
                 {data: 'titlelink', name: 'title'},
                 {data: 'created_at', name: 'created_at', searchable:false},
-                {data: 'deadline', name: 'deadline', searchable:false},
                 {data: 'source', name: 'source.name'},
                 {data: 'name', name: 'creator.name'},
                 {data: 'department', name: 'department.name'},

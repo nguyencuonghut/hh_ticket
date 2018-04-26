@@ -12,7 +12,6 @@
                         <tr>
                             <th>{{ __('Tiêu đề') }}</th>
                             <th>{{ __('Ngày tạo') }}</th>
-                            <th>{{ __('Hạn trả lời') }}</th>
                         </tr>
                         </thead>
                     </table>
@@ -127,7 +126,6 @@
                         <tr>
                             <th>{{ __('Tiêu đề') }}</th>
                             <th>{{ __('Ngày tạo') }}</th>
-                            <th>{{ __('Hạn trả lời') }}</th>
                             <th>{{ __('Kết quả') }}</th>
                         </tr>
                         </thead>
@@ -168,7 +166,6 @@
                 columns: [
                     {data: 'titlelink', name: 'title'},
                     {data: 'issue_date', name: 'issue_date'},
-                    {data: 'answer_date', name: 'answer_date'},
                 ],
                 createdRow: function ( row, data, index ) {
                     if ( data['ticket_status'] == '1' ) {
@@ -207,7 +204,6 @@
                 columns: [
                     {data: 'titlelink', name: 'title'},
                     {data: 'issue_date', name: 'issue_date'},
-                    {data: 'answer_date', name: 'answer_date'},
                     {data: 'confirmation_result', name: 'confirmation_result'},
                 ],
                 createdRow: function ( row, data, index ) {

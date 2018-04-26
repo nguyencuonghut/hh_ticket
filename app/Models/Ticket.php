@@ -10,7 +10,6 @@ class Ticket extends Model
 
     protected $fillable = [
         'title',
-        'deadline',
         'source_id',
         'what',
         'why',

@@ -55,10 +55,9 @@
                                 <div class="col-md-12 col-md-6"></div>
                                 <div class="contactleft">
                                     <p><b>Ngày phát hành:</b> {{date('d F, Y', strtotime($ticket->created_at))}}</p>
-                                    <p><b>Thời hạn trả lời:</b> {{date('d F, Y', strtotime($ticket->deadline))}}</p>
+                                    <p><b>Nguồn gốc:</b> {{$ticket->source->name}}</p>
                                 </div>
                                 <div class="contactright col-md-6">
-                                    <p><b>Nguồn gốc:</b> {{$ticket->source->name}}</p>
                                     <p><b>Người tạo phiếu:</b> {{$ticket->creator->name}}</p>
                                     <br>
                                     <br>
