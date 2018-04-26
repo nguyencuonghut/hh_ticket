@@ -108,7 +108,7 @@
                                     </tr>
                                     <tr>
                                         <th class="col-md-3"><b>Nó xảy ra khi nào?</b></th>
-                                        <td class="col-md-4">{{date('d F, Y', strtotime($ticket->when))}}</td>
+                                        <td class="col-md-4">{{date('d F, Y H:i', strtotime($ticket->when))}}</td>
                                     </tr>
                                     <tr>
                                         <th class="col-md-3"><b>Ai phát hiện ra?</b></th>

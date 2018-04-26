@@ -73,6 +73,7 @@ class TicketRepository implements TicketRepositoryContract
                 'assigned_preventer_id' => $requestData->director_id,
                 'state_id' => 1,
                 'ticket_status_id' => 1,
+                'when' => Carbon::parse($requestData->when)->toDateTimeString()
             ]
         );
 
@@ -108,7 +109,9 @@ class TicketRepository implements TicketRepositoryContract
         $input = $requestData = array_merge(
             $requestData->all(),
             ['creator_id' => auth()->id(),
-                'image_path' => $filename,]
+                'image_path' => $filename,
+                'when' => Carbon::parse($requestData->when)->toDateTimeString()
+            ]
         );
 
         $ticket->fill($input)->save();

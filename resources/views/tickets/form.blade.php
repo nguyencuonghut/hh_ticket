@@ -32,7 +32,9 @@
     </div>
     <div class="form-group col-sm-4 removeleft removeright">
         {!! Form::label('when', __('Nó xảy ra khi nào ?'), ['class' => 'control-label required']) !!}
-        {!! Form::date('when', \Carbon\Carbon::now(), ['class' => 'form-control']) !!}
+        {!! Form::text('when',
+        isset($ticket->when) ? date('m-d-Y h:i A', strtotime($ticket->when)) : null,
+          ['class' => 'form-control']) !!}
     </div>
 </div>
 
@@ -71,6 +73,16 @@
         $("#director_id").select2({
             placeholder: "Chọn giám đốc khối",
             allowClear: true
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#when').datetimepicker(
+                {
+                    useCurrent: false,
+                }
+            );
         });
     </script>
 @endpush
