@@ -197,6 +197,23 @@
                     <td>{{$allDepartmentReasonTickets[9][5]}} <i>({{$allDepartmentReasonTickets[9]->sum() ? (int)(100 * $allDepartmentReasonTickets[9][5]/$allDepartmentReasonTickets[9]->sum()) : 0}} %)</i></td>
                     -->
                 </tr>
+                <tr>
+                    <td>Pháp chế</td>
+                    <td>{{$allDepartmentTickets[10]}}</td>
+                    <td>{{$allDepartmentStateTickets[10][0]}} <i>({{$allDepartmentStateTickets[10]->sum() ? (int)(100 * $allDepartmentStateTickets[10][0]/$allDepartmentStateTickets[10]->sum()) : 0}} %)</i></td>
+                    <td>{{$allDepartmentStateTickets[10][1]}} <i>({{$allDepartmentStateTickets[10]->sum() ? (int)(100 * $allDepartmentStateTickets[10][1]/$allDepartmentStateTickets[10]->sum()) : 0}} %)</i></td>
+                    <td>{{$allDepartmentStateTickets[10][2]}} <i>({{$allDepartmentStateTickets[10]->sum() ? (int)(100 * $allDepartmentStateTickets[10][2]/$allDepartmentStateTickets[10]->sum()) : 0}} %)</i></td>
+                    <td>{{$allDepartmentStateTickets[10][3]}} <i>({{$allDepartmentStateTickets[10]->sum() ? (int)(100 * $allDepartmentStateTickets[10][3]/$allDepartmentStateTickets[10]->sum()) : 0}} %)</i></td>
+
+                <!--
+                    <td>{{$allDepartmentReasonTickets[10][0]}} <i>({{$allDepartmentReasonTickets[10]->sum() ? (int)(100 * $allDepartmentReasonTickets[10][0]/$allDepartmentReasonTickets[10]->sum()) : 0}} %)</i></td>
+                    <td>{{$allDepartmentReasonTickets[10][1]}} <i>({{$allDepartmentReasonTickets[10]->sum() ? (int)(100 * $allDepartmentReasonTickets[10][1]/$allDepartmentReasonTickets[10]->sum()) : 0}} %)</i></td>
+                    <td>{{$allDepartmentReasonTickets[10][2]}} <i>({{$allDepartmentReasonTickets[10]->sum() ? (int)(100 * $allDepartmentReasonTickets[10][2]/$allDepartmentReasonTickets[10]->sum()) : 0}} %)</i></td>
+                    <td>{{$allDepartmentReasonTickets[10][3]}} <i>({{$allDepartmentReasonTickets[10]->sum() ? (int)(100 * $allDepartmentReasonTickets[10][3]/$allDepartmentReasonTickets[10]->sum()) : 0}} %)</i></td>
+                    <td>{{$allDepartmentReasonTickets[10][4]}} <i>({{$allDepartmentReasonTickets[10]->sum() ? (int)(100 * $allDepartmentReasonTickets[10][4]/$allDepartmentReasonTickets[10]->sum()) : 0}} %)</i></td>
+                    <td>{{$allDepartmentReasonTickets[10][5]}} <i>({{$allDepartmentReasonTickets[10]->sum() ? (int)(100 * $allDepartmentReasonTickets[10][5]/$allDepartmentReasonTickets[10]->sum()) : 0}} %)</i></td>
+                    -->
+                </tr>
             </table>
         </div>
     </div>

@@ -20,7 +20,7 @@ class DepartmentsTableSeeder extends Seeder
 
         $createDep = new Department;
         $createDep->id = '2';
-        $createDep->name = 'BP Sale Admin';
+        $createDep->name = 'BP Kinh Doanh';
         $createDep->save();
 
         $createDep = new Department;
@@ -61,6 +61,11 @@ class DepartmentsTableSeeder extends Seeder
         $createDep = new Department;
         $createDep->id = '10';
         $createDep->name = 'BP Kho';
+        $createDep->save();
+
+        $createDep = new Department;
+        $createDep->id = '11';
+        $createDep->name = 'BP Pháp Chế';
         $createDep->save();
 
 

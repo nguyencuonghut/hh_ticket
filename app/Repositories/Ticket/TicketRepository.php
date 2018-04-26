@@ -360,10 +360,11 @@ class TicketRepository implements TicketRepositoryContract
         $kythuat_cnt =  Ticket::all()->where('department_id', 8)->count();
         $qlcl_cnt =  Ticket::all()->where('department_id', 9)->count();
         $kho_cnt =  Ticket::all()->where('department_id', 10)->count();
+        $phapche_cnt =  Ticket::all()->where('department_id', 11)->count();
 
         return collect([$hcns_cnt, $sale_cnt, $ketoan_cnt, $ksnb_cnt, $baotri_cnt,
-            $sx_cnt, $thumua_cnt, $kythuat_cnt, $qlcl_cnt, $kho_cnt]);
-        //return collect([12, 20, 31, 14, 55, 26, 57, 88, 9, 10]);
+            $sx_cnt, $thumua_cnt, $kythuat_cnt, $qlcl_cnt, $kho_cnt, $phapche_cnt]);
+        //return collect([12, 20, 31, 14, 55, 26, 57, 88, 9, 10, 11]);
     }
     /**
      * @param
@@ -512,8 +513,16 @@ class TicketRepository implements TicketRepositoryContract
         $kho_cnt = collect([$kho_status_1_cnt, $kho_status_2_cnt, $kho_status_3_cnt, $kho_status_4_cnt, $kho_status_5_cnt]);
         //$kho_cnt = collect([90, 91, 92, 93]);
 
+        $phapche_status_1_cnt =  Ticket::all()->where('department_id', 11)->where('state_id', 1)->count();
+        $phapche_status_2_cnt =  Ticket::all()->where('department_id', 11)->where('state_id', 2)->count();
+        $phapche_status_3_cnt =  Ticket::all()->where('department_id', 11)->where('state_id', 3)->count();
+        $phapche_status_4_cnt =  Ticket::all()->where('department_id', 11)->where('state_id', 4)->count();
+        $phapche_status_5_cnt =  Ticket::all()->where('department_id', 11)->where('state_id', 5)->count();
+        $phapche_cnt = collect([$phapche_status_1_cnt, $phapche_status_2_cnt, $phapche_status_3_cnt, $phapche_status_4_cnt, $phapche_status_5_cnt]);
+        //$phapche_cnt = collect([99, 98, 97, 96]);
+
         return collect([$hcns_cnt, $sale_cnt, $ketoan_cnt, $ksnb_cnt, $baotri_cnt,
-            $sx_cnt, $thumua_cnt, $kythuat_cnt, $qlcl_cnt, $kho_cnt]);
+            $sx_cnt, $thumua_cnt, $kythuat_cnt, $qlcl_cnt, $kho_cnt, $phapche_cnt]);
     }
 
 
@@ -620,11 +629,21 @@ class TicketRepository implements TicketRepositoryContract
         $kho_reason_type_6_cnt = Ticket::all()->where('department_id', 10)->where('root_cause_type_id', 6)->count();
         $kho_cnt = collect([$kho_reason_type_1_cnt, $kho_reason_type_2_cnt, $kho_reason_type_3_cnt,
             $kho_reason_type_4_cnt, $kho_reason_type_5_cnt, $kho_reason_type_6_cnt]);
-        //$kho_cnt = collect([00, 91, 92, 93, 94]);
+        //$kho_cnt = collect([90, 91, 92, 93, 94]);
+
+        $phapche_reason_type_1_cnt = Ticket::all()->where('department_id', 11)->where('root_cause_type_id', 1)->count();
+        $phapche_reason_type_2_cnt = Ticket::all()->where('department_id', 11)->where('root_cause_type_id', 2)->count();
+        $phapche_reason_type_3_cnt = Ticket::all()->where('department_id', 11)->where('root_cause_type_id', 3)->count();
+        $phapche_reason_type_4_cnt = Ticket::all()->where('department_id', 11)->where('root_cause_type_id', 4)->count();
+        $phapche_reason_type_5_cnt = Ticket::all()->where('department_id', 11)->where('root_cause_type_id', 5)->count();
+        $phapche_reason_type_6_cnt = Ticket::all()->where('department_id', 11)->where('root_cause_type_id', 6)->count();
+        $phapche_cnt = collect([$phapche_reason_type_1_cnt, $phapche_reason_type_2_cnt, $phapche_reason_type_3_cnt,
+            $phapche_reason_type_4_cnt, $phapche_reason_type_5_cnt, $phapche_reason_type_6_cnt]);
+        //$phapche_cnt = collect([99, 98, 97, 96, 95]);
 
 
         return collect([$hcns_cnt, $sale_cnt, $ketoan_cnt, $ksnb_cnt, $baotri_cnt,
-            $sx_cnt, $thumua_cnt, $kythuat_cnt, $qlcl_cnt, $kho_cnt]);
+            $sx_cnt, $thumua_cnt, $kythuat_cnt, $qlcl_cnt, $kho_cnt, $phapche_cnt]);
     }
 
     /**
