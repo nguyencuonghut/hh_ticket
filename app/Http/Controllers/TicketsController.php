@@ -61,7 +61,8 @@ class TicketsController extends Controller
         return view('tickets.create')
             ->withSources(Source::all()->pluck('name', 'id'))
             ->withUsers(User::all()->pluck('name', 'id'))
-            ->withDirectors($directors);
+            ->withDirectors($directors)
+            ->withDepartments(Department::all()->pluck('name', 'id'));
     }
 
     /**
@@ -103,7 +104,8 @@ class TicketsController extends Controller
             ->withRootCauseTypes($this->tickets->getAllRootCauseTypesWithDescription())
             ->withPreventions(Prevention::all()->where('ticket_id', $id))
             ->withEffectivenesses(Effectiveness::all()->pluck('name', 'id'))
-            ->withResults(ApproveResult::all()->pluck('name', 'id'));
+            ->withResults(ApproveResult::all()->pluck('name', 'id'))
+            ->withDepartments(Department::all()->pluck('name', 'id'));;
     }
 
     /**

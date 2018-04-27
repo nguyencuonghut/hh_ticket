@@ -59,8 +59,7 @@
                                 </div>
                                 <div class="contactright col-md-6">
                                     <p><b>Người tạo phiếu:</b> {{$ticket->creator->name}}</p>
-                                    <br>
-                                    <br>
+                                    <p><b>Phát hành tới:</b> {{$ticket->department->name}}</p>
                                 </div>
                                 <h5><b style="color:blue;float: left;">1. Mô tả vấn đề:</b>
                                     @if(\Auth::id() == $ticket->creator_id)

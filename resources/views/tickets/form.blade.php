@@ -48,12 +48,16 @@
         {!! Form::text('how_1', null, ['class' => 'form-control']) !!}
     </div>
     <div class="form-group col-sm-4 removeleft removeright">
-        {!! Form::label('how_2', __('Có bao nhiêu SKPH(nhập SỐ)'), ['class' => 'control-label required']) !!}
+        {!! Form::label('how_2', __('Có bao nhiêu SKPH (nhập SỐ)'), ['class' => 'control-label required']) !!}
         {!! Form::text('how_2', null, ['class' => 'form-control']) !!}
     </div>
 </div>
 
 <div class="form-inline">
+    <div class="form-group col-sm-4 removeleft">
+        {!! Form::label('department_id', __('Phát hành tới bộ phận'), ['class' => 'control-label required']) !!}
+        {!! Form::select('department_id', $departments, null, ['placeholder' => '', 'id'=>'department_id', 'name'=>'department_id','class'=>'form-control', 'style' => 'width:100%']) !!}
+    </div>
     <div class="form-group">
         {{ Form::label('image_path', __('Ảnh'), ['class' => 'control-label']) }}
         {!! Form::file('image_path',  null, ['class' => 'form-control']) !!}
@@ -72,6 +76,12 @@
     <script type="text/javascript">
         $("#director_id").select2({
             placeholder: "Chọn giám đốc khối",
+            allowClear: true
+        });
+    </script>
+    <script type="text/javascript">
+        $("#department_id").select2({
+            placeholder: "Chọn phòng/ban",
             allowClear: true
         });
     </script>
