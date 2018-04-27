@@ -48,7 +48,7 @@
         {!! Form::text('how_1', null, ['class' => 'form-control']) !!}
     </div>
     <div class="form-group col-sm-4 removeleft removeright">
-        {!! Form::label('how_2', __('Có bao nhiêu sự không phù hợp (nhập SỐ)'), ['class' => 'control-label required']) !!}
+        {!! Form::label('how_2', __('Có bao nhiêu SKPH(nhập SỐ)'), ['class' => 'control-label required']) !!}
         {!! Form::text('how_2', null, ['class' => 'form-control']) !!}
     </div>
 </div>

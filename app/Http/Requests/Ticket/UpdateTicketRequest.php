@@ -30,8 +30,9 @@ class UpdateTicketRequest extends FormRequest
             'who' => 'required',
             'where' => 'required',
             'how_1' => 'required',
-            'how_2' => 'required',
+            'how_2' => 'required | numeric',
             'director_id' => 'required',
+            'image_path' => 'mimes:jpeg,bmp,png',
         ];
     }
 
@@ -47,7 +48,9 @@ class UpdateTicketRequest extends FormRequest
             'where.required' => 'Yêu cầu bạn PHẢI điền "Phát hiện ra ở đâu?"',
             'how_1.required' => 'Yêu cầu bạn PHẢI điền "Bằng cách nào?"',
             'how_2.required' => 'Yêu cầu bạn PHẢI điền "Có bao nhiêu sự không phù hợp?"',
+            'how_2.numeric' => 'Yêu cầu bạn PHẢI điền số ở mục "Có bao nhiêu sự không phù hợp?"',
             'director_id.required' => 'Yêu cầu bạn PHẢI điền "Giám đốc khối (nơi xảy ra SKPH)"',
+            'image_path.mimes' => 'Yêu cầu file đính kèm phải là file ảnh có định dạng: .jpg, .bmp, .png',
         ];
     }
 }
