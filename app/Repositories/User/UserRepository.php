@@ -90,8 +90,11 @@ class UserRepository implements UserRepositoryContract
         $companyname = $settings->company;
         $user = User::findorFail($id);
         $password = bcrypt($requestData->password);
-        $role = $requestData->roles;
-        $department = $requestData->departments;
+
+        if(0 != $requestData->roles && 0 != $requestData->departments){ //User updates his profile
+            $role = $requestData->roles;
+            $department = $requestData->departments;
+        }
 
         if ($requestData->hasFile('image_path')) {
             $settings = Setting::findOrFail(1);
@@ -116,8 +119,10 @@ class UserRepository implements UserRepositoryContract
         }
 
         $user->fill($input)->save();
-        $user->roles()->sync([$role]);
-        $user->department()->sync([$department]);
+        if(0 != $requestData->roles && 0 != $requestData->departments) { //User updates his profile
+            $user->roles()->sync([$role]);
+            $user->department()->sync([$department]);
+        }
 
         Session::flash('flash_message', 'User successfully updated!');
 

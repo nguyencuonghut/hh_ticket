@@ -65,7 +65,9 @@ class UsersController extends Controller
         $users = User::select(['id', 'name', 'email', 'work_number']);
         return Datatables::of($users)
             ->addColumn('namelink', function ($users) {
-                return '<a href="users/' . $users->id . '" ">' . $users->name . '</a>';
+                return '<a href="users/' . $users->id . '" ">' . $users->name . ' - '
+                    . $users->department()->first()->name
+                    . ' (' . $users->roles()->first()->name . ')'. '</a>';
             })
             ->addColumn('edit', function ($user) {
                 return '<a href="' . route("users.edit", $user->id) . '" class="btn btn-success"> Sửa</a>';
